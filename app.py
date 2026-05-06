@@ -58,10 +58,10 @@ div[role="option"]:hover {
 }
 
 .card {
-    background: #111827;
-    border: 1px solid #334155;
+    background: transparent;
+    border: none;
     border-radius: 18px;
-    padding: 26px;
+    padding: 0px;
     margin-bottom: 26px;
 }
 
