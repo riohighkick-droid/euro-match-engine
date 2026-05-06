@@ -371,14 +371,14 @@ if st.button("⚽ MATCH START", use_container_width=True):
 
         st.subheader("📢 MATCH LIVE")
 
- for line in logs:
-    if line.startswith("<div"):
-        st.markdown(line, unsafe_allow_html=True)
-    else:
-        st.markdown(
-            f'<div class="live">{line}</div>',
-            unsafe_allow_html=True
-        )
+        for line in logs:
+            if line.startswith("<div"):
+                st.markdown(line, unsafe_allow_html=True)
+            else:
+                st.markdown(
+                    f'<div class="live">{line}</div>',
+                    unsafe_allow_html=True
+                )
 
 st.markdown('</div>', unsafe_allow_html=True)
 """)
