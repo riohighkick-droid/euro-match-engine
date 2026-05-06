@@ -337,7 +337,6 @@ if st.button("⚽ MATCH START", use_container_width=True):
                 f'<div class="live">{line}</div>',
                 unsafe_allow_html=True
             )
-            st.markdown(f'<div class="live">{line}</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
 """)
