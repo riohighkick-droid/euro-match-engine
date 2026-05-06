@@ -321,9 +321,9 @@ else:
     st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="live">実況：ここで試合終了！！両者一歩も譲らず、決着はつきません！！まさに紙一重のドローです！！</div>', unsafe_allow_html=True)
 
-        st.subheader("🎙️ MATCH LIVE")
+st.subheader("🎙️ MATCH LIVE")
 
-        for line in logs:
+for line in logs:
             st.markdown(f'<div class="live">{line}</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
