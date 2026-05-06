@@ -445,32 +445,34 @@ def play_demo_match():
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
         if winner == "home":
-            attacker = home_player
-            attacker_team = home_team
-            keeper = away_gk
-            side = "home"
+    attacker = home_player
+    attacker_team = home_team
+    keeper = away_gk
+    side = "home"
 
-        elif winner == "away":
-            attacker = away_player
-            attacker_team = away_team
-            keeper = home_gk
-            side = "away"
+elif winner == "away":
+    attacker = away_player
+    attacker_team = away_team
+    keeper = home_gk
+    side = "away"
 
-        attacker_pos = get_player_position(attacker_team, attacker)
-        if attacker_pos in ["CB", "SB", "RB", "LB", "DF"] and event in ["hat_trick", "doppel_back"]:
+else:
+    draw_lines = [
+        "実況：注目の攻防は互いに譲らず、ここは決着つかず！！",
+        "実況：激しいぶつかり合い！！しかし最後まで崩し切れません！！",
+        "実況：一進一退の攻防！！ここは両者痛み分けです！！",
+        "実況：勝負は紙一重！！このホットポイントはノーゴール！！",
+        "実況：互いに意地を見せましたが、ここはスコア動かず！！"
+    ]
+
+    logs.append(random.choice(draw_lines))
+    logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
+    continue
+
+attacker_pos = get_player_position(attacker_team, attacker)
+
+if attacker_pos in ["CB", "SB", "RB", "LB", "DF"] and event in ["hat_trick", "doppel_back"]:
     event = "normal_goal"
-
-        else:
-            draw_lines = [
-                "実況：注目の攻防は互いに譲らず、ここは決着つかず！！",
-                "実況：激しいぶつかり合い！！しかし最後まで崩し切れません！！",
-                "実況：一進一退の攻防！！ここは両者痛み分けです！！",
-                "実況：勝負は紙一重！！このホットポイントはノーゴール！！",
-                "実況：互いに意地を見せましたが、ここはスコア動かず！！"
-            ]
-            logs.append(random.choice(draw_lines))
-            logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
-            continue
 
         duel_lines = [
             f"実況：激しい競り合いを制したのは、、、{attacker}だァァァ！！！",
