@@ -18,22 +18,21 @@ st.markdown(\"\"\"
 }
 
 div[role="listbox"] {
-    background-color: #111827 !important;
-    color: #facc15 !important;
-    font-size: 18px !important;
-    font-weight: 800 !important;
+    background-color: white !important;
 }
 
 div[role="option"] {
-    background-color: #111827 !important;
-    color: #f8fafc !important;
+    color: black !important;
+    background-color: white !important;
     font-size: 18px !important;
+    font-weight: 700 !important;
 }
 
 div[role="option"]:hover {
     background-color: #facc15 !important;
-    color: #000000 !important;
+    color: black !important;
 }
+
 
 .logo-area {
     text-align: center;
