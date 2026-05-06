@@ -108,6 +108,7 @@ def play_player_match(home_player, away_player):
         return "home", battle_logs, home_card, losers
 
     elif away_wins > home_wins:
+        losers = [home_player]
         return "away", battle_logs, away_card, losers
 
     else:
