@@ -635,25 +635,26 @@ if st.button("⚽ MATCH START", use_container_width=True):
 
 if st.button("⚽ MATCH START", use_container_width=True):
 
-else:
-    home_score, away_score, logs = play_demo_match()
+    if home_team is None or away_team is None:
+        st.error("両チームを選択してください。")
 
-    st.subheader("📢 MATCH LIVE")
+    elif home_team == away_team:
+        st.error("同じチーム同士は選べません。")
 
-    for line in logs:
-        if line.startswith("<div"):
-            st.markdown(line, unsafe_allow_html=True)
-        else:
-            st.markdown(f'<div class="live">{line}</div>', unsafe_allow_html=True)
-                f'<div class="live">{line}</div>',
-                unsafe_allow_html=True
-            )
+    elif len(home_starters) != 7 or len(away_starters) != 7:
+        st.error("両チームともフィールド選手を7人選んでください。")
+
+    else:
+
+        home_score, away_score, logs = play_demo_match()
 
         st.subheader("📢 MATCH LIVE")
 
         for line in logs:
+
             if line.startswith("<div"):
                 st.markdown(line, unsafe_allow_html=True)
+
             else:
                 st.markdown(
                     f'<div class="live">{line}</div>',
