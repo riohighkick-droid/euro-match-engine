@@ -130,6 +130,19 @@ div.stButton > button:hover {
     color: #000000 !important;
     transform: scale(1.02);
 }
+
+div[data-baseweb="select"] input {
+    color: black !important;
+}
+
+input {
+    color: black !important;
+}
+
+textarea {
+    color: black !important;
+}
+
 </style>
 \"\"\", unsafe_allow_html=True)
 
