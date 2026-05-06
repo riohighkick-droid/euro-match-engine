@@ -443,6 +443,8 @@ def play_demo_match():
             keeper = away_gk
             side = "home"
 
+            suspended_players.append(away_player)
+
         elif winner == "away":
             attacker = away_player
             attacker_team = away_team
