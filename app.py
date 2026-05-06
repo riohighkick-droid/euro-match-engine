@@ -254,7 +254,7 @@ time_zones = [
     ("後半 84分", "終盤、勝敗を決めるクライマックス。")
 ]
 
-special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick"]
+special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
 
 def play_demo_match():
     score_home = 0
@@ -303,7 +303,7 @@ def play_demo_match():
         elif event == "hat_trick":
             points = random.choice([2, 3])
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append(f"実況：{attacker}、ハットトリック級の爆発！！一気に{points}点級のビッグプレーです！！")
+            logs.append(f"実況：{attacker}、ハットトリックの大爆発！！一気に{points}点級のビッグプレーです！！")
 
         elif event == "normal_goal":
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
