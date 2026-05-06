@@ -382,12 +382,29 @@ def play_demo_match():
     score_away = 0
     logs = []
 
+    used_home_players = []
+    used_away_players = []
+
     for i in range(3):
 
         minute, context = time_zones[i]
 
-        home_player = random.choice(home_starters)
-        away_player = random.choice(away_starters)
+        available_home = [p for p in home_starters if p not in used_home_players]
+        available_away = [p for p in away_starters if p not in used_away_players]
+
+        if not available_home:
+            used_home_players = []
+            available_home = home_starters
+
+        if not available_away:
+            used_away_players = []
+            available_away = away_starters
+
+        home_player = random.choice(available_home)
+        away_player = random.choice(available_away)
+
+        used_home_players.append(home_player)
+        used_away_players.append(away_player)
 
         winner, loser_name, winning_card, battle_logs = play_player_match(
             home_player,
