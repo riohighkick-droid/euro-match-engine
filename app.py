@@ -305,6 +305,11 @@ def play_demo_match():
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：{attacker}、ハットトリックの大爆発！！一気に{points}点級のビッグプレーです！！")
 
+        elif event == "doppel_back":
+            logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
+            points = 2
+            logs.append(f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪うビッグプレーです！！")
+
         elif event == "normal_goal":
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：{attacker}がGK戦を冷静に制した！{attacker_team}が貴重なゴール！！")
