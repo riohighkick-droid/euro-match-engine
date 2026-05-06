@@ -628,34 +628,54 @@ logs.append(
     </div>
     """
 )
+logs.append(f"""
+<div style="
+    text-align:center;
+    font-size:52px;
+    font-weight:bold;
+    color:#FFD700;
+    margin-top:40px;
+    margin-bottom:20px;
+">
+FULL TIME
+</div>
+""")
 
-logs.append(
-    f"""
-    <div style="
-        text-align:center;
-        font-size:42px;
-        font-weight:bold;
-        color:#FFD700;
-        margin-top:30px;
-    ">
-    ⭐ MAN OF THE MATCH ⭐
-    </div>
-    """
-)
+logs.append(f"""
+<div style="
+    text-align:center;
+    font-size:64px;
+    font-weight:bold;
+    color:#FFD700;
+    margin-bottom:40px;
+">
+{home_team} {score_home} - {score_away} {away_team}
+</div>
+""")
 
-logs.append(
-    f"""
-    <div style="
-        text-align:center;
-        font-size:54px;
-        font-weight:bold;
-        color:white;
-        margin-bottom:30px;
-    ">
-    {mom_player}
-    </div>
-    """
-)
+logs.append(f"""
+<div style="
+    text-align:center;
+    font-size:42px;
+    font-weight:bold;
+    color:#FFD700;
+    margin-top:30px;
+">
+⭐ MAN OF THE MATCH ⭐
+</div>
+""")
+
+logs.append(f"""
+<div style="
+    text-align:center;
+    font-size:54px;
+    font-weight:bold;
+    color:white;
+    margin-bottom:30px;
+">
+{mom_player}
+</div>
+""")
 
     mom_lines = [
         f"実況：今日は完全に{mom_player}が試合を支配しました！！！",
