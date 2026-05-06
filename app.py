@@ -383,6 +383,7 @@ def play_demo_match():
     score_away = 0
     logs = []
     mom_points = {}
+    suspended_players = []
 
     def add_mom_points(player, pts):
         mom_points[player] = mom_points.get(player, 0) + pts
@@ -390,7 +391,6 @@ def play_demo_match():
     used_home_players = []
     used_away_players = []
     selected_pairs = []
-    suspended_players = []
 
     for i in range(3):
 
@@ -429,15 +429,15 @@ def play_demo_match():
         minute, context = time_zones[i]
         home_player, away_player = pair
 
-        winner, battle_logs, winning_card, losers = play_player_match(
+        winner, loser, winning_card, battle_logs = play_player_match(
             home_player,
             away_player
         )
 
+        if loser is not None and loser not in suspended_players:
+            suspended_players.append(loser)
+
         event = winning_card["special"] if winning_card else "save"
-        for loser in losers:
-            if loser not in suspended_players:
-                suspended_players.append(loser)
 
         logs.append('<div style="height:18px;"></div>')
         logs.append(f"【{minute}】")
@@ -450,15 +450,11 @@ def play_demo_match():
             keeper = away_gk
             side = "home"
 
-            suspended_players.append(away_player)
-
         elif winner == "away":
             attacker = away_player
             attacker_team = away_team
             keeper = home_gk
             side = "away"
-
-            suspended_players.append(home_player)
 
         else:
             draw_lines = [
@@ -620,11 +616,11 @@ def play_demo_match():
     ]
 
     logs.append(random.choice(mom_lines))
-    if suspended_players:
 
+    if suspended_players:
         logs.append(
             f'<div style="text-align:center; font-size:16px; color:#BBBBBB; margin-top:25px;">次戦出場停止：{", ".join(suspended_players)}</div>'
-    )
+        )
 
     return score_home, score_away, logs
 
