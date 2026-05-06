@@ -434,6 +434,9 @@ def play_demo_match():
         )
 
         event = winning_card["special"] if winning_card else "save"
+        for loser in losers:
+            if loser not in suspended_players:
+                suspended_players.append(loser)
 
         logs.append('<div style="height:18px;"></div>')
         logs.append(f"【{minute}】")
