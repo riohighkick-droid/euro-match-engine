@@ -94,12 +94,12 @@ def play_player_match(home_player, away_player):
 
         if result == "home":
             home_wins += 1
-            .append(f"→ {home_player} WIN!")
+            .battle_logs.append(f"→ {home_player} WIN!")
             losers.append(away_player)
 
         elif result == "away":
             away_wins += 1
-            .append(f"→ {away_player} WIN!")
+            .battle_logs.append(f"→ {away_player} WIN!")
             losers.append(home_player)
 
         else:
