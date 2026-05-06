@@ -613,6 +613,11 @@ def play_demo_match():
     ]
 
     logs.append(random.choice(mom_lines))
+    if suspended_players:
+
+        logs.append(
+            f'<div style="text-align:center; font-size:16px; color:#BBBBBB; margin-top:25px;">次戦出場停止：{", ".join(suspended_players)}</div>'
+    )
 
     return score_home, score_away, logs
 
