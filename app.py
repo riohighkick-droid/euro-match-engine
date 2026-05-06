@@ -21,6 +21,53 @@ def make_deck():
     random.shuffle(deck)
     return deck
 
+    # ===== 本番エンジン STEP 2：5すくみ判定 =====
+def judge_card_battle(home_card, away_card):
+
+    win_map = {
+        "offense": "defense",
+        "defense": "speed",
+        "speed": "technique",
+        "technique": "physical",
+        "physical": "offense"
+    }
+
+    h = home_card["type"]
+    a = away_card["type"]
+
+    # player_class は数値勝負
+    if h == "player_class" or a == "player_class":
+
+        if home_card["power"] > away_card["power"]:
+            return "home"
+
+        elif away_card["power"] > home_card["power"]:
+            return "away"
+
+        else:
+            return "draw"
+
+    # 同タイプは数値勝負
+    if h == a:
+
+        if home_card["power"] > away_card["power"]:
+            return "home"
+
+        elif away_card["power"] > home_card["power"]:
+            return "away"
+
+        else:
+            return "draw"
+
+    # 5すくみ判定
+    if win_map.get(h) == a:
+        return "home"
+
+    elif win_map.get(a) == h:
+        return "away"
+
+    return "draw"
+
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
     page_icon="logo.jpeg",
