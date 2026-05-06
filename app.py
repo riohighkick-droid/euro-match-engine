@@ -545,8 +545,7 @@ if side == "home":
     score_home += points
 else:
     score_away += points
-
-        logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
+logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
 
     return score_home, score_away, logs
 
