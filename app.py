@@ -388,20 +388,21 @@ def play_demo_match():
         home_player = random.choice(home_starters)
         away_player = random.choice(away_starters)
 
-        home_wins = random.choice([True, False])
+        winner, battle_logs, winning_card = play_player_match(home_player, away_player)
+
+logs.extend(battle_logs)
         event = random.choice(special_events)
 
         logs.append(f"【{minute}】")
         logs.append(context)
         logs.append(f"{home_player} vs {away_player}")
 
-        if home_wins:
+        if winner == "home":
             attacker = home_player
             defender = away_player
             attacker_team = home_team
             keeper = away_gk
-            side = "home"
-        else:
+        elif winner == "away":
             attacker = away_player
             defender = home_player
             attacker_team = away_team
