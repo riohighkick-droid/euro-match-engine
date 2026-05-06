@@ -438,6 +438,9 @@ def play_demo_match():
             suspended_players.append(loser)
 
         event = winning_card["special"] if winning_card else "save"
+        attacker_pos = get_player_position(attacker_team, attacker)
+        if attacker_pos in ["CB", "SB", "RB", "LB", "DF"] and event in ["hat_trick", "doppel_back"]:
+            event = "normal_goal"
 
         logs.append('<div style="height:18px;"></div>')
         logs.append(f"【{minute}】")
