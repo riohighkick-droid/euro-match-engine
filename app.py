@@ -341,10 +341,10 @@ def pick_side(side_label, side_icon):
     gk = team_df[team_df["position"] == "GK"]
 
     starters = st.multiselect(
-    f"{side_label} フィールド選手を7人選択",
+    f"{side_label} フィールド選手を6人選択",
     field["name"].tolist(),
     format_func=lambda name: player_label(team, name),
-    max_selections=7,
+    max_selections=6,
     key=f"{side_label}_starters"
 )
 
@@ -628,8 +628,8 @@ if st.button("⚽ MATCH START", use_container_width=True):
         st.error("両チームを選択してください。")
     elif home_team == away_team:
         st.error("同じチーム同士は選べません。")
-    elif len(home_starters) != 7 or len(away_starters) != 7:
-        st.error("両チームともフィールド選手を7人選んでください。")
+    elif len(home_starters) != 6 or len(away_starters) != 6:
+        st.error("両チームともフィールド選手を6人選んでください。")
     else:
         home_score, away_score, logs = play_demo_match()
 
