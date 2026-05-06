@@ -77,6 +77,7 @@ def play_player_match(home_player, away_player):
     away_wins = 0
 
     battle_logs = []
+    losers = []
 
     for i in range(3):
 
@@ -94,6 +95,7 @@ def play_player_match(home_player, away_player):
         if result == "home":
             home_wins += 1
             battle_logs.append(f"→ {home_player} WIN!")
+            losers.append(away_player)
 
         elif result == "away":
             away_wins += 1
