@@ -1,30 +1,40 @@
-
+with open("app.py", "w", encoding="utf-8") as f:
+    f.write("""
 import streamlit as st
 import pandas as pd
 import random
 
-st.set_page_config(page_title="EURO MATCH ENGINE - TACTICAL SIX", layout="wide")
+st.set_page_config(
+    page_title="EURO MATCH ENGINE - TACTICAL SIX",
+    page_icon="logo.jpeg",
+    layout="wide"
+)
 
-st.markdown("""
+st.markdown(\"\"\"
 <style>
 .stApp {
-    background: #030303;
+    background: #050505;
     color: #f8fafc;
 }
 
-.big-title {
+.logo-area {
     text-align: center;
-    font-size: 76px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 64px;
     font-weight: 900;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
     color: #ffffff;
-    margin-top: 20px;
     margin-bottom: 0px;
 }
 
 .sub-title {
     text-align: center;
-    font-size: 26px;
+    font-size: 24px;
     color: #facc15;
     letter-spacing: 4px;
     margin-bottom: 35px;
@@ -32,53 +42,81 @@ st.markdown("""
 
 .card {
     background: #111827;
-    border: 1px solid #374151;
+    border: 1px solid #334155;
     border-radius: 18px;
-    padding: 24px;
-    margin-bottom: 24px;
+    padding: 26px;
+    margin-bottom: 26px;
 }
 
-.team-title {
-    font-size: 30px;
-    font-weight: 900;
-    color: #facc15;
-    margin-bottom: 15px;
+h1, h2, h3, p, label, div, span {
+    color: #f8fafc !important;
+}
+
+.stSelectbox label,
+.stMultiSelect label {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: #facc15 !important;
 }
 
 .score {
     text-align: center;
-    font-size: 56px;
+    font-size: 54px;
     font-weight: 900;
     color: #facc15;
-    margin-bottom: 20px;
+    margin: 24px 0;
 }
 
 .result {
     text-align: center;
     font-size: 34px;
     font-weight: 900;
-    color: white;
+    color: #ffffff;
     margin-bottom: 30px;
 }
 
 .live {
     background: #020617;
-    border-left: 5px solid #facc15;
-    padding: 14px 18px;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-size: 18px;
+    border-left: 6px solid #facc15;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+div.stButton > button {
+    background: linear-gradient(90deg, #facc15, #f59e0b);
+    color: #050505 !important;
+    font-size: 28px;
+    font-weight: 900;
+    border-radius: 14px;
+    padding: 18px 30px;
+    border: none;
+    box-shadow: 0 0 24px rgba(250, 204, 21, 0.45);
+}
+
+div.stButton > button:hover {
+    background: linear-gradient(90deg, #fde047, #facc15);
+    color: #000000 !important;
+    transform: scale(1.02);
 }
 </style>
-""", unsafe_allow_html=True)
+\"\"\", unsafe_allow_html=True)
 
-st.markdown('<div class="big-title">EURO MATCH ENGINE</div>', unsafe_allow_html=True)
+# ===== ロゴ表示 =====
+try:
+    col1, col2, col3 = st.columns([1, 2.4, 1])
+    with col2:
+        st.image("logo.jpeg", use_container_width=True)
+except:
+    st.markdown('<div class="main-title">EURO MATCH ENGINE</div>', unsafe_allow_html=True)
+
 st.markdown('<div class="sub-title">TACTICAL SIX</div>', unsafe_allow_html=True)
 
 df = pd.read_csv("players.csv", encoding="utf-8-sig")
 df.columns = df.columns.str.strip().str.replace(" ", "_")
 
-# 今はteam列から全部取得。国列がない間はイングランドに全部入れる
 teams_by_country = {
     "イングランド": sorted(df["team"].unique().tolist()),
     "イタリア": [],
@@ -91,7 +129,7 @@ def get_teams(country):
 
 def pick_side(side_label, side_icon):
     st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown(f'<div class="team-title">{side_icon} {side_label}</div>', unsafe_allow_html=True)
+    st.markdown(f"## {side_icon} {side_label}")
 
     country = st.selectbox(
         f"{side_label} 国を選択",
@@ -184,28 +222,23 @@ def play_demo_match():
         logs.append(f"次戦出場停止：{defender}")
 
         if event == "super_goal":
-            logs.append(f"実況：出たーーー！！{attacker}のスーパーゴール！！")
-            logs.append("実況：GKのポジション、相手のカード、すべてを置き去りにする理不尽な一撃！！")
+            logs.append(f"実況：出たーーー！！{attacker}のスーパーゴール！！GKの反応を置き去りにする一撃！！")
             points = 1
 
         elif event == "god_hand":
-            logs.append(f"実況：止めたーーー！！{keeper}、まさにゴッドハンド！！")
-            logs.append("実況：これは失点を覚悟した場面、しかし最後の砦が奇跡的に立ちはだかりました！！")
+            logs.append(f"実況：止めたーーー！！{keeper}、まさにゴッドハンド！！失点濃厚の場面を奇跡的に防ぎました！！")
             points = 0
 
         elif event == "hat_trick":
             points = random.choice([2, 3])
-            logs.append(f"実況：{attacker}、ここでハットトリック級の決定力！！")
-            logs.append(f"実況：一撃で{points}点級の価値を持つビッグプレー！！試合の流れが大きく動きます！！")
+            logs.append(f"実況：{attacker}、ハットトリック級の爆発！！一気に{points}点級のビッグプレーです！！")
 
         elif event == "normal_goal":
-            logs.append(f"実況：{attacker}がGK戦を冷静に制した！")
-            logs.append(f"実況：{attacker_team}、貴重なゴールを奪います！！")
+            logs.append(f"実況：{attacker}がGK戦を冷静に制した！{attacker_team}が貴重なゴール！！")
             points = 1
 
         else:
-            logs.append(f"実況：{attacker}が抜け出したが、{keeper}が冷静に対応！")
-            logs.append("実況：ここはノーゴール。まだ試合は分かりません。")
+            logs.append(f"実況：{attacker}が抜け出したが、{keeper}が冷静に対応！ここはノーゴール！！")
             points = 0
 
         if side == "home":
@@ -247,3 +280,4 @@ if st.button("⚽ MATCH START", use_container_width=True):
             st.markdown(f'<div class="live">{line}</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
+""")
