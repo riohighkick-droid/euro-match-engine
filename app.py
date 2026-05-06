@@ -391,7 +391,7 @@ def play_demo_match():
         winner, battle_logs, winning_card = play_player_match(home_player, away_player)
 
 logs.extend(battle_logs)
-        event = winning_card["special"] if winning_card else "save"
+event = winning_card["special"] if winning_card else "save"
 
         logs.append(f"【{minute}】")
         logs.append(context)
