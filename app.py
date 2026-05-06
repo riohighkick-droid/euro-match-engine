@@ -393,9 +393,9 @@ def play_demo_match():
 logs.extend(battle_logs)
 event = winning_card["special"] if winning_card else "save"
 
-        logs.append(f"【{minute}】")
-        logs.append(context)
-        logs.append(f"{home_player} vs {away_player}")
+logs.append(f"【{minute}】")
+logs.append(context)
+logs.append(f"{home_player} vs {away_player}")
 
         if winner == "home":
             attacker = home_player
