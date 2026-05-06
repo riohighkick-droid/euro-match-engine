@@ -440,6 +440,7 @@ def play_demo_match():
         if event == "super_goal":
             points = 1
             logs.append("🌟 SUPER GOAL 🌟")
+            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：{attacker}！！！これは止められない！！スーパーゴール！！！")
 
         elif event == "god_hand":
@@ -450,12 +451,13 @@ def play_demo_match():
         elif event == "hat_trick":
             points = 3
             logs.append("👑 HAT TRICK 👑")
+            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：{attacker}がハットトリック級の大暴れ！！！")
 
         elif event == "doppel_back":
             points = 2
             logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
-            logs.append(f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪うビッグプレーです！！")
+            logs.append(f"実況：決まったぁぁぁ！！！ドッペルバlogs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')ック炸裂！！一気に2点を奪うビッグプレーです！！")
 
         elif event == "normal":
             points = 1
