@@ -67,6 +67,49 @@ def judge_card_battle(home_card, away_card):
 
     return "draw"
 
+    # ===== 本番エンジン STEP 3：選手バトル =====
+def play_player_match(home_player, away_player):
+
+    home_deck = make_deck()
+    away_deck = make_deck()
+
+    home_wins = 0
+    away_wins = 0
+
+    battle_logs = []
+
+    for i in range(3):
+
+        home_card = home_deck[i]
+        away_card = away_deck[i]
+
+        result = judge_card_battle(home_card, away_card)
+
+        battle_logs.append(
+            f"{home_player} [{home_card['type']}] VS "
+            f"{away_player} [{away_card['type']}]"
+        )
+
+        if result == "home":
+            home_wins += 1
+            battle_logs.append(f"→ {home_player} WIN!")
+
+        elif result == "away":
+            away_wins += 1
+            battle_logs.append(f"→ {away_player} WIN!")
+
+        else:
+            battle_logs.append("→ DRAW")
+
+    if home_wins > away_wins:
+        return "home", battle_logs, home_card
+
+    elif away_wins > home_wins:
+        return "away", battle_logs, away_card
+
+    else:
+        return "draw", battle_logs, None
+
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
     page_icon="logo.jpeg",
