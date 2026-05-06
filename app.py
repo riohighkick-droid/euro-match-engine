@@ -304,6 +304,7 @@ def play_demo_match():
             logs.append(f"実況：{attacker}、ハットトリック級の爆発！！一気に{points}点級のビッグプレーです！！")
 
         elif event == "normal_goal":
+            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：{attacker}がGK戦を冷静に制した！{attacker_team}が貴重なゴール！！")
             points = 1
 
