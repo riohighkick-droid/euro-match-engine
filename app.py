@@ -94,25 +94,25 @@ def play_player_match(home_player, away_player):
 
         if result == "home":
             home_wins += 1
-            battle_logs.append(f"→ {home_player} WIN!")
+            .append(f"→ {home_player} WIN!")
             losers.append(away_player)
 
         elif result == "away":
             away_wins += 1
-            battle_logs.append(f"→ {away_player} WIN!")
+            .append(f"→ {away_player} WIN!")
             losers.append(home_player)
 
         else:
-            battle_logs.append("→ DRAW")
+            .append("→ DRAW")
 
     if home_wins > away_wins:
-        return "home", battle_logs, home_card, losers
+        return "home", , home_card, losers
 
     elif away_wins > home_wins:
-        return "away", battle_logs, away_card, losers
+        return "away", , away_card, losers
 
     else:
-        return "draw", battle_logs, None, losers
+        return "draw", , None, losers
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
@@ -428,7 +428,7 @@ def play_demo_match():
         minute, context = time_zones[i]
         home_player, away_player = pair
 
-        winner, battle_logs, winning_card = play_player_match(
+        winner, battle_logs, winning_card, losers = play_player_match(
             home_player,
             away_player
         )
