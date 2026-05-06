@@ -402,6 +402,7 @@ logs.extend(battle_logs)
             defender = away_player
             attacker_team = home_team
             keeper = away_gk
+            side = "home"
         elif winner == "away":
             attacker = away_player
             defender = home_player
