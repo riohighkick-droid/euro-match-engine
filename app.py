@@ -340,12 +340,13 @@ def pick_side(side_label, side_icon):
     field = team_df[team_df["position"] != "GK"]
     gk = team_df[team_df["position"] == "GK"]
 
-    starters = st.multiselect(
-        f"{side_label} フィールド選手を7人選択",
-        field["name"].tolist(),
-        max_selections=7,
-        key=f"{side_label}_starters"
-    )
+starters = st.multiselect(
+    f"{side_label} フィールド選手を7人選択",
+    field["name"].tolist(),
+    format_func=lambda name: player_label(team, name),
+    max_selections=7,
+    key=f"{side_label}_starters"
+)
 
     keeper = st.selectbox(
         f"{side_label} GKを選択",
