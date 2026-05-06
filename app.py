@@ -143,6 +143,37 @@ textarea {
     color: black !important;
 }
 
+.goal {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 18px;
+    background: #000000;
+    animation: pulse 0.8s infinite alternate;
+}
+
+.goal span:nth-child(1) { color: #3b82f6; }
+.goal span:nth-child(2) { color: #22c55e; }
+.goal span:nth-child(3) { color: #84cc16; }
+.goal span:nth-child(4) { color: #eab308; }
+.goal span:nth-child(5) { color: #f97316; }
+.goal span:nth-child(6) { color: #ef4444; }
+.goal span:nth-child(7) { color: #ffffff; }
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        text-shadow: 0 0 8px #facc15;
+    }
+    to {
+        transform: scale(1.04);
+        text-shadow: 0 0 24px #facc15;
+    }
+}
+
 </style>
 \"\"\", unsafe_allow_html=True)
 
