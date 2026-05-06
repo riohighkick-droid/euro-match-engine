@@ -80,8 +80,8 @@ def play_player_match(home_player, away_player):
 
     for i in range(3):
 
-        home_card = random.choice(players[home_player]["cards"])
-        away_card = random.choice(players[away_player]["cards"])
+        home_card = random.choice(home_player["cards"])
+        away_card = random.choice(away_player["cards"])
 
         result = judge_battle(home_card, away_card)
 
