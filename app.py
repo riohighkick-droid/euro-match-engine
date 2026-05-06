@@ -383,19 +383,24 @@ def play_demo_match():
     logs = []
 
     for i in range(3):
+
         minute, context = time_zones[i]
 
         home_player = random.choice(home_starters)
         away_player = random.choice(away_starters)
 
-        winner, battle_logs, winning_card = play_player_match(home_player, away_player)
+        winner, loser_name, winning_card, battle_logs = play_player_match(
+            home_player,
+            away_player
+        )
 
-logs.extend(battle_logs)
-event = winning_card["special"] if winning_card else "save"
+        logs.append(f"【{minute}】")
+        logs.append(context)
+        logs.append(f"{home_player} vs {away_player}")
 
-logs.append(f"【{minute}】")
-logs.append(context)
-logs.append(f"{home_player} vs {away_player}")
+        logs.extend(battle_logs)
+
+        event = winning_card["special"] if winning_card else "save"
 
         if winner == "home":
             attacker = home_player
@@ -403,6 +408,7 @@ logs.append(f"{home_player} vs {away_player}")
             attacker_team = home_team
             keeper = away_gk
             side = "home"
+
         elif winner == "away":
             attacker = away_player
             defender = home_player
@@ -410,37 +416,38 @@ logs.append(f"{home_player} vs {away_player}")
             keeper = home_gk
             side = "away"
 
-        set_score = random.choice(["3-0", "3-1", "3-2"])
-        logs.append(f"ホットポイント結果：{set_score}。{attacker}が攻防を制した。")
-        logs.append(f"次戦出場停止：{defender}")
+        else:
+            logs.append("実況：このホットポイントは決着つかず！")
+            continue
 
         if event == "super_goal":
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append(f"実況：出たーーー！！{attacker}のスーパーゴール！！GKの反応を置き去りにする一撃！！")
             points = 1
+            logs.append("🌟 SUPER GOAL 🌟")
+            logs.append(f"実況：{attacker}！！！これは止められない！！スーパーゴール！！！")
 
         elif event == "god_hand":
-            logs.append(f"実況：止めたーーー！！{keeper}、まさにゴッドハンド！！失点濃厚の場面を奇跡的に防ぎました！！")
             points = 0
+            logs.append("🧤 GOD HAND 🧤")
+            logs.append(f"実況：{keeper}が神セーブ！！ゴッドハンド炸裂！！！")
 
         elif event == "hat_trick":
-            points = random.choice([2, 3])
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append(f"実況：{attacker}、ハットトリックの大爆発！！一気に{points}点級のビッグプレーです！！")
+            points = 3
+            logs.append("👑 HAT TRICK 👑")
+            logs.append(f"実況：{attacker}がハットトリック級の大暴れ！！！")
 
         elif event == "doppel_back":
-            logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
             points = 2
+            logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
             logs.append(f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪うビッグプレーです！！")
 
-        elif event == "normal_goal":
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append(f"実況：{attacker}がGK戦を冷静に制した！{attacker_team}が貴重なゴール！！")
+        elif event == "normal":
             points = 1
+            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
+            logs.append(f"実況：{attacker}が決めたぁぁぁ！！！")
 
         else:
-            logs.append(f"実況：{attacker}が抜け出したが、{keeper}が冷静に対応！ここはノーゴール！！")
             points = 0
+            logs.append(f"実況：{keeper}がしっかり防いだ！")
 
         if side == "home":
             score_home += points
