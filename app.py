@@ -292,6 +292,7 @@ def play_demo_match():
         logs.append(f"次戦出場停止：{defender}")
 
         if event == "super_goal":
+            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：出たーーー！！{attacker}のスーパーゴール！！GKの反応を置き去りにする一撃！！")
             points = 1
 
@@ -301,6 +302,7 @@ def play_demo_match():
 
         elif event == "hat_trick":
             points = random.choice([2, 3])
+            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append(f"実況：{attacker}、ハットトリック級の爆発！！一気に{points}点級のビッグプレーです！！")
 
         elif event == "normal_goal":
