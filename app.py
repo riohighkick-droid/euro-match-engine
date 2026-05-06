@@ -381,10 +381,10 @@ def play_demo_match():
 
     used_home_players = []
     used_away_players = []
+    selected_pairs = []
 
+    # ===== 試合前に今日のホットポイントを決める =====
     for i in range(3):
-
-        minute, context = time_zones[i]
 
         available_home = [p for p in home_starters if p not in used_home_players]
         available_away = [p for p in away_starters if p not in used_away_players]
@@ -403,40 +403,75 @@ def play_demo_match():
         used_home_players.append(home_player)
         used_away_players.append(away_player)
 
+        selected_pairs.append((home_player, away_player))
+
+    # ===== 試合開始演出 =====
+    logs.append("━━━━━━━━━━━━")
+    logs.append("MATCH START")
+    logs.append("━━━━━━━━━━━━")
+    logs.append(f"{home_team}！！")
+    logs.append(f"対するは、{away_team}！！")
+    logs.append("運命の一戦、キックオフです！！")
+
+    # ===== ホットポイント紹介 =====
+    logs.append("━━━━━━━━━━━━")
+    logs.append("TODAY'S HOT POINT")
+    logs.append("━━━━━━━━━━━━")
+    logs.append("今日の勝敗を分ける注目のホットポイントはこちら！！")
+
+    for idx, pair in enumerate(selected_pairs, start=1):
+        hp, ap = pair
+        logs.append(f"{idx}. {player_label(home_team, hp)} vs {player_label(away_team, ap)}")
+
+    # ===== 試合本編 =====
+    for i, pair in enumerate(selected_pairs):
+
+        minute, context = time_zones[i]
+        home_player, away_player = pair
+
         winner, battle_logs, winning_card = play_player_match(
             home_player,
             away_player
         )
 
-        logs.extend(battle_logs)
-
         event = winning_card["special"] if winning_card else "save"
 
+        logs.append("━━━━━━━━━━━━")
         logs.append(f"【{minute}】")
         logs.append(context)
-        logs.append(f"{home_player} vs {away_player}")
+        logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
         if winner == "home":
-
             attacker = home_player
-            defender = away_player
             attacker_team = home_team
             keeper = away_gk
             side = "home"
 
         elif winner == "away":
-
             attacker = away_player
-            defender = home_player
             attacker_team = away_team
             keeper = home_gk
             side = "away"
 
         else:
-
-            logs.append("実況：このホットポイントは決着つかず！")
+            draw_lines = [
+                "実況：注目の攻防は互いに譲らず、ここは決着つかず！！",
+                "実況：激しいぶつかり合い！！しかし最後まで崩し切れません！！",
+                "実況：一進一退の攻防！！ここは両者痛み分けです！！",
+                "実況：勝負は紙一重！！このホットポイントはノーゴール！！",
+                "実況：互いに意地を見せましたが、ここはスコア動かず！！"
+            ]
+            logs.append(random.choice(draw_lines))
             continue
 
+        duel_lines = [
+            f"実況：激しい競り合いを制したのは、、、{attacker}だァァァ！！！",
+            f"実況：注目の攻防、最後に上回ったのは{attacker}！！！",
+            f"実況：ここで抜け出したのは、、、{attacker}だァァァ！！！",
+            f"実況：この局面をものにしたのは{attacker}！！流れを引き寄せます！！！",
+            f"実況：勝負どころで強さを見せたのは{attacker}！！！"
+        ]
+        logs.append(random.choice(duel_lines))
 
         if event == "super_goal":
 
@@ -446,15 +481,14 @@ def play_demo_match():
             points = 1
 
             super_goal_lines = [
-                f"実況：{attacker}のスーパーゴール！！！GKも一歩も動けない！！！",
-                f"実況：これは理不尽！！{attacker}、角度のないところから突き刺しました！！！",
+                f"実況：これは理不尽！！{attacker}、とんでもない一撃を突き刺しました！！！",
                 f"実況：スーパーゴール炸裂！！{attacker_team}、会場の空気を一変させました！！！",
                 f"実況：{attacker}が魅せた！！まさに試合を切り裂く一撃です！！！",
-                f"実況：これは止められない！！{keeper}も見送るしかありません！！！"
+                f"実況：これは止められない！！{keeper}も見送るしかありません！！！",
+                f"実況：衝撃のフィニッシュ！！{attacker}、完璧に決め切りました！！！"
             ]
 
             logs.append(random.choice(super_goal_lines))
-
 
         elif event == "hat_trick":
 
@@ -464,15 +498,14 @@ def play_demo_match():
             points = random.choice([2, 3])
 
             hat_trick_lines = [
-                f"実況：{attacker}がハットトリック級の大暴れ！！！",
-                f"実況：止まらない{attacker}！！完全に主役です！！！",
-                f"実況：{attacker}、圧巻の連続攻撃！！！",
-                f"実況：エースの仕事！！{attacker}が流れを持っていく！！！",
-                f"実況：{attacker}が爆発！！守備陣が崩壊しています！！！"
+                f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！",
+                f"実況：{attacker}、圧巻の大暴れ！！試合を支配しています！！！",
+                f"実況：エースの仕事！！{attacker}が一気に流れを持っていきました！！！",
+                f"実況：{attacker}が爆発！！相手守備陣、対応しきれません！！！",
+                f"実況：これは大きい！！{attacker}が試合を一気に動かします！！！"
             ]
 
             logs.append(random.choice(hat_trick_lines))
-
 
         elif event == "doppel_back":
 
@@ -482,15 +515,14 @@ def play_demo_match():
             points = 2
 
             doppel_back_lines = [
-                f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！！",
-                f"実況：これはデカい！！一気に2点を奪う！！！",
-                f"実況：まさかの2点級プレー！！！",
-                f"実況：ドッペルバック発動！！試合が動いた！！！",
-                f"実況：{attacker}が勝負を決めにきた！！！"
+                f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！",
+                f"実況：これはデカい！！{attacker}の一撃で試合が大きく動きます！！！",
+                f"実況：まさかの2点級プレー！！{attacker_team}、ここで一気に突き放す！！！",
+                f"実況：ドッペルバック発動！！この一撃はあまりにも重い！！！",
+                f"実況：{attacker}が勝負を決めにきた！！流れを完全に掌握しました！！！"
             ]
 
             logs.append(random.choice(doppel_back_lines))
-
 
         elif event == "normal_goal" or event == "normal":
 
@@ -500,15 +532,14 @@ def play_demo_match():
             points = 1
 
             normal_goal_lines = [
-                f"実況：{attacker}がGK戦を冷静に制した！！！",
-                f"実況：決めた！！落ち着いて流し込みました！！！",
-                f"実況：最後はきっちり仕留めた！！！",
-                f"実況：{attacker_team}、このチャンスを逃しません！！！",
-                f"実況：この一撃は大きい！！！"
+                f"実況：{attacker}が冷静に決め切った！！！",
+                f"実況：決めた！！{attacker}、落ち着いて流し込みました！！！",
+                f"実況：最後はきっちり仕留めた！！{keeper}届きません！！！",
+                f"実況：{attacker_team}、このチャンスを逃しませんでした！！！",
+                f"実況：{attacker}が決め切った！！この一撃は大きい！！！"
             ]
 
             logs.append(random.choice(normal_goal_lines))
-
 
         elif event == "god_hand":
 
@@ -517,15 +548,14 @@ def play_demo_match():
             points = 0
 
             god_hand_lines = [
-                f"実況：止めたぁぁぁ！！！まさにゴッドハンド！！！",
-                f"実況：神セーブ炸裂！！！",
-                f"実況：{keeper}が立ちはだかる！！！",
-                f"実況：失点確実と思われた場面を止めました！！！",
-                f"実況：守護神降臨！！！"
+                f"実況：決まったかと思われたァァァ！！しかし{keeper}止めたァァァ！！！",
+                f"実況：神セーブ炸裂！！{keeper}が失点濃厚の場面を救いました！！！",
+                f"実況：{keeper}が立ちはだかる！！信じられない反応です！！！",
+                f"実況：ゴッドハンド発動！！{attacker}の決定機を完全に封じました！！！",
+                f"実況：守護神降臨！！{keeper}、ここでビッグセーブ！！！"
             ]
 
             logs.append(random.choice(god_hand_lines))
-
 
         else:
 
@@ -534,15 +564,14 @@ def play_demo_match():
             points = 0
 
             save_lines = [
-                f"実況：{keeper}がしっかり防いだ！！！",
-                f"実況：抜け出したがGKが冷静！！！",
-                f"実況：これは決めきれない！！！",
-                f"実況：正面でキャッチ！！！",
-                f"実況：守護神が止めた！！！"
+                f"実況：{keeper}がしっかり防いだ！！ここはノーゴール！！",
+                f"実況：抜け出した{attacker}！！しかし{keeper}が冷静に対応しました！！",
+                f"実況：これは決めきれない！！{keeper}が落ち着いて処理！！！",
+                f"実況：{keeper}、正面でキャッチ！！このチャンスは得点ならず！！！",
+                f"実況：守護神が止めた！！{attacker_team}、追加点ならず！！！"
             ]
 
             logs.append(random.choice(save_lines))
-
 
         if side == "home":
             score_home += points
@@ -550,6 +579,11 @@ def play_demo_match():
             score_away += points
 
         logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
+
+    logs.append("━━━━━━━━━━━━")
+    logs.append("FULL TIME")
+    logs.append("━━━━━━━━━━━━")
+    logs.append(f"{home_team} {score_home} - {score_away} {away_team}")
 
     return score_home, score_away, logs
 
