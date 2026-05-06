@@ -378,6 +378,10 @@ def play_demo_match():
     score_home = 0
     score_away = 0
     logs = []
+    mom_points = {}
+
+    def add_mom_points(player, pts):
+        mom_points[player] = mom_points.get(player, 0) + pts
 
     used_home_players = []
     used_away_players = []
@@ -472,6 +476,7 @@ def play_demo_match():
             f"実況：勝負どころで強さを見せたのは{attacker}！！！"
         ]
         logs.append(random.choice(duel_lines))
+        add_mom_points(attacker, 1)
 
         if event == "super_goal":
 
@@ -479,6 +484,7 @@ def play_demo_match():
             logs.append('<div class="goal">☄️ SUPER GOAL ☄️</div>')
 
             points = 1
+            add_mom_points(attacker, 4)
 
             super_goal_lines = [
                 f"実況：これは理不尽！！{attacker}、とんでもない一撃を突き刺しました！！！",
@@ -496,6 +502,7 @@ def play_demo_match():
             logs.append('<div class="goal">👑 HAT TRICK 👑</div>')
 
             points = random.choice([2, 3])
+            add_mom_points(attacker, 6)
 
             hat_trick_lines = [
                 f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！",
@@ -513,6 +520,7 @@ def play_demo_match():
             logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
 
             points = 2
+            add_mom_points(attacker, 5)
 
             doppel_back_lines = [
                 f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！",
@@ -530,6 +538,7 @@ def play_demo_match():
             logs.append('<div class="goal">⚽ GOAL ⚽</div>')
 
             points = 1
+            add_mom_points(attacker, 3)
 
             normal_goal_lines = [
                 f"実況：{attacker}が冷静に決め切った！！！",
@@ -546,6 +555,7 @@ def play_demo_match():
             logs.append('<div class="goal">🧤 GOD HAND 🧤</div>')
 
             points = 0
+            add_mom_points(keeper, 5)
 
             god_hand_lines = [
                 f"実況：決まったかと思われたァァァ！！しかし{keeper}止めたァァァ！！！",
@@ -562,6 +572,7 @@ def play_demo_match():
             logs.append('<div class="goal">🧤 GREAT SAVE 🧤</div>')
 
             points = 0
+            add_mom_points(keeper, 2)
 
             save_lines = [
                 f"実況：{keeper}がしっかり防いだ！！ここはノーゴール！！",
@@ -573,6 +584,9 @@ def play_demo_match():
 
             logs.append(random.choice(save_lines))
 
+        if i == 2 and points > 0:
+            add_mom_points(attacker, 1)
+
         if side == "home":
             score_home += points
         else:
@@ -580,10 +594,30 @@ def play_demo_match():
 
         logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
 
+    if len(mom_points) > 0:
+        mom_player = max(mom_points, key=mom_points.get)
+    else:
+        all_players = home_starters + away_starters + [home_gk, away_gk]
+        mom_player = random.choice(all_players)
+
     logs.append("━━━━━━━━━━━━")
     logs.append("FULL TIME")
     logs.append("━━━━━━━━━━━━")
     logs.append(f"{home_team} {score_home} - {score_away} {away_team}")
+    logs.append("")
+    logs.append("⭐ MAN OF THE MATCH ⭐")
+    logs.append("")
+    logs.append(mom_player)
+
+    mom_lines = [
+        f"実況：今日は完全に{mom_player}が試合を支配しました！！！",
+        f"実況：文句なしのMOM！！{mom_player}、圧巻のパフォーマンスです！！！",
+        f"実況：攻守に輝いた{mom_player}！！今日の主役はこの男です！！！",
+        f"実況：スタジアムを沸かせたのは{mom_player}でした！！！",
+        f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！"
+    ]
+
+    logs.append(random.choice(mom_lines))
 
     return score_home, score_away, logs
 
