@@ -386,6 +386,7 @@ def play_demo_match():
     used_home_players = []
     used_away_players = []
     selected_pairs = []
+    suspended_players = []
 
     for i in range(3):
 
