@@ -635,14 +635,16 @@ if st.button("⚽ MATCH START", use_container_width=True):
 
 if st.button("⚽ MATCH START", use_container_width=True):
 
+else:
     home_score, away_score, logs = play_demo_match()
-st.subheader("📢 MATCH LIVE")
+
+    st.subheader("📢 MATCH LIVE")
 
     for line in logs:
         if line.startswith("<div"):
             st.markdown(line, unsafe_allow_html=True)
         else:
-            st.markdown(
+            st.markdown(f'<div class="live">{line}</div>', unsafe_allow_html=True)
                 f'<div class="live">{line}</div>',
                 unsafe_allow_html=True
             )
