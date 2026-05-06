@@ -348,11 +348,11 @@ starters = st.multiselect(
     key=f"{side_label}_starters"
 )
 
-    keeper = st.selectbox(
-        f"{side_label} GKを選択",
-        gk["name"].tolist(),
-        key=f"{side_label}_gk"
-    )
+keeper = st.selectbox(
+    f"{side_label} GKを選択",
+    gk["name"].tolist(),
+    key=f"{side_label}_gk"
+)
 
     st.markdown('</div>', unsafe_allow_html=True)
     return team, starters, keeper
