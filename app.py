@@ -4,6 +4,23 @@ import streamlit as st
 import pandas as pd
 import random
 
+# ===== 本番エンジン STEP 1：カードデッキ =====
+def make_deck():
+    deck = [
+        {"type": "offense", "special": "normal", "power": 6},
+        {"type": "offense", "special": "super_goal", "power": 9},
+        {"type": "offense", "special": "doppel_back", "power": 8},
+        {"type": "defense", "special": "normal", "power": 6},
+        {"type": "defense", "special": "god_hand", "power": 9},
+        {"type": "speed", "special": "normal", "power": 6},
+        {"type": "technique", "special": "normal", "power": 6},
+        {"type": "physical", "special": "normal", "power": 6},
+        {"type": "player_class", "special": "normal", "power": 6},
+        {"type": "offense", "special": "hat_trick", "power": 7},
+    ]
+    random.shuffle(deck)
+    return deck
+
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
     page_icon="logo.jpeg",
