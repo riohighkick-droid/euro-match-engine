@@ -65,7 +65,7 @@ div[role="option"]:hover {
     margin-bottom: 26px;
 }
 
-h1, h2, h3, p, label, div, span {
+h1, h2, h3, p, label,  {
     color: #f8fafc !important;
 }
 
