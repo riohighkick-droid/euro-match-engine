@@ -541,10 +541,10 @@ else:
     ]
 
     logs.append(random.choice(save_lines))
-    if side == "home":
-    　　score_home += points
-    else:
-        score_away += points
+if side == "home":
+    score_home += points
+else:
+    score_away += points
 
         logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
 
