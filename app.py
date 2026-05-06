@@ -633,32 +633,18 @@ if st.button("⚽ MATCH START", use_container_width=True):
     else:
         home_score, away_score, logs = play_demo_match()
 
-        st.markdown(
-            f'<div class="score">{home_team} {home_score} - {away_score} {away_team}</div>',
-            unsafe_allow_html=True
-        )
+if st.button("⚽ MATCH START", use_container_width=True):
 
-        if home_score > away_score:
-            st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
-            st.markdown(
-                f'<div class="live">実況：試合終了！！最後に歓喜を爆発させたのは{home_team}！！激しいホットポイントを制し、堂々の勝利です！！</div>',
-                unsafe_allow_html=True
-            )
+    home_score, away_score, logs = play_demo_match()
 
-        elif away_score > home_score:
-            st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
-            st.markdown(
-                f'<div class="live">実況：試合終了！！敵地で勝ち切ったのは{away_team}！！終盤まで続いた激闘を制し、勝利を持ち帰ります！！</div>',
-                unsafe_allow_html=True
-            )
+    st.subheader("📢 MATCH LIVE")
 
+    for line in logs:
+        if line.startswith("<div"):
+            st.markdown(line, unsafe_allow_html=True)
         else:
-            st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
-            st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
             st.markdown(
-                f'<div class="live">実況：ここで試合終了！！両者一歩も譲らず、決着はつきません！！まさに紙一重のドローです！！</div>',
+                f'<div class="live">{line}</div>',
                 unsafe_allow_html=True
             )
 
