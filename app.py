@@ -387,7 +387,6 @@ def play_demo_match():
     used_away_players = []
     selected_pairs = []
 
-    # ===== 試合前に今日のホットポイントを決める =====
     for i in range(3):
 
         available_home = [p for p in home_starters if p not in used_home_players]
@@ -409,25 +408,17 @@ def play_demo_match():
 
         selected_pairs.append((home_player, away_player))
 
-    # ===== 試合開始演出 =====
-    logs.append("━━━━━━━━━━━━")
-    logs.append("MATCH START")
-    logs.append("━━━━━━━━━━━━")
-    logs.append(f"{home_team}！！")
-    logs.append(f"対するは、{away_team}！！")
-    logs.append("運命の一戦、キックオフです！！")
+    logs.append('<div style="text-align:center; font-size:34px; font-weight:bold; color:#FFD700; margin-top:20px;">MATCH START</div>')
+    logs.append(f"実況：{home_team}！！対するは、{away_team}！！")
+    logs.append("実況：運命の一戦、キックオフです！！")
 
-    # ===== ホットポイント紹介 =====
-    logs.append("━━━━━━━━━━━━")
-    logs.append("TODAY'S HOT POINT")
-    logs.append("━━━━━━━━━━━━")
-    logs.append("今日の勝敗を分ける注目のホットポイントはこちら！！")
+    logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
+    logs.append("実況：今日の勝敗を分ける注目のホットポイントはこちら！！")
 
     for idx, pair in enumerate(selected_pairs, start=1):
         hp, ap = pair
         logs.append(f"{idx}. {player_label(home_team, hp)} vs {player_label(away_team, ap)}")
 
-    # ===== 試合本編 =====
     for i, pair in enumerate(selected_pairs):
 
         minute, context = time_zones[i]
@@ -440,7 +431,7 @@ def play_demo_match():
 
         event = winning_card["special"] if winning_card else "save"
 
-        logs.append("━━━━━━━━━━━━")
+        logs.append('<div style="height:18px;"></div>')
         logs.append(f"【{minute}】")
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
@@ -466,6 +457,7 @@ def play_demo_match():
                 "実況：互いに意地を見せましたが、ここはスコア動かず！！"
             ]
             logs.append(random.choice(draw_lines))
+            logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
             continue
 
         duel_lines = [
@@ -475,6 +467,7 @@ def play_demo_match():
             f"実況：この局面をものにしたのは{attacker}！！流れを引き寄せます！！！",
             f"実況：勝負どころで強さを見せたのは{attacker}！！！"
         ]
+
         logs.append(random.choice(duel_lines))
         add_mom_points(attacker, 1)
 
@@ -600,13 +593,11 @@ def play_demo_match():
         all_players = home_starters + away_starters + [home_gk, away_gk]
         mom_player = random.choice(all_players)
 
-logs.append(f'<div style="text-align:center; font-size:52px; font-weight:bold; color:#FFD700; margin-top:40px; margin-bottom:20px;">FULL TIME</div>')
-
-logs.append(f'<div style="text-align:center; font-size:64px; font-weight:bold; color:#FFD700; margin-bottom:40px;">{home_team} {score_home} - {score_away} {away_team}</div>')
-
-logs.append(f'<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
-
-logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
+    logs.append('<div style="height:35px;"></div>')
+    logs.append('<div style="text-align:center; font-size:52px; font-weight:bold; color:#FFD700; margin-top:40px; margin-bottom:20px;">FULL TIME</div>')
+    logs.append(f'<div style="text-align:center; font-size:64px; font-weight:bold; color:#FFD700; margin-bottom:40px;">{home_team} {score_home} - {score_away} {away_team}</div>')
+    logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
+    logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
     mom_lines = [
         f"実況：今日は完全に{mom_player}が試合を支配しました！！！",
