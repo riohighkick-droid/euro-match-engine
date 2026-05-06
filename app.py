@@ -600,14 +600,62 @@ def play_demo_match():
         all_players = home_starters + away_starters + [home_gk, away_gk]
         mom_player = random.choice(all_players)
 
-    logs.append("━━━━━━━━━━━━")
-    logs.append("FULL TIME")
-    logs.append("━━━━━━━━━━━━")
-    logs.append(f"{home_team} {score_home} - {score_away} {away_team}")
-    logs.append("")
-    logs.append("⭐ MAN OF THE MATCH ⭐")
-    logs.append("")
-    logs.append(mom_player)
+logs.append(
+    f"""
+    <div style="
+        text-align:center;
+        font-size:52px;
+        font-weight:bold;
+        color:#FFD700;
+        margin-top:40px;
+        margin-bottom:20px;
+    ">
+    FULL TIME
+    </div>
+    """
+)
+
+logs.append(
+    f"""
+    <div style="
+        text-align:center;
+        font-size:64px;
+        font-weight:bold;
+        color:#FFD700;
+        margin-bottom:40px;
+    ">
+    {home_team} {score_home} - {score_away} {away_team}
+    </div>
+    """
+)
+
+logs.append(
+    f"""
+    <div style="
+        text-align:center;
+        font-size:42px;
+        font-weight:bold;
+        color:#FFD700;
+        margin-top:30px;
+    ">
+    ⭐ MAN OF THE MATCH ⭐
+    </div>
+    """
+)
+
+logs.append(
+    f"""
+    <div style="
+        text-align:center;
+        font-size:54px;
+        font-weight:bold;
+        color:white;
+        margin-bottom:30px;
+    ">
+    {mom_player}
+    </div>
+    """
+)
 
     mom_lines = [
         f"実況：今日は完全に{mom_player}が試合を支配しました！！！",
