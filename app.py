@@ -67,7 +67,7 @@ def judge_card_battle(home_card, away_card):
 
     return "draw"
 
-    # ===== 本番エンジン STEP 3：選手バトル =====
+# ===== 本番エンジン STEP 3：選手バトル =====
 def play_player_match(home_player, away_player):
 
     home_deck = make_deck()
@@ -75,40 +75,55 @@ def play_player_match(home_player, away_player):
 
     home_wins = 0
     away_wins = 0
-
     battle_logs = []
 
-    for i in range(3):
+    winning_card = None
 
-        home_card = home_deck[i]
-        away_card = away_deck[i]
+    round_num = 1
+
+    while home_wins < 3 and away_wins < 3:
+
+        home_card = home_deck.pop(0)
+        away_card = away_deck.pop(0)
 
         result = judge_card_battle(home_card, away_card)
 
         battle_logs.append(
-            f"{home_player} [{home_card['type']}] VS "
-            f"{away_player} [{away_card['type']}]"
+            f"{round_num}本目：{home_player} [{home_card['type']}/{home_card['special']}({home_card['power']})] "
+            f"vs {away_player} [{away_card['type']}/{away_card['special']}({away_card['power']})]"
         )
 
         if result == "home":
             home_wins += 1
-            battle_logs.append(f"→ {home_player} WIN!")
+            winning_card = home_card
+            battle_logs.append(f"→ {home_player} がこの攻防を制す！")
 
         elif result == "away":
             away_wins += 1
-            battle_logs.append(f"→ {away_player} WIN!")
+            winning_card = away_card
+            battle_logs.append(f"→ {away_player} がこの攻防を制す！")
 
         else:
-            battle_logs.append("→ DRAW")
+            battle_logs.append("→ 互角の攻防。ここは決着つかず！")
+
+        round_num += 1
+
+        if len(home_deck) == 0 or len(away_deck) == 0:
+            break
 
     if home_wins > away_wins:
-        return "home", battle_logs, home_card
+        loser_name = away_player
+        battle_logs.append(f"ホットポイント結果：{home_wins}-{away_wins}。{home_player}が攻防を制した。")
+        return "home", loser_name, winning_card, battle_logs
 
     elif away_wins > home_wins:
-        return "away", battle_logs, away_card
+        loser_name = home_player
+        battle_logs.append(f"ホットポイント結果：{away_wins}-{home_wins}。{away_player}が攻防を制した。")
+        return "away", loser_name, winning_card, battle_logs
 
     else:
-        return "draw", battle_logs, None
+        battle_logs.append("ホットポイント結果：決着つかず。")
+        return "draw", None, None, battle_logs
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
