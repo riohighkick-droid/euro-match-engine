@@ -152,7 +152,6 @@ try:
 except:
     st.markdown('<div class="main-title">EURO MATCH ENGINE</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="sub-title">TACTICAL SIX</div>', unsafe_allow_html=True)
 
 df = pd.read_csv("players.csv", encoding="utf-8-sig")
 df.columns = df.columns.str.strip().str.replace(" ", "_")
