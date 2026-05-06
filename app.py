@@ -75,41 +75,45 @@ def play_player_match(home_player, away_player):
 
     home_wins = 0
     away_wins = 0
-
     battle_logs = []
+    winning_card = None
 
-    home_card = None
-    away_card = None
+    for i in range(5):
 
-    for i in range(3):
+        if len(home_deck) == 0 or len(away_deck) == 0:
+            break
 
-        home_card = home_deck[i]
-        away_card = away_deck[i]
+        home_card = home_deck.pop(0)
+        away_card = away_deck.pop(0)
 
         result = judge_card_battle(home_card, away_card)
 
         if result == "home":
             home_wins += 1
-            battle_logs.append(f"→ {home_player} WIN!")
+            winning_card = home_card
 
         elif result == "away":
             away_wins += 1
-            battle_logs.append(f"→ {away_player} WIN!")
+            winning_card = away_card
 
-        else:
-            battle_logs.append("→ DRAW")
+        if home_wins >= 3:
+            loser = away_player
+            return "home", loser, winning_card, battle_logs
+
+        if away_wins >= 3:
+            loser = home_player
+            return "away", loser, winning_card, battle_logs
 
     if home_wins > away_wins:
-        losers = [away_player]
-        return "home", battle_logs, home_card, losers
+        loser = away_player
+        return "home", loser, winning_card, battle_logs
 
     elif away_wins > home_wins:
-        losers = [home_player]
-        return "away", battle_logs, away_card, losers
+        loser = home_player
+        return "away", loser, winning_card, battle_logs
 
     else:
-        losers = []
-        return "draw", battle_logs, None, losers
+        return "draw", None, None, battle_logs
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
