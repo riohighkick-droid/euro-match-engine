@@ -636,8 +636,7 @@ if st.button("⚽ MATCH START", use_container_width=True):
 if st.button("⚽ MATCH START", use_container_width=True):
 
     home_score, away_score, logs = play_demo_match()
-
-    st.subheader("📢 MATCH LIVE")
+st.subheader("📢 MATCH LIVE")
 
     for line in logs:
         if line.startswith("<div"):
