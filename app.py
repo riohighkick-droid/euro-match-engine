@@ -148,8 +148,6 @@ textarea {
 
 # ===== ロゴ表示 =====
 try:
-    col1, col2, col3 = st.columns([1, 2.4, 1])
-    with col2:
         st.image("logo.jpeg", use_container_width=True)
 except:
     st.markdown('<div class="main-title">EURO MATCH ENGINE</div>', unsafe_allow_html=True)
