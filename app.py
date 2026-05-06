@@ -355,7 +355,7 @@ keeper = st.selectbox(
 )
 
 st.markdown('</div>', unsafe_allow_html=True)
-    return team, starters, keeper
+return team, starters, keeper
 
 left, right = st.columns(2)
 
