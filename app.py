@@ -70,49 +70,48 @@ def judge_card_battle(home_card, away_card):
 # ===== 本番エンジン STEP 3：選手バトル =====
 def play_player_match(home_player, away_player):
 
-    home_deck = make_deck()
-    away_deck = make_deck()
-
     home_wins = 0
     away_wins = 0
 
     battle_logs = []
-    losers = []
+
+    home_card = None
+    away_card = None
 
     for i in range(3):
 
-        home_card = home_deck[i]
-        away_card = away_deck[i]
+        home_card = draw_card(home_player)
+        away_card = draw_card(away_player)
 
-        result = judge_card_battle(home_card, away_card)
-
-        battle_logs.append(
-            f"{home_player} [{home_card['type']}:{home_card['power']}] "
-            f"vs "
-            f"{away_player} [{away_card['type']}:{away_card['power']}]"
-        )
+        result = judge_battle(home_card, away_card)
 
         if result == "home":
+
             home_wins += 1
+
             battle_logs.append(f"→ {home_player} WIN!")
 
         elif result == "away":
+
             away_wins += 1
+
             battle_logs.append(f"→ {away_player} WIN!")
 
         else:
+
             battle_logs.append("→ DRAW")
 
-    if home_wins > away_wins:
-        losers = [away_player]
-        return "home", battle_logs, home_card, losers
+        if home_wins >= 3:
+            losers = [away_player]
+            return "home", battle_logs, home_card, losers
 
-    elif away_wins > home_wins:
-        losers = [home_player]
-        return "away", battle_logs, away_card, losers
+        elif away_wins >= 3:
+            losers = [home_player]
+            return "away", battle_logs, away_card, losers
 
-    else:
-        return "draw",  battle_logs,None, losers
+    losers = []
+
+    return "draw", battle_logs, None, losers
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
