@@ -340,7 +340,7 @@ def pick_side(side_label, side_icon):
     field = team_df[team_df["position"] != "GK"]
     gk = team_df[team_df["position"] == "GK"]
 
-starters = st.multiselect(
+    starters = st.multiselect(
     f"{side_label} フィールド選手を7人選択",
     field["name"].tolist(),
     format_func=lambda name: player_label(team, name),
@@ -348,14 +348,14 @@ starters = st.multiselect(
     key=f"{side_label}_starters"
 )
 
-keeper = st.selectbox(
+    keeper = st.selectbox(
     f"{side_label} GKを選択",
     gk["name"].tolist(),
     key=f"{side_label}_gk"
 )
 
-st.markdown('</div>', unsafe_allow_html=True)
-return team, starters, keeper
+    st.markdown('</div>', unsafe_allow_html=True)
+    return team, starters, keeper
 
 left, right = st.columns(2)
 
