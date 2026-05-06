@@ -103,7 +103,7 @@ def play_player_match(home_player, away_player):
             losers.append(home_player)
 
         else:
-            append("→ DRAW")
+            battle_logs.append("→ DRAW")
 
     if home_wins > away_wins:
         return "home",  home_card, losers
