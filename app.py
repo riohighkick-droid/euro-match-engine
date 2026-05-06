@@ -451,6 +451,8 @@ def play_demo_match():
             keeper = home_gk
             side = "away"
 
+            suspended_players.append(home_player)
+
         else:
             draw_lines = [
                 "実況：注目の攻防は互いに譲らず、ここは決着つかず！！",
