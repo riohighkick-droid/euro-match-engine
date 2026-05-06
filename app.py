@@ -23,7 +23,6 @@ def make_deck():
 
     # ===== 本番エンジン STEP 2：5すくみ判定 =====
 def judge_card_battle(home_card, away_card):
-
     win_map = {
         "offense": "defense",
         "defense": "speed",
