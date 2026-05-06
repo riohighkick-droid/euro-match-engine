@@ -104,6 +104,7 @@ def play_player_match(home_player, away_player):
             battle_logs.append("→ DRAW")
 
     if home_wins > away_wins:
+        losers = [away_player]
         return "home", battle_logs, home_card, losers
 
     elif away_wins > home_wins:
