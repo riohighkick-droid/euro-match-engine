@@ -303,6 +303,15 @@ teams_by_country = {
 
 def get_teams(country):
     return teams_by_country.get(country, [])
+def get_player_position(team, player_name):
+    row = df[(df["team"] == team) & (df["name"] == player_name)]
+    if len(row) == 0:
+        return ""
+    return row.iloc[0]["position"]
+
+def player_label(team, player_name):
+    pos = get_player_position(team, player_name)
+    return f"[{pos}] {player_name}"
 
 def pick_side(side_label, side_icon):
     st.markdown('<div class="card">', unsafe_allow_html=True)
