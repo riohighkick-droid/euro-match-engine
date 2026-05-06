@@ -444,7 +444,7 @@ def play_demo_match():
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
-        if winner == "home":
+if winner == "home":
     attacker = home_player
     attacker_team = home_team
     keeper = away_gk
@@ -473,17 +473,6 @@ attacker_pos = get_player_position(attacker_team, attacker)
 
 if attacker_pos in ["CB", "SB", "RB", "LB", "DF"] and event in ["hat_trick", "doppel_back"]:
     event = "normal_goal"
-
-        duel_lines = [
-            f"実況：激しい競り合いを制したのは、、、{attacker}だァァァ！！！",
-            f"実況：注目の攻防、最後に上回ったのは{attacker}！！！",
-            f"実況：ここで抜け出したのは、、、{attacker}だァァァ！！！",
-            f"実況：この局面をものにしたのは{attacker}！！流れを引き寄せます！！！",
-            f"実況：勝負どころで強さを見せたのは{attacker}！！！"
-        ]
-
-        logs.append(random.choice(duel_lines))
-        add_mom_points(attacker, 1)
 
         if event == "super_goal":
 
