@@ -354,7 +354,7 @@ keeper = st.selectbox(
     key=f"{side_label}_gk"
 )
 
-    st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
     return team, starters, keeper
 
 left, right = st.columns(2)
