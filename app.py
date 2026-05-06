@@ -106,13 +106,13 @@ def play_player_match(home_player, away_player):
             append("→ DRAW")
 
     if home_wins > away_wins:
-        return "home", , home_card, losers
+        return "home",  home_card, losers
 
     elif away_wins > home_wins:
-        return "away", , away_card, losers
+        return "away",  away_card, losers
 
     else:
-        return "draw", , None, losers
+        return "draw",  None, losers
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
