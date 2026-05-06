@@ -100,6 +100,7 @@ def play_player_match(home_player, away_player):
         elif result == "away":
             away_wins += 1
             battle_logs.append(f"→ {away_player} WIN!")
+            losers.append(home_player)
 
         else:
             battle_logs.append("→ DRAW")
