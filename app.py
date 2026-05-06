@@ -307,19 +307,19 @@ if st.button("⚽ MATCH START", use_container_width=True):
         )
 
 if home_score > away_score:
-    st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="live">実況：試合終了！！最後に歓喜を爆発させたのは{home_team}！！激しいホットポイントを制し、堂々の勝利です！！</div>', unsafe_allow_html=True)
+       st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
+       st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
+       st.markdown(f'<div class="live">実況：試合終了！！最後に歓喜を爆発させたのは{home_team}！！激しいホットポイントを制し、堂々の勝利です！！</div>', unsafe_allow_html=True)
 
 elif away_score > home_score:
-    st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="live">実況：試合終了！！敵地で勝ち切ったのは{away_team}！！終盤まで続いた激闘を制し、勝利を持ち帰ります！！</div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="live">実況：試合終了！！敵地で勝ち切ったのは{away_team}！！終盤まで続いた激闘を制し、勝利を持ち帰ります！！</div>', unsafe_allow_html=True)
 
 else:
-    st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="live">実況：ここで試合終了！！両者一歩も譲らず、決着はつきません！！まさに紙一重のドローです！！</div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="result">FULL TIME</div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="result">{home_team} {home_score} - {away_score} {away_team}</div>', unsafe_allow_html=True)
+      st.markdown(f'<div class="live">実況：ここで試合終了！！両者一歩も譲らず、決着はつきません！！まさに紙一重のドローです！！</div>', unsafe_allow_html=True)
 
 st.subheader("🎙️ MATCH LIVE")
 
