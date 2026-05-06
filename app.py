@@ -76,6 +76,18 @@ h1, h2, h3, p, label, div, span {
     color: #facc15 !important;
 }
 
+.stSelectbox div[data-baseweb="select"] > div {
+    color: black !important;
+    background-color: white !important;
+    font-weight: 700 !important;
+}
+
+.stMultiSelect div[data-baseweb="select"] > div {
+    color: black !important;
+    background-color: white !important;
+    font-weight: 700 !important;
+}
+
 .score {
     text-align: center;
     font-size: 54px;
