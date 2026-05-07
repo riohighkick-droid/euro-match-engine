@@ -429,7 +429,11 @@ def play_demo_match():
         selected_pairs.append((home_player, away_player))
 
     logs.append('<div style="text-align:center; font-size:34px; font-weight:bold; color:#FFD700; margin-top:20px;">MATCH START</div>')
-    logs.append(f"実況：{home_team}！！対するは、{away_team}！！")
+    home_nickname = teams[home_team]["nickname"]
+    away_nickname = teams[away_team]["nickname"]
+    logs.append(
+        f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！"
+)
     logs.append("実況：運命の一戦、キックオフです！！")
 
     logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
