@@ -664,7 +664,9 @@ def play_demo_match():
 
     logs.append('<div style="height:35px;"></div>')
     logs.append('<div style="text-align:center; font-size:52px; font-weight:bold; color:#FFD700; margin-top:40px; margin-bottom:20px;">FULL TIME</div>')
-    logs.append(f'<div style="text-align:center; font-size:64px; font-weight:bold; color:#FFD700; margin-bottom:40px;">{home_team} {score_home} - {score_away} {away_team}</div>')
+    home_short = teams[home_team]["short_name"]
+    away_short = teams[away_team]["short_name"]
+    logs.append(f'<div style="text-align:center; font-size:64px; font-weight:bold; color:#FFD700; margin-bottom:40px;">{home_short} {score_home} - {score_away} {away_short}</div>')
     logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
     logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
