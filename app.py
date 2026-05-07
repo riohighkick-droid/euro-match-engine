@@ -428,12 +428,85 @@ def play_demo_match():
 
         selected_pairs.append((home_player, away_player))
 
-    logs.append('<div style="text-align:center; font-size:34px; font-weight:bold; color:#FFD700; margin-top:20px;">MATCH START</div>')
+    home_short = teams[home_team]["short_name"]
+    away_short = teams[away_team]["short_name"]
+
     home_nickname = teams[home_team]["nickname"]
     away_nickname = teams[away_team]["nickname"]
+
+    stadium = teams[home_team]["stadium"]
+
+    home_color = teams[home_team]["team_color"]
+    sub_color = teams[home_team]["sub_color"]
+
+    text_color = "#FFFFFF"
+
+    logs.append(
+        f'''
+        <div style="
+            background: linear-gradient(135deg, {home_color}, {sub_color});
+            border-radius: 24px;
+            padding: 35px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.35);
+        ">
+
+            <div style="
+                font-size: 54px;
+                font-weight: 900;
+                color: {text_color};
+                letter-spacing: 4px;
+                margin-bottom: 15px;
+            ">
+                MATCH START
+            </div>
+
+            <div style="
+                font-size: 26px;
+                font-weight: bold;
+                color: {text_color};
+                margin-bottom: 10px;
+            ">
+                🏟️ {stadium}
+            </div>
+
+            <div style="
+                font-size: 30px;
+                font-weight: bold;
+                color: {text_color};
+                margin-top: 20px;
+            ">
+                {home_nickname}　{home_team}
+            </div>
+
+            <div style="
+                font-size: 22px;
+                font-weight: bold;
+                color: {text_color};
+                margin-top: 8px;
+                margin-bottom: 8px;
+            ">
+                VS
+            </div>
+
+            <div style="
+                font-size: 30px;
+                font-weight: bold;
+                color: {text_color};
+            ">
+                {away_nickname}　{away_team}
+            </div>
+
+        </div>
+        '''
+    )
+
     logs.append(
         f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！"
-)
+    )
+
     logs.append("実況：運命の一戦、キックオフです！！")
 
     logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
