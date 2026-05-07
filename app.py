@@ -152,6 +152,51 @@ def svg_img_tag(short_name, size=70):
         f'<img src="data:image/svg+xml;base64,{encoded}" '
         f'style="width:{size}px; height:{size}px; object-fit:contain; vertical-align:middle;">'
     )
+def render_logo_box(short_name, box_size=160, logo_size=130):
+
+    path = logo_path(short_name)
+
+    if os.path.exists(path):
+
+        with open(path, "rb") as f:
+            encoded = base64.b64encode(f.read()).decode()
+
+        logo_html = f"""
+        <img src="data:image/svg+xml;base64,{encoded}"
+             style="
+                max-width:{logo_size}px;
+                max-height:{logo_size}px;
+                width:auto;
+                height:auto;
+                object-fit:contain;
+             ">
+        """
+
+    else:
+
+        logo_html = f"""
+        <div style="
+            font-size:28px;
+            font-weight:900;
+            color:white;
+        ">
+            {short_name}
+        </div>
+        """
+
+    return f"""
+    <div style="
+        width:{box_size}px;
+        height:{box_size}px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin:auto;
+        overflow:hidden;
+    ">
+        {logo_html}
+    </div>
+    """
 for _, row in team_df.iterrows():
     teams[row["team_name"]] = {
         "short_name": row["short_name"],
