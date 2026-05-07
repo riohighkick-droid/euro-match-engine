@@ -111,6 +111,14 @@ st.set_page_config(
     page_icon="logo.jpeg",
     layout="wide"
 )
+
+st.markdown("""
+<style>
+.stApp {
+    background-color: #0f172a;
+}
+</style>
+""", unsafe_allow_html=True)
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
