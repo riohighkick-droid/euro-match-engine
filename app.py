@@ -122,7 +122,10 @@ st.set_page_config(
 )
 
 st.markdown(\"\"\"
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
+
 .stApp {
     background: #050505;
     color: #f8fafc;
