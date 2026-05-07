@@ -455,6 +455,10 @@ def play_demo_match():
         event = winning_card["special"] if winning_card else "save"
 
         logs.append('<div style="height:18px;"></div>')
+        stadium = teams[home_team]["stadium"]
+        logs.append(
+            f'<div style="text-align:center; font-size:30px; color:#CCCCCC; margin-top:10px; margin-bottom:25px;">🏟️ {stadium}</div>'
+        )
         logs.append(f"【{minute}】")
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
