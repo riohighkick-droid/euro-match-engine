@@ -112,6 +112,47 @@ st.set_page_config(
     layout="wide"
 )
 
+st.markdown("""
+<style>
+.stApp {
+    background: linear-gradient(135deg, #050816 0%, #111827 55%, #020617 100%);
+    color: #ffffff;
+}
+
+.card {
+    background: rgba(17, 24, 39, 0.92);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: 0 0 24px rgba(255, 215, 0, 0.12);
+}
+
+.live {
+    background: rgba(2, 6, 23, 0.85);
+    border-left: 5px solid #FFD700;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.goal {
+    text-align: center;
+    font-size: 44px;
+    font-weight: 900;
+    color: #FFD700;
+    letter-spacing: 3px;
+    text-shadow: 0 0 16px rgba(255, 215, 0, 0.8);
+    margin: 22px 0;
+}
+
+h1, h2, h3 {
+    color: #FFD700;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
