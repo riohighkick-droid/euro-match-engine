@@ -119,6 +119,7 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
