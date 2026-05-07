@@ -70,18 +70,21 @@ def judge_card_battle(home_card, away_card):
 # ===== 本番エンジン STEP 3：選手バトル =====
 def play_player_match(home_player, away_player):
 
-    home_deck = make_deck()
-    away_deck = make_deck()
-
     home_wins = 0
     away_wins = 0
     battle_logs = []
     winning_card = None
 
-    for i in range(5):
+    home_deck = make_deck()
+    away_deck = make_deck()
 
-        if len(home_deck) == 0 or len(away_deck) == 0:
-            break
+    while home_wins < 3 and away_wins < 3:
+
+        if len(home_deck) == 0:
+            home_deck = make_deck()
+
+        if len(away_deck) == 0:
+            away_deck = make_deck()
 
         home_card = home_deck.pop(0)
         away_card = away_deck.pop(0)
@@ -96,24 +99,14 @@ def play_player_match(home_player, away_player):
             away_wins += 1
             winning_card = away_card
 
-        if home_wins >= 3:
-            loser = away_player
-            return "home", loser, winning_card, battle_logs
+        else:
+            continue
 
-        if away_wins >= 3:
-            loser = home_player
-            return "away", loser, winning_card, battle_logs
+    if home_wins >= 3:
+        return "home", away_player, winning_card, battle_logs
 
-    if home_wins > away_wins:
-        loser = away_player
-        return "home", loser, winning_card, battle_logs
+    return "away", home_player, winning_card, battle_logs
 
-    elif away_wins > home_wins:
-        loser = home_player
-        return "away", loser, winning_card, battle_logs
-
-    else:
-        return "draw", None, None, battle_logs
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
@@ -417,13 +410,10 @@ def play_demo_match():
 
     home_short = team_value(home_team, "short_name", home_team)
     away_short = team_value(away_team, "short_name", away_team)
-
     home_nickname = team_value(home_team, "nickname", home_team)
     away_nickname = team_value(away_team, "nickname", away_team)
-
     stadium = team_value(home_team, "stadium", "")
-    home_color = team_value(home_team, "team_color", "#111111")
-    sub_color = team_value(home_team, "sub_color", "#FFD700")
+    home_color = team_value(home_team, "team_color", "#FFD700")
 
     used_home_players = []
     used_away_players = []
@@ -434,14 +424,6 @@ def play_demo_match():
         available_home = [p for p in home_starters if p not in used_home_players]
         available_away = [p for p in away_starters if p not in used_away_players]
 
-        if not available_home:
-            used_home_players = []
-            available_home = home_starters
-
-        if not available_away:
-            used_away_players = []
-            available_away = away_starters
-
         home_player = random.choice(available_home)
         away_player = random.choice(available_away)
 
@@ -450,12 +432,18 @@ def play_demo_match():
 
         selected_pairs.append((home_player, away_player))
 
-    logs.append(f'<div style="background:linear-gradient(135deg,{home_color},{sub_color}); border-radius:24px; padding:35px; margin-top:20px; margin-bottom:30px; text-align:center; box-shadow:0 0 30px rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.25);"><div style="font-size:54px; font-weight:900; color:white; letter-spacing:4px; margin-bottom:15px;">MATCH START</div><div style="font-size:26px; font-weight:bold; color:white; margin-bottom:10px;">🏟️ {stadium}</div><div style="font-size:30px; font-weight:bold; color:white; margin-top:20px;">{home_nickname}　{home_team}</div><div style="font-size:22px; font-weight:bold; color:white; margin-top:8px; margin-bottom:8px;">VS</div><div style="font-size:30px; font-weight:bold; color:white;">{away_nickname}　{away_team}</div></div>')
+    logs.append(
+        f'<div style="border:3px solid {home_color}; border-radius:22px; padding:24px; margin-top:20px; margin-bottom:25px; text-align:center; background:#111827;">'
+        f'<div style="font-family:Orbitron, sans-serif; font-size:46px; font-weight:900; color:#FFD700; letter-spacing:3px;">MATCH START</div>'
+        f'<div style="font-family:Orbitron, sans-serif; font-size:24px; font-weight:700; color:white; margin-top:10px;">{home_short} vs {away_short}</div>'
+        f'<div style="font-size:22px; color:#CCCCCC; margin-top:12px;">🏟️ {stadium}</div>'
+        f'</div>'
+    )
 
     logs.append(f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！")
     logs.append("実況：運命の一戦、キックオフです！！")
 
-    logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
+    logs.append('<div style="text-align:center; font-family:Orbitron, sans-serif; font-size:30px; font-weight:900; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
     logs.append("実況：今日の勝敗を分ける注目のホットポイントはこちら！！")
 
     for idx, pair in enumerate(selected_pairs, start=1):
@@ -472,13 +460,13 @@ def play_demo_match():
             away_player
         )
 
-        if loser is not None and loser not in suspended_players:
+        if loser not in suspended_players:
             suspended_players.append(loser)
 
         event = winning_card["special"] if winning_card else "save"
 
         logs.append('<div style="height:18px;"></div>')
-        logs.append(f'<div style="border-left:6px solid {home_color}; padding-left:14px; margin-top:18px; font-size:24px; font-weight:bold; color:#FFD700;">【{minute}】</div>')
+        logs.append(f'<div style="border-left:6px solid {home_color}; padding-left:14px; margin-top:18px; font-family:Orbitron, sans-serif; font-size:24px; font-weight:900; color:#FFD700;">【{minute}】</div>')
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
@@ -487,25 +475,14 @@ def play_demo_match():
             attacker_team = home_team
             keeper = away_gk
             side = "home"
+            opponent = away_player
 
-        elif winner == "away":
+        else:
             attacker = away_player
             attacker_team = away_team
             keeper = home_gk
             side = "away"
-
-        else:
-            draw_lines = [
-                "実況：注目の攻防は互いに譲らず、ここは決着つかず！！",
-                "実況：激しいぶつかり合い！！しかし最後まで崩し切れません！！",
-                "実況：一進一退の攻防！！ここは両者痛み分けです！！",
-                "実況：勝負は紙一重！！このホットポイントはノーゴール！！",
-                "実況：互いに意地を見せましたが、ここはスコア動かず！！"
-            ]
-
-            logs.append(random.choice(draw_lines))
-            logs.append(f"現在スコア：{home_short} {score_home} - {score_away} {away_short}")
-            continue
+            opponent = home_player
 
         attacker_pos = get_player_position(attacker_team, attacker)
 
@@ -513,16 +490,11 @@ def play_demo_match():
             event = "normal_goal"
 
         duel_lines = [
-            f"実況：激しい競り合いを制したのは、、、{attacker}だァァァ！！！",
-            f"実況：注目の攻防、最後に上回ったのは{attacker}！！！",
-            f"実況：ここで抜け出したのは、、、{attacker}だァァァ！！！",
-            f"実況：この局面をものにしたのは{attacker}！！流れを引き寄せます！！！",
-            f"実況：勝負どころで強さを見せたのは{attacker}！！！",
-            f"実況：{attacker}、この局面で圧倒的な強さを見せつけたァァァ！！！",
-            f"実況：会場どよめく！！{attacker}が流れを強引に引き寄せます！！！",
-            f"実況：ここで魅せた！！{attacker}、完全に主導権を握りました！！！",
-            f"実況：激戦を制したのは{attacker}！！この勝負強さは本物です！！！",
-            f"実況：ぶつかり合いを制圧！！{attacker}が試合を動かしました！！！"
+            f"実況：{attacker}、{opponent}との戦いを制してGKと1対1を迎えます！！！",
+            f"実況：注目の攻防を制したのは{attacker}！！残るは守護神のみ！！！",
+            f"実況：{attacker}が{opponent}を上回った！！決定機到来です！！！",
+            f"実況：勝負どころで抜け出したのは{attacker}！！GKとの一騎打ちへ！！！",
+            f"実況：{attacker}、この局面を制しました！！さあ最後の砦はGK！！！"
         ]
 
         logs.append(random.choice(duel_lines))
@@ -536,15 +508,15 @@ def play_demo_match():
             points = 1
             add_mom_points(attacker, 4)
 
-            super_goal_lines = [
+            lines = [
                 f"実況：これは理不尽！！{attacker}、とんでもない一撃を突き刺しました！！！",
                 f"実況：スーパーゴール炸裂！！{attacker_team}、会場の空気を一変させました！！！",
-                f"実況：{attacker}が魅せた！！まさに試合を切り裂く一撃です！！！",
                 f"実況：これは止められない！！{keeper}も見送るしかありません！！！",
-                f"実況：衝撃のフィニッシュ！！{attacker}、完璧に決め切りました！！！"
+                f"実況：衝撃のフィニッシュ！！{attacker}、完璧に決め切りました！！！",
+                f"実況：芸術的な一撃！！{attacker}が試合を動かします！！！"
             ]
 
-            logs.append(random.choice(super_goal_lines))
+            logs.append(random.choice(lines))
 
         elif event == "hat_trick":
 
@@ -554,7 +526,7 @@ def play_demo_match():
             points = random.choice([2, 3])
             add_mom_points(attacker, 6)
 
-            hat_trick_lines = [
+            lines = [
                 f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！",
                 f"実況：{attacker}、圧巻の大暴れ！！試合を支配しています！！！",
                 f"実況：エースの仕事！！{attacker}が一気に流れを持っていきました！！！",
@@ -562,7 +534,7 @@ def play_demo_match():
                 f"実況：これは大きい！！{attacker}が試合を一気に動かします！！！"
             ]
 
-            logs.append(random.choice(hat_trick_lines))
+            logs.append(random.choice(lines))
 
         elif event == "doppel_back":
 
@@ -572,7 +544,7 @@ def play_demo_match():
             points = 2
             add_mom_points(attacker, 5)
 
-            doppel_back_lines = [
+            lines = [
                 f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！",
                 f"実況：これはデカい！！{attacker}の一撃で試合が大きく動きます！！！",
                 f"実況：まさかの2点級プレー！！{attacker_team}、ここで一気に突き放す！！！",
@@ -580,7 +552,7 @@ def play_demo_match():
                 f"実況：{attacker}が勝負を決めにきた！！流れを完全に掌握しました！！！"
             ]
 
-            logs.append(random.choice(doppel_back_lines))
+            logs.append(random.choice(lines))
 
         elif event == "normal_goal" or event == "normal":
 
@@ -590,7 +562,7 @@ def play_demo_match():
             points = 1
             add_mom_points(attacker, 3)
 
-            normal_goal_lines = [
+            lines = [
                 f"実況：{attacker}が冷静に決め切った！！！",
                 f"実況：決めた！！{attacker}、落ち着いて流し込みました！！！",
                 f"実況：最後はきっちり仕留めた！！{keeper}届きません！！！",
@@ -598,7 +570,7 @@ def play_demo_match():
                 f"実況：{attacker}が決め切った！！この一撃は大きい！！！"
             ]
 
-            logs.append(random.choice(normal_goal_lines))
+            logs.append(random.choice(lines))
 
         elif event == "god_hand":
 
@@ -607,7 +579,7 @@ def play_demo_match():
             points = 0
             add_mom_points(keeper, 5)
 
-            god_hand_lines = [
+            lines = [
                 f"実況：決まったかと思われたァァァ！！しかし{keeper}止めたァァァ！！！",
                 f"実況：神セーブ炸裂！！{keeper}が失点濃厚の場面を救いました！！！",
                 f"実況：{keeper}が立ちはだかる！！信じられない反応です！！！",
@@ -615,7 +587,7 @@ def play_demo_match():
                 f"実況：守護神降臨！！{keeper}、ここでビッグセーブ！！！"
             ]
 
-            logs.append(random.choice(god_hand_lines))
+            logs.append(random.choice(lines))
 
         else:
 
@@ -624,7 +596,7 @@ def play_demo_match():
             points = 0
             add_mom_points(keeper, 2)
 
-            save_lines = [
+            lines = [
                 f"実況：{keeper}がしっかり防いだ！！ここはノーゴール！！",
                 f"実況：抜け出した{attacker}！！しかし{keeper}が冷静に対応しました！！",
                 f"実況：これは決めきれない！！{keeper}が落ち着いて処理！！！",
@@ -632,7 +604,7 @@ def play_demo_match():
                 f"実況：守護神が止めた！！{attacker_team}、追加点ならず！！！"
             ]
 
-            logs.append(random.choice(save_lines))
+            logs.append(random.choice(lines))
 
         if i == 2 and points > 0:
             add_mom_points(attacker, 1)
@@ -651,8 +623,14 @@ def play_demo_match():
         mom_player = random.choice(all_players)
 
     logs.append('<div style="height:35px;"></div>')
-    logs.append(f'<div style="background:linear-gradient(135deg,{home_color},{sub_color}); border-radius:24px; padding:28px; margin-top:35px; margin-bottom:20px; text-align:center; box-shadow:0 0 34px rgba(255,215,0,0.22); border:1px solid rgba(255,255,255,0.22);"><div style="font-size:52px; font-weight:900; color:white; letter-spacing:3px;">FULL TIME</div><div style="font-size:66px; font-weight:900; color:white; margin-top:12px;">{home_short} {score_home} - {score_away} {away_short}</div></div>')
-    logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
+    logs.append(
+        f'<div style="border:3px solid {home_color}; border-radius:22px; padding:28px; margin-top:35px; margin-bottom:20px; text-align:center; background:#111827;">'
+        f'<div style="font-family:Orbitron, sans-serif; font-size:52px; font-weight:900; color:#FFD700; letter-spacing:3px;">FULL TIME</div>'
+        f'<div style="font-family:Orbitron, sans-serif; font-size:66px; font-weight:900; color:white; margin-top:12px;">{home_short} {score_home} - {score_away} {away_short}</div>'
+        f'</div>'
+    )
+
+    logs.append('<div style="text-align:center; font-family:Orbitron, sans-serif; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
     logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
     mom_lines = [
@@ -671,7 +649,7 @@ def play_demo_match():
         )
 
     return score_home, score_away, logs
-
+    
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
 if st.button("⚽ MATCH START", use_container_width=True):
