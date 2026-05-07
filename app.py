@@ -109,7 +109,6 @@ def play_player_match(home_player, away_player):
 st.set_page_config(
 st.markdown("""
 <style>
-
 .stApp{
     background:#050505;
     color:#f8fafc;
@@ -152,17 +151,8 @@ div.stButton > button{
     font-weight:900 !important;
     border-radius:14px !important;
 }
-
 </style>
 """, unsafe_allow_html=True)
-
-    page_title="EURO MATCH ENGINE - TACTICAL SIX",
-    page_icon="logo.jpeg",
-    layout="wide"
-)
-
-
-
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
