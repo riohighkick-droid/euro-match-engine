@@ -207,8 +207,29 @@ def pick_side(side_label, side_icon):
     logo_file = logo_path(short_name)
 
     if os.path.exists(logo_file):
-        st.image(logo_file, width=120)
+        st.markdown(
+            """
+            <div style="
+                width:160px;
+                height:160px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                margin:auto;
+                padding:10px;
+            ">
+            """,
+            unsafe_allow_html=True
+        )
 
+        st.image(logo_file, width=140)
+
+        st.markdown(
+            """
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
     team_players = df[df["team"] == team]
     field = team_players[team_players["position"] != "GK"]
     gk = team_players[team_players["position"] == "GK"]
