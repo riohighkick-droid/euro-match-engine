@@ -212,16 +212,30 @@ def pick_side(side_label, side_icon):
 
         with logo_col2:
 
-           st.markdown(
-              "<div style='height:180px; display:flex; align-items:center; justify-content:center;'>",
-              unsafe_allow_html=True
-            )
-            
-           st.image(logo_file, width=100)
-            
-           st.markdown(
-              "</div>",
-              unsafe_allow_html=True
+            with open(logo_file, "rb") as f:
+                logo_base64 = base64.b64encode(f.read()).decode()
+
+        st.markdown(
+            f"""
+            <div style="
+                height:180px;
+                width:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+            ">
+                <img src="data:image/svg+xml;base64,{logo_base64}"
+                     style="
+                        max-width:100px;
+                        max-height:100px;
+                        width:auto;
+                        height:auto;
+                        object-fit:contain;
+                        display:block;
+                    ">
+            </div>
+            """,
+            unsafe_allow_html=True
             )
         
     team_players = df[df["team"] == team]
