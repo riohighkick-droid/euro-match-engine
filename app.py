@@ -111,7 +111,7 @@ st.set_page_config(
     page_icon="logo.jpeg",
     layout="wide"
 )
-st.markdown("<style>.stSelectbox div[data-baseweb='select'] > div {text-align:center; justify-content:center;}</style>", unsafe_allow_html=True)
+st.markdown("<style>.stSelectbox div[data-baseweb='select'] > div {background-color:#1f2937; color:white; border:2px solid #FFD700; border-radius:12px; min-height:50px; font-weight:700; text-align:center; justify-content:center;}</style>", unsafe_allow_html=True)
 st.markdown("<style>.goal {font-size:56px; font-weight:900; background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#33ff00,#00ccff,#6633ff,#ff00cc); background-size:400% 400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:rainbow 3s ease infinite;} @keyframes rainbow {0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;}}</style>", unsafe_allow_html=True)
 
 # ===== ロゴ表示 =====
