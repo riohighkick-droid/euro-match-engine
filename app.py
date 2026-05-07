@@ -517,14 +517,19 @@ if st.button("⚽ MATCH START", use_container_width=True):
 
         for line in logs:
 
-            if line.strip().startswith("<div"):
+            if "<div" in line or "<img" in line or "<span" in line:
                 st.markdown(line, unsafe_allow_html=True)
 
-            else:
+            elif "GOOOOO" in line or "GOAL" in line:
                 st.markdown(
-                    f'<div class="live">{line}</div>',
+                    f'<div class="goal">{line}</div>',
                     unsafe_allow_html=True
                 )
 
-st.markdown('</div>', unsafe_allow_html=True)
+           else:
+               st.markdown(
+                   f'<div class="live">{line}</div>',
+                   unsafe_allow_html=True
+             )
+
 """)
