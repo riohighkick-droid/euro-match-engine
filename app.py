@@ -112,7 +112,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.markdown("<style>.stApp {background: linear-gradient(135deg, #050816 0%, #111827 55%, #020617 100%); color: white;} h1,h2,h3 {color:#FFD700;} .stButton button {background: linear-gradient(135deg,#FFD700,#F59E0B); color:black; font-weight:900; border:none; border-radius:14px; height:56px; font-size:22px; box-shadow:0 0 18px rgba(255,215,0,0.35);} </style>", unsafe_allow_html=True)
+st.markdown("<style>.stApp {background: linear-gradient(135deg, #050816 0%, #111827 55%, #020617 100%); color: white;} h1,h2,h3 {color:#FFD700;} .stButton button {background: linear-gradient(135deg,#FFD700,#F59E0B); color:black; font-weight:900; border:none; border-radius:14px; height:56px; font-size:22px; box-shadow:0 0 18px rgba(255,215,0,0.35);} .stSelectbox div[data-baseweb='select'] > div {background-color:#111827; color:white; border:1px solid #FFD700; border-radius:12px;} </style>", unsafe_allow_html=True)
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
