@@ -105,18 +105,17 @@ def play_player_match(home_player, away_player):
         return "home", away_player, winning_card, battle_logs
 
     return "away", home_player, winning_card, battle_logs
-    
+
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
     page_icon="logo.jpeg",
     layout="wide"
 )
 
-st.markdown(\"\"\"
-
+st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
-<style>
 
+<style>
 .stApp {
     background: #050505;
     color: #f8fafc;
@@ -138,104 +137,6 @@ div[role="option"]:hover {
     color: black !important;
 }
 
-
-.logo-area {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.main-title {
-    text-align: center;
-    font-size: 64px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    color: #ffffff;
-    margin-bottom: 0px;
-}
-
-.sub-title {
-    text-align: center;
-    font-size: 24px;
-    color: #facc15;
-    letter-spacing: 4px;
-    margin-bottom: 35px;
-}
-
-.card {
-    background: transparent;
-    border: none;
-    border-radius: 18px;
-    padding: 0px;
-    margin-bottom: 26px;
-}
-
-h1, h2, h3, p, label,  {
-    color: #f8fafc !important;
-}
-
-.stSelectbox label,
-.stMultiSelect label {
-    font-size: 18px !important;
-    font-weight: 800 !important;
-    color: #facc15 !important;
-}
-
-.stSelectbox div[data-baseweb="select"] > div {
-    color: black !important;
-    background-color: white !important;
-    font-weight: 700 !important;
-}
-
-.stMultiSelect div[data-baseweb="select"] > div {
-    color: black !important;
-    background-color: white !important;
-    font-weight: 700 !important;
-}
-
-.score {
-    text-align: center;
-    font-size: 54px;
-    font-weight: 900;
-    color: #facc15;
-    margin: 24px 0;
-}
-
-.result {
-    text-align: center;
-    font-size: 34px;
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 30px;
-}
-
-.live {
-    background: #020617;
-    border-left: 6px solid #facc15;
-    padding: 16px 20px;
-    margin: 12px 0;
-    border-radius: 10px;
-    font-size: 20px;
-    line-height: 1.7;
-}
-
-div.stButton > button {
-    background: linear-gradient(90deg, #facc15, #f59e0b);
-    color: #050505 !important;
-    font-size: 28px;
-    font-weight: 900;
-    border-radius: 14px;
-    padding: 18px 30px;
-    border: none;
-    box-shadow: 0 0 24px rgba(250, 204, 21, 0.45);
-}
-
-div.stButton > button:hover {
-    background: linear-gradient(90deg, #fde047, #facc15);
-    color: #000000 !important;
-    transform: scale(1.02);
-}
-
 div[data-baseweb="select"] input {
     color: black !important;
 }
@@ -248,6 +149,24 @@ textarea {
     color: black !important;
 }
 
+.card {
+    background: #111827;
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.live {
+    background: #020617;
+    border-left: 6px solid #facc15;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+}
+
 .goal {
     text-align: center;
     font-size: 42px;
@@ -257,16 +176,33 @@ textarea {
     padding: 18px;
     border-radius: 18px;
     background: #000000;
-    animation: pulse 0.8s infinite alternate;
+    color: #ffffff;
+    animation: pulse 0.9s infinite alternate;
 }
 
 .goal span:nth-child(1) { color: #3b82f6; }
 .goal span:nth-child(2) { color: #22c55e; }
-.goal span:nth-child(3) { color: #84cc16; }
-.goal span:nth-child(4) { color: #eab308; }
-.goal span:nth-child(5) { color: #f97316; }
-.goal span:nth-child(6) { color: #ef4444; }
+.goal span:nth-child(3) { color: #facc15; }
+.goal span:nth-child(4) { color: #ef4444; }
+.goal span:nth-child(5) { color: #a855f7; }
+.goal span:nth-child(6) { color: #f97316; }
 .goal span:nth-child(7) { color: #ffffff; }
+
+div.stButton > button {
+    background: linear-gradient(90deg, #facc15, #f59e0b) !important;
+    color: #050505 !important;
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    border-radius: 14px !important;
+    border: 2px solid #fde047 !important;
+    box-shadow: 0 0 24px rgba(250, 204, 21, 0.45) !important;
+}
+
+div.stButton > button:hover {
+    background: linear-gradient(90deg, #fde047, #facc15) !important;
+    color: #000000 !important;
+    transform: scale(1.02);
+}
 
 @keyframes pulse {
     from {
@@ -278,9 +214,8 @@ textarea {
         text-shadow: 0 0 24px #facc15;
     }
 }
-
 </style>
-\"\"\", unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # ===== ロゴ表示 =====
 try:
@@ -309,16 +244,19 @@ def logo_path(short_name):
     return f"logos/{short_name}.svg"
 
 
-def svg_img_tag(short_name, width=70):
+def svg_img_tag(short_name, size=70):
     path = logo_path(short_name)
 
     if not os.path.exists(path):
-        return f'<span style="font-size:32px; font-weight:bold;">{short_name}</span>'
+        return f'<span style="font-size:28px; font-weight:900;">{short_name}</span>'
 
     with open(path, "rb") as f:
         encoded = base64.b64encode(f.read()).decode()
 
-    return f'<img src="data:image/svg+xml;base64,{encoded}" width="{width}" style="vertical-align:middle;">'
+    return (
+        f'<img src="data:image/svg+xml;base64,{encoded}" '
+        f'style="width:{size}px; height:{size}px; object-fit:contain; vertical-align:middle;">'
+    )
 for _, row in team_df.iterrows():
     teams[row["team_name"]] = {
         "short_name": row["short_name"],
@@ -372,9 +310,22 @@ def pick_side(side_label, side_icon):
     )
 
     short_name = team_value(team, "short_name", team)
+    team_logo = svg_img_tag(short_name, 95)
 
-    if os.path.exists(logo_path(short_name)):
-        st.image(logo_path(short_name), width=95)
+    st.markdown(
+        f'''
+        <div style="
+            height:125px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin:8px 0 18px 0;
+        ">
+            {team_logo}
+        </div>
+        ''',
+        unsafe_allow_html=True
+    )
 
     team_df = df[df["team"] == team]
     field = team_df[team_df["position"] != "GK"]
@@ -439,7 +390,6 @@ def play_demo_match():
     selected_pairs = []
 
     for i in range(3):
-
         available_home = [p for p in home_starters if p not in used_home_players]
         available_away = [p for p in away_starters if p not in used_away_players]
 
@@ -641,15 +591,19 @@ def play_demo_match():
         all_players = home_starters + away_starters + [home_gk, away_gk]
         mom_player = random.choice(all_players)
 
-    home_logo = svg_img_tag(home_short, 64)
-    away_logo = svg_img_tag(away_short, 64)
+    home_logo = svg_img_tag(home_short, 58)
+    away_logo = svg_img_tag(away_short, 58)
 
     logs.append('<div style="height:35px;"></div>')
     logs.append(
         f'<div style="border:3px solid {home_color}; border-radius:22px; padding:28px; margin-top:35px; margin-bottom:20px; text-align:center; background:#111827;">'
         f'<div style="font-size:52px; font-weight:900; color:#FFD700; letter-spacing:3px;">FULL TIME</div>'
-        f'<div style="display:flex; justify-content:center; align-items:center; gap:18px; font-size:58px; font-weight:900; color:white; margin-top:16px;">'
-        f'{home_logo}<span>{home_short}</span><span>{score_home} - {score_away}</span><span>{away_short}</span>{away_logo}'
+        f'<div style="display:flex; justify-content:center; align-items:center; gap:16px; font-size:56px; font-weight:900; color:white; margin-top:16px;">'
+        f'<span style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;">{home_logo}</span>'
+        f'<span>{home_short}</span>'
+        f'<span>{score_home} - {score_away}</span>'
+        f'<span>{away_short}</span>'
+        f'<span style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;">{away_logo}</span>'
         f'</div>'
         f'</div>'
     )
@@ -673,7 +627,6 @@ def play_demo_match():
         )
 
     return score_home, score_away, logs
-    
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
 if st.button("⚽ MATCH START", use_container_width=True):
