@@ -185,14 +185,30 @@ def pick_side(side_label, side_icon):
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown(f"## {side_icon} {side_label}")
 
-    country = st.selectbox(
-        f"{side_label} 国を選択",
-        ["イングランド", "イタリア", "ドイツ", "スペイン"],
-        key=f"{side_label}_country"
-    )
+country_list = sorted(team_df["country"].dropna().unique().tolist())
 
-    teams_list = get_teams(country)
+country = st.selectbox(
+    f"{side_label} 国を選択",
+    country_list,
+    key=f"{side_label}_country"
+)
 
+league_list = sorted(
+    team_df[team_df["country"] == country]["league"].dropna().unique().tolist()
+)
+
+league = st.selectbox(
+    f"{side_label} リーグを選択",
+    league_list,
+    key=f"{side_label}_league"
+)
+
+teams_list = sorted(
+    team_df[
+        (team_df["country"] == country) &
+        (team_df["league"] == league)
+    ]["team_name"].tolist()
+)
     if len(teams_list) == 0:
         st.warning(f"{country}のチームはまだ登録されていません。")
         st.markdown('</div>', unsafe_allow_html=True)
