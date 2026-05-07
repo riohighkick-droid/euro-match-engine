@@ -517,7 +517,7 @@ if st.button("⚽ MATCH START", use_container_width=True):
 
         for line in logs:
 
-            if line.startswith("<div"):
+            if line.strip().startswith("<div"):
                 st.markdown(line, unsafe_allow_html=True)
 
             else:
