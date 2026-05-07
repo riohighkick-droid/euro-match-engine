@@ -297,6 +297,21 @@ except:
 
 df = pd.read_csv("players.csv", encoding="utf-8-sig")
 df.columns = df.columns.str.strip().str.replace(" ", "_")
+team_df = pd.read_csv("teams.csv", encoding="utf-8-sig")
+team_df.columns = team_df.columns.str.strip().str.replace(" ", "_")
+
+teams = {}
+
+for _, row in team_df.iterrows():
+    teams[row["team_name"]] = {
+        "short_name": row["short_name"],
+        "nickname": row["nickname"],
+        "stadium": row["stadium"],
+        "team_color": row["team_color"],
+        "sub_color": row["sub_color"],
+        "league": row["league"],
+        "country": row["country"]
+    }
 
 teams_by_country = {
     "イングランド": sorted(df["team"].unique().tolist()),
