@@ -210,7 +210,7 @@ def pick_side(side_label, side_icon):
     if os.path.exists(logo_file):
         logo_col1, logo_col2, logo_col3 = st.columns([1,2,1])
 
-       with logo_col2:
+        with logo_col2:
 
            st.markdown(
               "<div style='height:180px; display:flex; align-items:center; justify-content:center;'>",
