@@ -107,6 +107,54 @@ def play_player_match(home_player, away_player):
     return "away", home_player, winning_card, battle_logs
 
 st.set_page_config(
+
+st.markdown("""
+<style>
+.stApp {
+    background: #050505;
+    color: #f8fafc;
+}
+
+.card {
+    background: #111827;
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.live {
+    background: #020617;
+    border-left: 6px solid #facc15;
+    padding: 16px 20px;
+    margin: 12px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.goal {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 18px;
+    background: #000000;
+    color: #ffffff;
+}
+
+div.stButton > button {
+    background: #facc15 !important;
+    color: #050505 !important;
+    font-size: 26px !important;
+    font-weight: 900 !important;
+    border-radius: 14px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
     page_icon="logo.jpeg",
     layout="wide"
