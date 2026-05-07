@@ -3,6 +3,8 @@ with open("app.py", "w", encoding="utf-8") as f:
 import streamlit as st
 import pandas as pd
 import random
+import os
+import base64
 
 # ===== 本番エンジン STEP 1：カードデッキ =====
 def make_deck():
@@ -99,15 +101,11 @@ def play_player_match(home_player, away_player):
             away_wins += 1
             winning_card = away_card
 
-        else:
-            continue
-
     if home_wins >= 3:
         return "home", away_player, winning_card, battle_logs
 
     return "away", home_player, winning_card, battle_logs
-
-
+    
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
     page_icon="logo.jpeg",
@@ -297,7 +295,30 @@ team_df = pd.read_csv("teams.csv", encoding="utf-8-sig")
 team_df.columns = team_df.columns.str.strip().str.replace(" ", "_")
 
 teams = {}
+def team_value(team, key, default=""):
+    try:
+        value = teams[team][key]
+        if pd.isna(value):
+            return default
+        return str(value)
+    except:
+        return default
 
+
+def logo_path(short_name):
+    return f"logos/{short_name}.svg"
+
+
+def svg_img_tag(short_name, width=70):
+    path = logo_path(short_name)
+
+    if not os.path.exists(path):
+        return f'<span style="font-size:32px; font-weight:bold;">{short_name}</span>'
+
+    with open(path, "rb") as f:
+        encoded = base64.b64encode(f.read()).decode()
+
+    return f'<img src="data:image/svg+xml;base64,{encoded}" width="{width}" style="vertical-align:middle;">'
 for _, row in team_df.iterrows():
     teams[row["team_name"]] = {
         "short_name": row["short_name"],
@@ -327,7 +348,6 @@ def get_player_position(team, player_name):
 def player_label(team, player_name):
     pos = get_player_position(team, player_name)
     return f"[{pos}] {player_name}"
-
 def pick_side(side_label, side_icon):
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown(f"## {side_icon} {side_label}")
@@ -338,38 +358,44 @@ def pick_side(side_label, side_icon):
         key=f"{side_label}_country"
     )
 
-    teams = get_teams(country)
+    teams_list = get_teams(country)
 
-    if len(teams) == 0:
+    if len(teams_list) == 0:
         st.warning(f"{country}のチームはまだ登録されていません。")
         st.markdown('</div>', unsafe_allow_html=True)
         return None, [], None
 
     team = st.selectbox(
         f"{side_label} チームを選択",
-        teams,
+        teams_list,
         key=f"{side_label}_team"
     )
+
+    short_name = team_value(team, "short_name", team)
+
+    if os.path.exists(logo_path(short_name)):
+        st.image(logo_path(short_name), width=95)
 
     team_df = df[df["team"] == team]
     field = team_df[team_df["position"] != "GK"]
     gk = team_df[team_df["position"] == "GK"]
 
     starters = st.multiselect(
-    f"{side_label} フィールド選手を6人選択",
-    field["name"].tolist(),
-    format_func=lambda name: player_label(team, name),
-    max_selections=6,
-    key=f"{side_label}_starters"
-)
+        f"{side_label} フィールド選手を6人選択",
+        field["name"].tolist(),
+        format_func=lambda name: player_label(team, name),
+        max_selections=6,
+        key=f"{side_label}_starters"
+    )
 
     keeper = st.selectbox(
-    f"{side_label} GKを選択",
-    gk["name"].tolist(),
-    key=f"{side_label}_gk"
-)
+        f"{side_label} GKを選択",
+        gk["name"].tolist(),
+        key=f"{side_label}_gk"
+    )
 
     st.markdown('</div>', unsafe_allow_html=True)
+
     return team, starters, keeper
 
 left, right = st.columns(2)
@@ -399,19 +425,12 @@ def play_demo_match():
     def add_mom_points(player, pts):
         mom_points[player] = mom_points.get(player, 0) + pts
 
-    def team_value(team, key, default=""):
-        try:
-            value = teams[team][key]
-            if pd.isna(value):
-                return default
-            return str(value)
-        except:
-            return default
-
     home_short = team_value(home_team, "short_name", home_team)
     away_short = team_value(away_team, "short_name", away_team)
+
     home_nickname = team_value(home_team, "nickname", home_team)
     away_nickname = team_value(away_team, "nickname", away_team)
+
     stadium = team_value(home_team, "stadium", "")
     home_color = team_value(home_team, "team_color", "#FFD700")
 
@@ -436,14 +455,14 @@ def play_demo_match():
         f'<div style="border:3px solid {home_color}; border-radius:22px; padding:24px; margin-top:20px; margin-bottom:25px; text-align:center; background:#111827;">'
         f'<div style="font-family:Orbitron, sans-serif; font-size:46px; font-weight:900; color:#FFD700; letter-spacing:3px;">MATCH START</div>'
         f'<div style="font-family:Orbitron, sans-serif; font-size:24px; font-weight:700; color:white; margin-top:10px;">{home_short} vs {away_short}</div>'
-        f'<div style="font-size:22px; color:#CCCCCC; margin-top:12px;">🏟️ {stadium}</div>'
+        f'<div style="font-family:Orbitron, sans-serif; font-size:20px; color:#CCCCCC; margin-top:12px;">🏟️ {stadium}</div>'
         f'</div>'
     )
 
     logs.append(f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！")
     logs.append("実況：運命の一戦、キックオフです！！")
 
-    logs.append('<div style="text-align:center; font-family:Orbitron, sans-serif; font-size:30px; font-weight:900; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
+    logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
     logs.append("実況：今日の勝敗を分ける注目のホットポイントはこちら！！")
 
     for idx, pair in enumerate(selected_pairs, start=1):
@@ -466,7 +485,7 @@ def play_demo_match():
         event = winning_card["special"] if winning_card else "save"
 
         logs.append('<div style="height:18px;"></div>')
-        logs.append(f'<div style="border-left:6px solid {home_color}; padding-left:14px; margin-top:18px; font-family:Orbitron, sans-serif; font-size:24px; font-weight:900; color:#FFD700;">【{minute}】</div>')
+        logs.append(f'<div style="border-left:6px solid {home_color}; padding-left:14px; margin-top:18px; font-size:24px; font-weight:bold; color:#FFD700;">【{minute}】</div>')
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
@@ -622,15 +641,20 @@ def play_demo_match():
         all_players = home_starters + away_starters + [home_gk, away_gk]
         mom_player = random.choice(all_players)
 
+    home_logo = svg_img_tag(home_short, 64)
+    away_logo = svg_img_tag(away_short, 64)
+
     logs.append('<div style="height:35px;"></div>')
     logs.append(
         f'<div style="border:3px solid {home_color}; border-radius:22px; padding:28px; margin-top:35px; margin-bottom:20px; text-align:center; background:#111827;">'
-        f'<div style="font-family:Orbitron, sans-serif; font-size:52px; font-weight:900; color:#FFD700; letter-spacing:3px;">FULL TIME</div>'
-        f'<div style="font-family:Orbitron, sans-serif; font-size:66px; font-weight:900; color:white; margin-top:12px;">{home_short} {score_home} - {score_away} {away_short}</div>'
+        f'<div style="font-size:52px; font-weight:900; color:#FFD700; letter-spacing:3px;">FULL TIME</div>'
+        f'<div style="display:flex; justify-content:center; align-items:center; gap:18px; font-size:58px; font-weight:900; color:white; margin-top:16px;">'
+        f'{home_logo}<span>{home_short}</span><span>{score_home} - {score_away}</span><span>{away_short}</span>{away_logo}'
+        f'</div>'
         f'</div>'
     )
 
-    logs.append('<div style="text-align:center; font-family:Orbitron, sans-serif; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
+    logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
     logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
     mom_lines = [
