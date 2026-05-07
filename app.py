@@ -183,7 +183,6 @@ def player_label(team, player_name):
     return f"[{pos}] {player_name}"
     
 def pick_side(side_label, side_icon):
-    st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown(f"## {side_icon} {side_label}")
 
     league_list = sorted(team_df["league"].dropna().unique().tolist())
@@ -198,11 +197,6 @@ def pick_side(side_label, side_icon):
         team_df[team_df["league"] == league]["team_name"].dropna().tolist()
     )
 
-    if len(teams_list) == 0:
-        st.warning(f"{league} のチームはまだ登録されていません。")
-        st.markdown("</div>", unsafe_allow_html=True)
-        return None, [], None
-
     team = st.selectbox(
         f"{side_label} チームを選択",
         teams_list,
@@ -210,40 +204,10 @@ def pick_side(side_label, side_icon):
     )
 
     short_name = team_value(team, "short_name", team)
-
     logo_file = logo_path(short_name)
-   def pick_side(side_label, side_icon):
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown(f"## {side_icon} {side_label}")
 
-    league_list = sorted(team_df["league"].dropna().unique().tolist())
-
-    league = st.selectbox(
-        f"{side_label} リーグを選択",
-        league_list,
-        key=f"{side_label}_league"
-    )
-
-    teams_list = sorted(
-        team_df[team_df["league"] == league]["team_name"].dropna().tolist()
-    )
-
-    if len(teams_list) == 0:
-        st.warning(f"{league} のチームはまだ登録されていません。")
-        st.markdown("</div>", unsafe_allow_html=True)
-        return None, [], None
-
-    team = st.selectbox(
-        f"{side_label} チームを選択",
-        teams_list,
-        key=f"{side_label}_team"
-    )
-
-    short_name = team_value(team, "short_name", team)
-
-    logo_file = logo_path(short_name)
     if os.path.exists(logo_file):
-        st.image(logo_file, width=95)
+        st.image(logo_file, width=120)
 
     team_players = df[df["team"] == team]
     field = team_players[team_players["position"] != "GK"]
@@ -262,29 +226,6 @@ def pick_side(side_label, side_icon):
         gk["name"].tolist(),
         key=f"{side_label}_gk"
     )
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    return team, starters, keeper
-    team_players = df[df["team"] == team]
-    field = team_players[team_players["position"] != "GK"]
-    gk = team_players[team_players["position"] == "GK"]
-
-    starters = st.multiselect(
-        f"{side_label} フィールド選手を6人選択",
-        field["name"].tolist(),
-        format_func=lambda name: player_label(team, name),
-        max_selections=6,
-        key=f"{side_label}_starters"
-    )
-
-    keeper = st.selectbox(
-        f"{side_label} GKを選択",
-        gk["name"].tolist(),
-        key=f"{side_label}_gk"
-    )
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
     return team, starters, keeper
 
