@@ -403,6 +403,25 @@ def play_demo_match():
     def add_mom_points(player, pts):
         mom_points[player] = mom_points.get(player, 0) + pts
 
+    def team_value(team, key, default=""):
+        try:
+            value = teams[team][key]
+            if pd.isna(value):
+                return default
+            return str(value)
+        except:
+            return default
+
+    home_short = team_value(home_team, "short_name", home_team)
+    away_short = team_value(away_team, "short_name", away_team)
+
+    home_nickname = team_value(home_team, "nickname", home_team)
+    away_nickname = team_value(away_team, "nickname", away_team)
+
+    stadium = team_value(home_team, "stadium", "")
+    home_color = team_value(home_team, "team_color", "#111111")
+    sub_color = team_value(home_team, "sub_color", "#FFD700")
+
     used_home_players = []
     used_away_players = []
     selected_pairs = []
@@ -428,88 +447,11 @@ def play_demo_match():
 
         selected_pairs.append((home_player, away_player))
 
-    home_short = teams[home_team]["short_name"]
-    away_short = teams[away_team]["short_name"]
+    logs.append(f'<div style="background:linear-gradient(135deg,{home_color},{sub_color}); border-radius:24px; padding:35px; margin-top:20px; margin-bottom:30px; text-align:center; box-shadow:0 0 30px rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.25);"><div style="font-size:54px; font-weight:900; color:white; letter-spacing:4px; margin-bottom:15px;">MATCH START</div><div style="font-size:26px; font-weight:bold; color:white; margin-bottom:10px;">🏟️ {stadium}</div><div style="font-size:30px; font-weight:bold; color:white; margin-top:20px;">{home_nickname}　{home_team}</div><div style="font-size:22px; font-weight:bold; color:white; margin-top:8px; margin-bottom:8px;">VS</div><div style="font-size:30px; font-weight:bold; color:white;">{away_nickname}　{away_team}</div></div>')
 
-home_short = teams[home_team]["short_name"]
-away_short = teams[away_team]["short_name"]
+    logs.append(f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！")
+    logs.append("実況：運命の一戦、キックオフです！！")
 
-home_nickname = teams[home_team]["nickname"]
-away_nickname = teams[away_team]["nickname"]
-
-stadium = teams[home_team]["stadium"]
-
-home_color = teams[home_team]["team_color"]
-sub_color = teams[home_team]["sub_color"]
-
-logs.append(
-    f"""
-    <div style="
-        background: linear-gradient(135deg, {home_color}, {sub_color});
-        border-radius: 24px;
-        padding: 35px;
-        margin-top: 20px;
-        margin-bottom: 30px;
-        text-align: center;
-        box-shadow: 0 0 30px rgba(0,0,0,0.35);
-    ">
-
-        <div style="
-            font-size: 54px;
-            font-weight: 900;
-            color: white;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-        ">
-            MATCH START
-        </div>
-
-        <div style="
-            font-size: 26px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-        ">
-            🏟️ {stadium}
-        </div>
-
-        <div style="
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
-            margin-top: 20px;
-        ">
-            {home_nickname}　{home_team}
-        </div>
-
-        <div style="
-            font-size: 22px;
-            font-weight: bold;
-            color: white;
-            margin-top: 8px;
-            margin-bottom: 8px;
-        ">
-            VS
-        </div>
-
-        <div style="
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
-        ">
-            {away_nickname}　{away_team}
-        </div>
-
-    </div>
-    """
-)
-
-logs.append(
-    f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！"
-)
-
-logs.append("実況：運命の一戦、キックオフです！！")
-    
     logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
     logs.append("実況：今日の勝敗を分ける注目のホットポイントはこちら！！")
 
@@ -533,11 +475,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
         event = winning_card["special"] if winning_card else "save"
 
         logs.append('<div style="height:18px;"></div>')
-        stadium = teams[home_team]["stadium"]
-        logs.append(
-            f'<div style="text-align:center; font-size:30px; color:#CCCCCC; margin-top:10px; margin-bottom:25px;">🏟️ {stadium}</div>'
-        )
-        logs.append(f"【{minute}】")
+        logs.append(f'<div style="border-left:6px solid {home_color}; padding-left:14px; margin-top:18px; font-size:24px; font-weight:bold; color:#FFD700;">【{minute}】</div>')
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
@@ -559,16 +497,11 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 "実況：激しいぶつかり合い！！しかし最後まで崩し切れません！！",
                 "実況：一進一退の攻防！！ここは両者痛み分けです！！",
                 "実況：勝負は紙一重！！このホットポイントはノーゴール！！",
-                "実況：互いに意地を見せましたが、ここはスコア動かず！！",
-                "実況：両者一歩も引かない！！緊張感が張り詰めています！！",
-                "実況：守備と攻撃が激突！！ここは互角のまま終了！！",
-                "実況：素晴らしい読み合い！！互いに決定打を許しません！！",
-                "実況：ここは完全に五分！！両者譲りません！！！",
-                "実況：白熱の攻防！！しかし最後まで均衡破れず！！"
+                "実況：互いに意地を見せましたが、ここはスコア動かず！！"
             ]
 
             logs.append(random.choice(draw_lines))
-            logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
+            logs.append(f"現在スコア：{home_short} {score_home} - {score_away} {away_short}")
             continue
 
         attacker_pos = get_player_position(attacker_team, attacker)
@@ -605,12 +538,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 f"実況：スーパーゴール炸裂！！{attacker_team}、会場の空気を一変させました！！！",
                 f"実況：{attacker}が魅せた！！まさに試合を切り裂く一撃です！！！",
                 f"実況：これは止められない！！{keeper}も見送るしかありません！！！",
-                f"実況：衝撃のフィニッシュ！！{attacker}、完璧に決め切りました！！！",
-                f"実況：スタジアム騒然！！{attacker}の一撃がネットを揺らしました！！！",
-                f"実況：常識外れのゴール！！これは誰にも止められません！！！",
-                f"実況：{attacker}、まさに一発回答！！試合を動かすスーパーゴールです！！！",
-                f"実況：芸術点まで満点！！{attacker}、鮮烈なフィニッシュ！！！",
-                f"実況：これはスーパー！！{attacker_team}にとって値千金の一撃です！！！"
+                f"実況：衝撃のフィニッシュ！！{attacker}、完璧に決め切りました！！！"
             ]
 
             logs.append(random.choice(super_goal_lines))
@@ -628,12 +556,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 f"実況：{attacker}、圧巻の大暴れ！！試合を支配しています！！！",
                 f"実況：エースの仕事！！{attacker}が一気に流れを持っていきました！！！",
                 f"実況：{attacker}が爆発！！相手守備陣、対応しきれません！！！",
-                f"実況：これは大きい！！{attacker}が試合を一気に動かします！！！",
-                f"実況：大暴れです！！{attacker}、止める術がありません！！！",
-                f"実況：完全にゾーンに入っています！！{attacker}が試合を破壊します！！！",
-                f"実況：これはエースの証明！！{attacker}が主役の座を奪いました！！！",
-                f"実況：守備陣を切り裂く連続攻撃！！{attacker}が魅せます！！！",
-                f"実況：今日の{attacker}は危険すぎる！！完全に止まりません！！！"
+                f"実況：これは大きい！！{attacker}が試合を一気に動かします！！！"
             ]
 
             logs.append(random.choice(hat_trick_lines))
@@ -651,12 +574,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 f"実況：これはデカい！！{attacker}の一撃で試合が大きく動きます！！！",
                 f"実況：まさかの2点級プレー！！{attacker_team}、ここで一気に突き放す！！！",
                 f"実況：ドッペルバック発動！！この一撃はあまりにも重い！！！",
-                f"実況：{attacker}が勝負を決めにきた！！流れを完全に掌握しました！！！",
-                f"実況：これは試合の流れを壊す一撃！！ドッペルバック炸裂！！！",
-                f"実況：一気に持っていった！！{attacker_team}、大きな追加点です！！！",
-                f"実況：衝撃の2点プレー！！相手ベンチも呆然です！！！",
-                f"実況：ドッペルバック！！これは勝敗に直結するビッグプレー！！！",
-                f"実況：{attacker}、ここで特大の仕事！！試合を大きく傾けます！！！"
+                f"実況：{attacker}が勝負を決めにきた！！流れを完全に掌握しました！！！"
             ]
 
             logs.append(random.choice(doppel_back_lines))
@@ -674,12 +592,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 f"実況：決めた！！{attacker}、落ち着いて流し込みました！！！",
                 f"実況：最後はきっちり仕留めた！！{keeper}届きません！！！",
                 f"実況：{attacker_team}、このチャンスを逃しませんでした！！！",
-                f"実況：{attacker}が決め切った！！この一撃は大きい！！！",
-                f"実況：冷静沈着！！{attacker}、きっちりゴールへ流し込みます！！！",
-                f"実況：勝負強い！！{attacker}、ここでネットを揺らしました！！！",
-                f"実況：チャンスを逃さない！！{attacker_team}、貴重なゴールです！！！",
-                f"実況：最後の局面で落ち着いていたのは{attacker}でした！！！",
-                f"実況：きましたゴール！！{attacker}、完璧な仕事です！！！"
+                f"実況：{attacker}が決め切った！！この一撃は大きい！！！"
             ]
 
             logs.append(random.choice(normal_goal_lines))
@@ -696,12 +609,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 f"実況：神セーブ炸裂！！{keeper}が失点濃厚の場面を救いました！！！",
                 f"実況：{keeper}が立ちはだかる！！信じられない反応です！！！",
                 f"実況：ゴッドハンド発動！！{attacker}の決定機を完全に封じました！！！",
-                f"実況：守護神降臨！！{keeper}、ここでビッグセーブ！！！",
-                f"実況：これは止めたというより消した！！{keeper}、驚異の反応！！！",
-                f"実況：決定機阻止！！{keeper}がチームを救いました！！！",
-                f"実況：なんという手！！{keeper}、まさにゴッドハンド！！！",
-                f"実況：会場がどよめくビッグセーブ！！{keeper}が立ちはだかります！！！",
-                f"実況：これは入ったと思いました！！しかし{keeper}が止めています！！！"
+                f"実況：守護神降臨！！{keeper}、ここでビッグセーブ！！！"
             ]
 
             logs.append(random.choice(god_hand_lines))
@@ -718,12 +626,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
                 f"実況：抜け出した{attacker}！！しかし{keeper}が冷静に対応しました！！",
                 f"実況：これは決めきれない！！{keeper}が落ち着いて処理！！！",
                 f"実況：{keeper}、正面でキャッチ！！このチャンスは得点ならず！！！",
-                f"実況：守護神が止めた！！{attacker_team}、追加点ならず！！！",
-                f"実況：{keeper}、冷静でした！！ここはしっかりセーブ！！！",
-                f"実況：シュートまで持ち込みましたが、{keeper}が読んでいました！！！",
-                f"実況：最後の砦が崩れない！！{keeper}が防ぎました！！！",
-                f"実況：これはGKの勝ち！！{keeper}が落ち着いて対応！！！",
-                f"実況：チャンスは作ったが決まらない！！{keeper}が立ちはだかります！！！"
+                f"実況：守護神が止めた！！{attacker_team}、追加点ならず！！！"
             ]
 
             logs.append(random.choice(save_lines))
@@ -736,7 +639,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
         else:
             score_away += points
 
-        logs.append(f"現在スコア：{home_team} {score_home} - {score_away} {away_team}")
+        logs.append(f"現在スコア：{home_short} {score_home} - {score_away} {away_short}")
 
     if len(mom_points) > 0:
         mom_player = max(mom_points, key=mom_points.get)
@@ -745,10 +648,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
         mom_player = random.choice(all_players)
 
     logs.append('<div style="height:35px;"></div>')
-    logs.append('<div style="text-align:center; font-size:52px; font-weight:bold; color:#FFD700; margin-top:40px; margin-bottom:20px;">FULL TIME</div>')
-    home_short = teams[home_team]["short_name"]
-    away_short = teams[away_team]["short_name"]
-    logs.append(f'<div style="text-align:center; font-size:64px; font-weight:bold; color:#FFD700; margin-bottom:40px;">{home_short} {score_home} - {score_away} {away_short}</div>')
+    logs.append(f'<div style="background:linear-gradient(135deg,{home_color},{sub_color}); border-radius:24px; padding:28px; margin-top:35px; margin-bottom:20px; text-align:center; box-shadow:0 0 34px rgba(255,215,0,0.22); border:1px solid rgba(255,255,255,0.22);"><div style="font-size:52px; font-weight:900; color:white; letter-spacing:3px;">FULL TIME</div><div style="font-size:66px; font-weight:900; color:white; margin-top:12px;">{home_short} {score_home} - {score_away} {away_short}</div></div>')
     logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
     logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
@@ -757,12 +657,7 @@ logs.append("実況：運命の一戦、キックオフです！！")
         f"実況：文句なしのMOM！！{mom_player}、圧巻のパフォーマンスです！！！",
         f"実況：攻守に輝いた{mom_player}！！今日の主役はこの男です！！！",
         f"実況：スタジアムを沸かせたのは{mom_player}でした！！！",
-        f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！",
-        f"実況：この試合の象徴は{mom_player}！！堂々のMOM選出です！！！",
-        f"実況：流れを変えたのは{mom_player}！！勝負どころで輝きました！！！",
-        f"実況：存在感抜群！！{mom_player}がピッチの中心にいました！！！",
-        f"実況：今日のヒーローは{mom_player}！！納得の選出です！！！",
-        f"実況：最後まで印象を残した{mom_player}！！MOMにふさわしい活躍でした！！！"
+        f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！"
     ]
 
     logs.append(random.choice(mom_lines))
