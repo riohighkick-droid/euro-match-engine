@@ -211,8 +211,9 @@ def pick_side(side_label, side_icon):
         logo_col1, logo_col2, logo_col3 = st.columns([1,2,1])
 
         with logo_col2:
+            st.markdown("<div style='height:170px; padding-top:45px;'>", unsafe_allow_html=True)
             st.image(logo_file, width=100)
-            st.markdown("<div style='height:140px;'></div>", unsafe_allow_html=True)
+            st.markdown("</div>", unsafe_allow_html=True)
         
     team_players = df[df["team"] == team]
     field = team_players[team_players["position"] != "GK"]
