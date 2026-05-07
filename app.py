@@ -214,6 +214,7 @@ def pick_side(side_label, side_icon):
             st.empty()
             st.markdown("<div style='height:180px;'>", unsafe_allow_html=True)
             st.image(logo_file, width=100)
+            st.markdown("</div>", unsafe_allow_html=True)
             st.empty()
 
         
