@@ -185,33 +185,34 @@ def pick_side(side_label, side_icon):
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown(f"## {side_icon} {side_label}")
 
-country_list = sorted(team_df["country"].dropna().unique().tolist())
+    country_list = sorted(team_df["country"].dropna().unique().tolist())
 
-country = st.selectbox(
-    f"{side_label} 国を選択",
-    country_list,
-    key=f"{side_label}_country"
-)
+    country = st.selectbox(
+        f"{side_label} 国を選択",
+        country_list,
+        key=f"{side_label}_country"
+    )
 
-league_list = sorted(
-    team_df[team_df["country"] == country]["league"].dropna().unique().tolist()
-)
+    league_list = sorted(
+        team_df[team_df["country"] == country]["league"].dropna().unique().tolist()
+    )
 
-league = st.selectbox(
-    f"{side_label} リーグを選択",
-    league_list,
-    key=f"{side_label}_league"
-)
+    league = st.selectbox(
+        f"{side_label} リーグを選択",
+        league_list,
+        key=f"{side_label}_league"
+    )
 
-teams_list = sorted(
-    team_df[
-        (team_df["country"] == country) &
-        (team_df["league"] == league)
-    ]["team_name"].tolist()
-)
-if len(teams_list) == 0:
-        st.warning(f"{country}のチームはまだ登録されていません。")
-        st.markdown('</div>', unsafe_allow_html=True)
+    teams_list = sorted(
+        team_df[
+            (team_df["country"] == country) &
+            (team_df["league"] == league)
+        ]["team_name"].dropna().tolist()
+    )
+
+    if len(teams_list) == 0:
+        st.warning(f"{country} / {league} のチームはまだ登録されていません。")
+        st.markdown("</div>", unsafe_allow_html=True)
         return None, [], None
 
     team = st.selectbox(
@@ -221,26 +222,14 @@ if len(teams_list) == 0:
     )
 
     short_name = team_value(team, "short_name", team)
-    team_logo = svg_img_tag(short_name, 95)
 
-    st.markdown(
-        f'''
-        <div style="
-            height:125px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            margin:8px 0 18px 0;
-        ">
-            {team_logo}
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
+    logo_file = logo_path(short_name)
+    if os.path.exists(logo_file):
+        st.image(logo_file, width=95)
 
-    team_df = df[df["team"] == team]
-    field = team_df[team_df["position"] != "GK"]
-    gk = team_df[team_df["position"] == "GK"]
+    team_players = df[df["team"] == team]
+    field = team_players[team_players["position"] != "GK"]
+    gk = team_players[team_players["position"] == "GK"]
 
     starters = st.multiselect(
         f"{side_label} フィールド選手を6人選択",
@@ -256,7 +245,7 @@ if len(teams_list) == 0:
         key=f"{side_label}_gk"
     )
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
     return team, starters, keeper
 
