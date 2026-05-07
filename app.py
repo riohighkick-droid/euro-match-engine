@@ -471,23 +471,77 @@ def play_demo_match():
         all_players = home_starters + away_starters + [home_gk, away_gk]
         mom_player = random.choice(all_players)
 
-    home_logo = svg_img_tag(home_short, 58)
-    away_logo = svg_img_tag(away_short, 58)
+    home_logo = svg_img_tag(home_short, 130)
+away_logo = svg_img_tag(away_short, 130)
 
-    logs.append('<div style="height:35px;"></div>')
-    logs.append(
-        f'<div style="border:3px solid {home_color}; border-radius:22px; padding:28px; margin-top:35px; margin-bottom:20px; text-align:center; background:#111827;">'
-        f'<div style="font-size:52px; font-weight:900; color:#FFD700; letter-spacing:3px;">FULL TIME</div>'
-        f'<div style="display:flex; justify-content:center; align-items:center; gap:16px; font-size:56px; font-weight:900; color:white; margin-top:16px;">'
-        f'<span style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;">{home_logo}</span>'
-        f'<span>{home_short}</span>'
-        f'<span>{score_home} - {score_away}</span>'
-        f'<span>{away_short}</span>'
-        f'<span style="width:68px; height:68px; display:flex; align-items:center; justify-content:center;">{away_logo}</span>'
-        f'</div>'
-        f'</div>'
-    )
+logs.append('<div style="height:35px;"></div>')
 
+logs.append(
+    f'''
+    <div style="
+        border:3px solid {home_color};
+        border-radius:22px;
+        padding:26px;
+        margin-top:35px;
+        margin-bottom:24px;
+        text-align:center;
+        background:#111827;
+    ">
+
+        <div style="
+            font-size:46px;
+            font-weight:900;
+            color:#FFD700;
+            letter-spacing:3px;
+            margin-bottom:20px;
+        ">
+            FULL TIME
+        </div>
+
+        <div style="
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:24px;
+            width:100%;
+        ">
+
+            <div style="
+                width:150px;
+                height:150px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                flex-shrink:0;
+            ">
+                {home_logo}
+            </div>
+
+            <div style="
+                font-size:52px;
+                font-weight:900;
+                color:white;
+                min-width:260px;
+                text-align:center;
+            ">
+                {home_short} {score_home} - {score_away} {away_short}
+            </div>
+
+            <div style="
+                width:150px;
+                height:150px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                flex-shrink:0;
+            ">
+                {away_logo}
+            </div>
+
+        </div>
+    </div>
+    '''
+)
     logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
     logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
