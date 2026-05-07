@@ -545,15 +545,15 @@ logs.append(
 logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
 logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
-    mom_lines = [
-        f"実況：今日は完全に{mom_player}が試合を支配しました！！！",
-        f"実況：文句なしのMOM！！{mom_player}、圧巻のパフォーマンスです！！！",
-        f"実況：攻守に輝いた{mom_player}！！今日の主役はこの男です！！！",
-        f"実況：スタジアムを沸かせたのは{mom_player}でした！！！",
-        f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！"
-    ]
+mom_lines = [
+f" 実況：今日は完全に{mom_player}が試合を支配しました！！！",
+f"実況：文句なしのMOM！！{mom_player}、圧巻のパフォーマンスです！！！",
+f"実況：攻守に輝いた{mom_player}！！今日の主役はこの男です！！！",
+f"実況：スタジアムを沸かせたのは{mom_player}でした！！！",
+f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！"
+]
 
-    logs.append(random.choice(mom_lines))
+logs.append(random.choice(mom_lines))
 
     if suspended_players:
         logs.append(
