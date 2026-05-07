@@ -112,15 +112,6 @@ st.set_page_config(
     layout="wide"
 )
 
-st.markdown("""
-<style>
-.stApp{
-    background:#050505;
-    color:#f8fafc;
-}
-</style>
-""", unsafe_allow_html=True)
-
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
