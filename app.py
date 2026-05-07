@@ -112,7 +112,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.markdown("<style>.stApp {background: linear-gradient(135deg, #050816 0%, #111827 55%, #020617 100%);}</style>", unsafe_allow_html=True)
+st.markdown("<style>.stApp {background: linear-gradient(135deg, #050816 0%, #111827 55%, #020617 100%); color: white;}</style>", unsafe_allow_html=True)
 # ===== ロゴ表示 =====
 try:
         st.image("logo.jpeg", use_container_width=True)
