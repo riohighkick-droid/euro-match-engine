@@ -181,21 +181,12 @@ def get_player_position(team, player_name):
 def player_label(team, player_name):
     pos = get_player_position(team, player_name)
     return f"[{pos}] {player_name}"
+    
 def pick_side(side_label, side_icon):
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown(f"## {side_icon} {side_label}")
 
-    country_list = sorted(team_df["country"].dropna().unique().tolist())
-
-    country = st.selectbox(
-        f"{side_label} 国を選択",
-        country_list,
-        key=f"{side_label}_country"
-    )
-
-    league_list = sorted(
-        team_df[team_df["country"] == country]["league"].dropna().unique().tolist()
-    )
+    league_list = sorted(team_df["league"].dropna().unique().tolist())
 
     league = st.selectbox(
         f"{side_label} リーグを選択",
@@ -204,14 +195,11 @@ def pick_side(side_label, side_icon):
     )
 
     teams_list = sorted(
-        team_df[
-            (team_df["country"] == country) &
-            (team_df["league"] == league)
-        ]["team_name"].dropna().tolist()
+        team_df[team_df["league"] == league]["team_name"].dropna().tolist()
     )
 
     if len(teams_list) == 0:
-        st.warning(f"{country} / {league} のチームはまだ登録されていません。")
+        st.warning(f"{league} のチームはまだ登録されていません。")
         st.markdown("</div>", unsafe_allow_html=True)
         return None, [], None
 
