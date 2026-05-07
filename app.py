@@ -216,6 +216,7 @@ def pick_side(side_label, side_icon):
               "<div style='height:180px; display:flex; align-items:center; justify-content:center;'>",
               unsafe_allow_html=True
             )
+            
             st.image(logo_file, width=100)
             st.markdown(
               "</div>",
