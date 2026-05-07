@@ -209,7 +209,7 @@ teams_list = sorted(
         (team_df["league"] == league)
     ]["team_name"].tolist()
 )
-    if len(teams_list) == 0:
+if len(teams_list) == 0:
         st.warning(f"{country}のチームはまだ登録されていません。")
         st.markdown('</div>', unsafe_allow_html=True)
         return None, [], None
