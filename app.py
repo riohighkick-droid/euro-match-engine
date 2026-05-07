@@ -212,6 +212,7 @@ def pick_side(side_label, side_icon):
 
         with logo_col2:
             st.empty()
+            st.markdown("<div style='height:180px;'>", unsafe_allow_html=True)
             st.image(logo_file, width=100)
             st.empty()
 
