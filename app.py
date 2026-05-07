@@ -163,12 +163,12 @@ for _, row in team_df.iterrows():
         "country": row["country"]
     }
 
-teams_by_country = {
-    "イングランド": sorted(df["team"].unique().tolist()),
-    "イタリア": [],
-    "ドイツ": [],
-    "スペイン": []
-}
+teams_by_country = {}
+
+for country in team_df["country"].unique():
+    teams_by_country[country] = sorted(
+        team_df[team_df["country"] == country]["team_name"].tolist()
+    )
 
 def get_teams(country):
     return teams_by_country.get(country, [])
