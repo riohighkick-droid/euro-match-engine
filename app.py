@@ -111,6 +111,7 @@ st.set_page_config(
     page_icon="logo.jpeg",
     layout="wide"
 )
+
 st.markdown("""
 <style>
 .stApp{
