@@ -258,10 +258,8 @@ def play_demo_match():
 
     home_short = team_value(home_team, "short_name", home_team)
     away_short = team_value(away_team, "short_name", away_team)
-
     home_nickname = team_value(home_team, "nickname", home_team)
     away_nickname = team_value(away_team, "nickname", away_team)
-
     stadium = team_value(home_team, "stadium", "")
     home_color = team_value(home_team, "team_color", "#FFD700")
 
@@ -283,9 +281,9 @@ def play_demo_match():
 
     logs.append(
         f'<div style="border:3px solid {home_color}; border-radius:22px; padding:24px; margin-top:20px; margin-bottom:25px; text-align:center; background:#111827;">'
-        f'<div style="font-family:Orbitron, sans-serif; font-size:46px; font-weight:900; color:#FFD700; letter-spacing:3px;">MATCH START</div>'
-        f'<div style="font-family:Orbitron, sans-serif; font-size:24px; font-weight:700; color:white; margin-top:10px;">{home_short} vs {away_short}</div>'
-        f'<div style="font-family:Orbitron, sans-serif; font-size:20px; color:#CCCCCC; margin-top:12px;">🏟️ {stadium}</div>'
+        f'<div style="font-size:46px; font-weight:900; color:#FFD700; letter-spacing:3px;">MATCH START</div>'
+        f'<div style="font-size:24px; font-weight:700; color:white; margin-top:10px;">{home_short} vs {away_short}</div>'
+        f'<div style="font-size:20px; color:#CCCCCC; margin-top:12px;">🏟️ {stadium}</div>'
         f'</div>'
     )
 
@@ -325,7 +323,6 @@ def play_demo_match():
             keeper = away_gk
             side = "home"
             opponent = away_player
-
         else:
             attacker = away_player
             attacker_team = away_team
@@ -350,110 +347,44 @@ def play_demo_match():
         add_mom_points(attacker, 1)
 
         if event == "super_goal":
-
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append('<div class="goal">☄️ SUPER GOAL ☄️</div>')
-
             points = 1
             add_mom_points(attacker, 4)
-
-            lines = [
-                f"実況：これは理不尽！！{attacker}、とんでもない一撃を突き刺しました！！！",
-                f"実況：スーパーゴール炸裂！！{attacker_team}、会場の空気を一変させました！！！",
-                f"実況：これは止められない！！{keeper}も見送るしかありません！！！",
-                f"実況：衝撃のフィニッシュ！！{attacker}、完璧に決め切りました！！！",
-                f"実況：芸術的な一撃！！{attacker}が試合を動かします！！！"
-            ]
-
-            logs.append(random.choice(lines))
+            logs.append(f"実況：これは理不尽！！{attacker}、とんでもない一撃を突き刺しました！！！")
 
         elif event == "hat_trick":
-
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append('<div class="goal">👑 HAT TRICK 👑</div>')
-
             points = random.choice([2, 3])
             add_mom_points(attacker, 6)
-
-            lines = [
-                f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！",
-                f"実況：{attacker}、圧巻の大暴れ！！試合を支配しています！！！",
-                f"実況：エースの仕事！！{attacker}が一気に流れを持っていきました！！！",
-                f"実況：{attacker}が爆発！！相手守備陣、対応しきれません！！！",
-                f"実況：これは大きい！！{attacker}が試合を一気に動かします！！！"
-            ]
-
-            logs.append(random.choice(lines))
+            logs.append(f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！")
 
         elif event == "doppel_back":
-
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
-
             points = 2
             add_mom_points(attacker, 5)
-
-            lines = [
-                f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！",
-                f"実況：これはデカい！！{attacker}の一撃で試合が大きく動きます！！！",
-                f"実況：まさかの2点級プレー！！{attacker_team}、ここで一気に突き放す！！！",
-                f"実況：ドッペルバック発動！！この一撃はあまりにも重い！！！",
-                f"実況：{attacker}が勝負を決めにきた！！流れを完全に掌握しました！！！"
-            ]
-
-            logs.append(random.choice(lines))
+            logs.append(f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！")
 
         elif event == "normal_goal" or event == "normal":
-
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append('<div class="goal">⚽ GOAL ⚽</div>')
-
             points = 1
             add_mom_points(attacker, 3)
-
-            lines = [
-                f"実況：{attacker}が冷静に決め切った！！！",
-                f"実況：決めた！！{attacker}、落ち着いて流し込みました！！！",
-                f"実況：最後はきっちり仕留めた！！{keeper}届きません！！！",
-                f"実況：{attacker_team}、このチャンスを逃しませんでした！！！",
-                f"実況：{attacker}が決め切った！！この一撃は大きい！！！"
-            ]
-
-            logs.append(random.choice(lines))
+            logs.append(f"実況：{attacker}が冷静に決め切った！！！")
 
         elif event == "god_hand":
-
             logs.append('<div class="goal">🧤 GOD HAND 🧤</div>')
-
             points = 0
             add_mom_points(keeper, 5)
-
-            lines = [
-                f"実況：決まったかと思われたァァァ！！しかし{keeper}止めたァァァ！！！",
-                f"実況：神セーブ炸裂！！{keeper}が失点濃厚の場面を救いました！！！",
-                f"実況：{keeper}が立ちはだかる！！信じられない反応です！！！",
-                f"実況：ゴッドハンド発動！！{attacker}の決定機を完全に封じました！！！",
-                f"実況：守護神降臨！！{keeper}、ここでビッグセーブ！！！"
-            ]
-
-            logs.append(random.choice(lines))
+            logs.append(f"実況：決まったかと思われたァァァ！！しかし{keeper}止めたァァァ！！！")
 
         else:
-
             logs.append('<div class="goal">🧤 GREAT SAVE 🧤</div>')
-
             points = 0
             add_mom_points(keeper, 2)
-
-            lines = [
-                f"実況：{keeper}がしっかり防いだ！！ここはノーゴール！！",
-                f"実況：抜け出した{attacker}！！しかし{keeper}が冷静に対応しました！！",
-                f"実況：これは決めきれない！！{keeper}が落ち着いて処理！！！",
-                f"実況：{keeper}、正面でキャッチ！！このチャンスは得点ならず！！！",
-                f"実況：守護神が止めた！！{attacker_team}、追加点ならず！！！"
-            ]
-
-            logs.append(random.choice(lines))
+            logs.append(f"実況：{keeper}がしっかり防いだ！！ここはノーゴール！！")
 
         if i == 2 and points > 0:
             add_mom_points(attacker, 1)
@@ -472,88 +403,86 @@ def play_demo_match():
         mom_player = random.choice(all_players)
 
     home_logo = svg_img_tag(home_short, 130)
-away_logo = svg_img_tag(away_short, 130)
+    away_logo = svg_img_tag(away_short, 130)
 
-logs.append('<div style="height:35px;"></div>')
+    logs.append('<div style="height:35px;"></div>')
 
-logs.append(
-    f'''
-    <div style="
-        border:3px solid {home_color};
-        border-radius:22px;
-        padding:26px;
-        margin-top:35px;
-        margin-bottom:24px;
-        text-align:center;
-        background:#111827;
-    ">
-
+    logs.append(
+        f'''
         <div style="
-            font-size:46px;
-            font-weight:900;
-            color:#FFD700;
-            letter-spacing:3px;
-            margin-bottom:20px;
+            border:3px solid {home_color};
+            border-radius:22px;
+            padding:26px;
+            margin-top:35px;
+            margin-bottom:24px;
+            text-align:center;
+            background:#111827;
         ">
-            FULL TIME
-        </div>
-
-        <div style="
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap:24px;
-            width:100%;
-        ">
-
             <div style="
-                width:150px;
-                height:150px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                flex-shrink:0;
-            ">
-                {home_logo}
-            </div>
-
-            <div style="
-                font-size:52px;
+                font-size:46px;
                 font-weight:900;
-                color:white;
-                min-width:260px;
-                text-align:center;
+                color:#FFD700;
+                letter-spacing:3px;
+                margin-bottom:20px;
             ">
-                {home_short} {score_home} - {score_away} {away_short}
+                FULL TIME
             </div>
 
             <div style="
-                width:150px;
-                height:150px;
                 display:flex;
                 align-items:center;
                 justify-content:center;
-                flex-shrink:0;
+                gap:24px;
+                width:100%;
             ">
-                {away_logo}
+                <div style="
+                    width:150px;
+                    height:150px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    flex-shrink:0;
+                ">
+                    {home_logo}
+                </div>
+
+                <div style="
+                    font-size:52px;
+                    font-weight:900;
+                    color:white;
+                    min-width:260px;
+                    text-align:center;
+                ">
+                    {home_short} {score_home} - {score_away} {away_short}
+                </div>
+
+                <div style="
+                    width:150px;
+                    height:150px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    flex-shrink:0;
+                ">
+                    {away_logo}
+                </div>
             </div>
-
         </div>
-    </div>
-    '''
-)
-logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
-logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
+        '''
+    )
 
-mom_lines = [
-f" 実況：今日は完全に{mom_player}が試合を支配しました！！！",
-f"実況：文句なしのMOM！！{mom_player}、圧巻のパフォーマンスです！！！",
-f"実況：攻守に輝いた{mom_player}！！今日の主役はこの男です！！！",
-f"実況：スタジアムを沸かせたのは{mom_player}でした！！！",
-f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！"
-]
+    logs.append('<div style="text-align:center; font-size:42px; font-weight:bold; color:#FFD700; margin-top:30px;">⭐ MAN OF THE MATCH ⭐</div>')
+    logs.append(f'<div style="text-align:center; font-size:54px; font-weight:bold; color:white; margin-bottom:30px;">{mom_player}</div>')
 
-logs.append(random.choice(mom_lines))
+    mom_lines = [
+        f"実況：今日は完全に{mom_player}が試合を支配しました！！！",
+        f"実況：文句なしのMOM！！{mom_player}、圧巻のパフォーマンスです！！！",
+        f"実況：攻守に輝いた{mom_player}！！今日の主役はこの男です！！！",
+        f"実況：スタジアムを沸かせたのは{mom_player}でした！！！",
+        f"実況：まさにゲームチェンジャー！！MOMは{mom_player}です！！！"
+    ]
+
+    logs.append(random.choice(mom_lines))
 
     if suspended_players:
         logs.append(
