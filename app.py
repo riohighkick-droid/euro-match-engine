@@ -147,13 +147,20 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
                     red_card_players.append(player_name)
 
-                   battle_logs.append(
-                       f"🟥 RED CARD!! {player_name} SENT OFF!"
+                    battle_logs.append(
+                        f"🟥 RED CARD!! {player_name} SENT OFF!"
                    )
 
-                   battle_logs.append(
-                       f"実況：{player_name}、退場です！！"
-                   )
+                   red_card_lines = [
+                       f"実況：{player_name}、退場です！！試合が壊れました！！",
+                       f"実況：ああっと！！ {player_name} にレッドカード！！これは痛すぎる！！",
+                       f"実況：主審、迷いなくレッド！！ {player_name}、一発退場です！！",
+                       f"実況：最悪の展開だ！！ {player_name}、ここで退場処分！！",
+                       f"実況：チームに激震！！ {player_name}、無念のレッドカード！！",
+                       f"実況：これは絶望的だ！！ {player_name} がピッチを去ります！！"
+                    ]
+
+                    battle_logs.append(random.choice(red_card_lines))
                     if player_name == home_player:
                         away_wins = 3
                     else:
