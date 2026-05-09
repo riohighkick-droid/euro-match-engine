@@ -246,7 +246,7 @@ def pick_side(side_label, side_icon):
         key=f"{side_label}_gk"
     )
 
-    return team, starters, keeper
+    return team, starters, keeper, pickup_player
 
 left, right = st.columns(2)
 
