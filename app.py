@@ -520,13 +520,23 @@ def play_demo_match():
                 logs.append(
                     f"実況：止めたァ！！ {keeper}、奇跡のスーパーセーブ！！！"
                 )
+                
         elif event == "doppel_back":
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
-            points = 2
-            add_mom_points(attacker, 5)
-            logs.append(f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！")
-
+            if keeper_result == side:
+                logs.append('<div class="goal">⚽ GOOOOOAL!! ⚽</div>')
+                logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
+                points = 2
+                add_mom_points(attacker, 5)
+                logs.append(
+                    f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！"
+                )
+            else:
+                logs.append('<div class="goal">🧤 GREAT SAVE!! 🧤</div>')
+                add_mom_points(keeper, 4)
+                logs.append(
+                    f"実況：止めたァァ！！ {keeper}、2点を阻止するビッグセーブ！！！"
+                )
+                
         elif event == "normal_goal" or event == "normal":
 
             if keeper_result == side:
