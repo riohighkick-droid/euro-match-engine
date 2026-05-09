@@ -150,6 +150,10 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
                     battle_logs.append(
                         f"🟥 RED CARD!! {player_name} SENT OFF!"
                     )
+                    if player_name == home_player:
+                        away_wins = 3
+                    else:
+                        home_wins = 3
 
         if result == "home":
             home_wins += 1
