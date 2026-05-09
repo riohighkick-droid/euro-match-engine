@@ -8,18 +8,48 @@ import base64
 
 # ===== 本番エンジン STEP 1：カードデッキ =====
 def make_deck():
-    deck = [
-        {"type": "offense", "special": "normal", "power": 6},
-        {"type": "offense", "special": "super_goal", "power": 9},
-        {"type": "offense", "special": "doppel_back", "power": 8},
-        {"type": "defense", "special": "normal", "power": 6},
-        {"type": "defense", "special": "god_hand", "power": 9},
-        {"type": "speed", "special": "normal", "power": 6},
-        {"type": "technique", "special": "normal", "power": 6},
-        {"type": "physical", "special": "normal", "power": 6},
-        {"type": "player_class", "special": "normal", "power": 6},
-        {"type": "offense", "special": "hat_trick", "power": 7},
+    deck = []
+
+    card_types = [
+        "offense",
+        "defense",
+        "speed",
+        "technique",
+        "physical",
+        "player_class"
     ]
+
+    ability_map = {
+        ("defense", 6): "god_hand",
+        ("offense", 6): "hat_trick",
+        ("speed", 6): "hat_trick",
+        ("offense", 5): "doppel_back",
+        ("speed", 5): "doppel_back",
+        ("physical", 6): "doppel_back",
+        ("technique", 6): "doppel_back",
+        ("offense", 4): "super_goal",
+        ("technique", 5): "super_goal",
+    }
+
+    for card_type in card_types:
+        for number in range(1, 7):
+            deck.append({
+                "type": card_type,
+                "number": number,
+                "name": f"{card_type}{number}",
+                "special": ability_map.get((card_type, number), "normal"),
+                "power": number
+            })
+
+    for i in range(3):
+        deck.append({
+            "type": "yellow_card",
+            "number": i + 1,
+            "name": f"yellow_card{i + 1}",
+            "special": "yellow_card",
+            "power": 0
+        })
+
     random.shuffle(deck)
     return deck
 
