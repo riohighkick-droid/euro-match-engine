@@ -495,12 +495,28 @@ def play_demo_match():
                 )
 
         elif event == "hat_trick":
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append('<div class="goal">👑 HAT TRICK 👑</div>')
-            points = 3
-            add_mom_points(attacker, 6)
-            logs.append(f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！")
+            if keeper_result == side:
 
+                logs.append('<div class="goal">⚽ GOOOOOAL!! ⚽</div>')
+                logs.append('<div class="goal">👑 HAT TRICK 👑</div>')
+
+                points = 3
+
+                add_mom_points(attacker, 6)
+
+                logs.append(
+                    f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！"
+                )
+
+            else:
+
+                logs.append('<div class="goal">🧤 GREAT SAVE!! 🧤</div>')
+
+                add_mom_points(keeper, 5)
+
+                logs.append(
+                    f"実況：止めたァ！！ {keeper}、奇跡のスーパーセーブ！！！"
+                )
         elif event == "doppel_back":
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append('<div class="goal">🔥 DOPPEL BACK!! 🔥</div>')
