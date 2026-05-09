@@ -131,6 +131,25 @@ def play_player_match(home_player, away_player):
         away_card = away_deck.pop(0)
 
         result = judge_card_battle(home_card, away_card)
+        for card in [home_card, away_card]:
+
+            if card["type"] == "yellow_card":
+
+                player_name = home_player if card == home_card else away_player
+
+                yellow_cards[player_name] = yellow_cards.get(player_name, 0) + 1
+
+                battle_logs.append(
+                    f"🟨 YELLOW CARD - {player_name} ({yellow_cards[player_name]}/2)"
+                )
+
+                if yellow_cards[player_name] >= 2:
+
+                    red_card_players.append(player_name)
+
+                    battle_logs.append(
+                        f"🟥 RED CARD!! {player_name} SENT OFF!"
+                    )
 
         if result == "home":
             home_wins += 1
