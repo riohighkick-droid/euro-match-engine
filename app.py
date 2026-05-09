@@ -109,7 +109,7 @@ def judge_card_battle(home_card, away_card):
     return "draw"
 
 # ===== 本番エンジン STEP 3：選手バトル =====
-def play_player_match(home_player, away_player):
+def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
     home_wins = 0
     away_wins = 0
