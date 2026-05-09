@@ -184,6 +184,8 @@ def get_player_position(team, player_name):
 def player_label(team, player_name):
     pos = get_player_position(team, player_name)
     return f"[{pos}] {player_name}"
+
+
     
 def pick_side(side_label, side_icon):
     st.markdown(f"## {side_icon} {side_label}")
@@ -231,7 +233,13 @@ def pick_side(side_label, side_icon):
         max_selections=6,
         key=f"{side_label}_starters"
     )
-
+    pickup_player = st.selectbox(
+        f"{side_label} PICKUP選手を選択",
+        starters,
+        format_func=lambda name: player_label(team, name),
+        key=f"{side_label}_pickup"
+    )
+    
     keeper = st.selectbox(
         f"{side_label} GKを選択",
         gk["name"].tolist(),
