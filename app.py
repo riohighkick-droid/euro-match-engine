@@ -262,9 +262,9 @@ def player_label(team, player_name):
 
     pos = get_player_position(team, player_name)
 
-    row = player_df[
-        (player_df["team"] == team) &
-        (player_df["name"] == player_name)
+    row = df[
+        (df["team"] == team) &
+        (df["name"] == player_name)
     ]
 
     if row.empty:
