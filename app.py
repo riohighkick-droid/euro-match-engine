@@ -147,9 +147,13 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
                     red_card_players.append(player_name)
 
-                    battle_logs.append(
-                        f"🟥 RED CARD!! {player_name} SENT OFF!"
-                    )
+                   battle_logs.append(
+                    f"🟥 RED CARD!! {player_name} SENT OFF!"
+                   )
+
+                   battle_logs.append(
+                       f"実況：{player_name}、退場です！！"
+                   )
                     if player_name == home_player:
                         away_wins = 3
                     else:
