@@ -259,8 +259,21 @@ def get_player_position(team, player_name):
     return row.iloc[0]["position"]
 
 def player_label(team, player_name):
+
     pos = get_player_position(team, player_name)
-    return f"[{pos}] {player_name}"
+
+    row = player_df[
+        (player_df["team"] == team) &
+        (player_df["name"] == player_name)
+    ]
+
+    if row.empty:
+        return f"[{pos}] {player_name}"
+
+    total = int(row.iloc[0]["total"])
+    role = row.iloc[0]["role"]
+
+    return f"[{pos}] {player_name} | {total} | {role}"
 
 
     
