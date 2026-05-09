@@ -397,7 +397,9 @@ def play_demo_match():
 
         winner, loser, winning_card, battle_logs = play_player_match(
             home_player,
-            away_player
+            away_player,
+            yellow_cards,
+            red_card_players
         )
 
         if loser not in suspended_players:
