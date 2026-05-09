@@ -55,6 +55,15 @@ def make_deck():
 
     # ===== 本番エンジン STEP 2：5すくみ判定 =====
 def judge_card_battle(home_card, away_card):
+    if home_card["type"] == "yellow_card" and away_card["type"] == "yellow_card":
+        return "draw"
+
+    if home_card["type"] == "yellow_card":
+        return "away"
+
+    if away_card["type"] == "yellow_card":
+        return "home"
+        
     win_map = {
         "offense": "defense",
         "defense": "speed",
