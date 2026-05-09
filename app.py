@@ -171,6 +171,7 @@ st.set_page_config(
 )
 st.markdown("<style>.stApp {background: linear-gradient(135deg, #050816 0%, #111827 55%, #020617 100%); color: white;} h1,h2,h3 {color:#FFD700;} label, .stMultiSelect label, .stSelectbox label {color:#ffffff !important; font-weight:800 !important; font-size:18px !important;} .stButton button {background: linear-gradient(135deg,#FFD700,#F59E0B); color:black; font-weight:900; border:none; border-radius:14px; height:60px; font-size:34px; letter-spacing:2px; box-shadow:0 0 18px rgba(255,215,0,0.35);} .stSelectbox div[data-baseweb='select'] > div {background-color:#1f2937; color:white; border:2px solid #FFD700; border-radius:12px; min-height:50px; font-weight:700; display:flex; align-items:center; justify-content:center;} .stSelectbox input {text-align:center;} </style>", unsafe_allow_html=True)
 st.markdown("<style>.goal {font-size:56px; font-weight:900; background:linear-gradient(90deg,#ff0000,#ff9900,#ffee00,#33ff00,#00ccff,#6633ff,#ff00cc); background-size:400% 400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:rainbow 3s ease infinite;} @keyframes rainbow {0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;}}</style>", unsafe_allow_html=True)
+st.markdown("<style>.live {background:rgba(15,23,42,0.88); border-left:5px solid #FFD700; border-radius:14px; padding:14px 18px; margin:12px 0; font-size:18px; line-height:1.7; box-shadow:0 0 12px rgba(255,215,0,0.08); text-align:center;}</style>", unsafe_allow_html=True)
 
 # ===== ロゴ表示 =====
 try:
