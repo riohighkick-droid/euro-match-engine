@@ -425,6 +425,7 @@ def play_demo_match():
             suspended_players.append(loser)
 
         event = winning_card["special"] if winning_card else "save"
+        points = 0
 
         logs.append('<div style="height:18px;"></div>')
         logs.append(f'<div style="border-left:6px solid {home_color}; padding-left:14px; margin-top:18px; font-size:24px; font-weight:bold; color:#FFD700;">【{minute}】</div>')
