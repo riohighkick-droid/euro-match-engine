@@ -282,11 +282,15 @@ def play_demo_match():
     stadium = team_value(home_team, "stadium", "")
     home_color = team_value(home_team, "team_color", "#FFD700")
 
-    used_home_players = []
-    used_away_players = []
-    selected_pairs = []
+    used_home_players = [home_pickup]
+    used_away_players = [away_pickup]
 
-    for i in range(3):
+    selected_pairs = [
+        (home_pickup, away_pickup)
+    ]
+
+    for i in range(2):
+
         available_home = [p for p in home_starters if p not in used_home_players]
         available_away = [p for p in away_starters if p not in used_away_players]
 
@@ -297,6 +301,8 @@ def play_demo_match():
         used_away_players.append(away_player)
 
         selected_pairs.append((home_player, away_player))
+
+    random.shuffle(selected_pairs)
 
     logs.append(
         f'<div style="border:3px solid {home_color}; border-radius:22px; padding:24px; margin-top:20px; margin-bottom:25px; text-align:center; background:#111827;">'
