@@ -470,11 +470,29 @@ def play_demo_match():
         add_mom_points(attacker, 1)
 
         if event == "super_goal":
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append('<div class="goal">☄️ SUPER GOAL ☄️</div>')
-            points = 1
-            add_mom_points(attacker, 4)
-            logs.append(f"実況：これは理不尽！！{attacker}、とんでもない一撃を突き刺しました！！！")
+
+            if keeper_card["special"] == "god_hand":
+
+                logs.append('<div class="goal">🧤 GOD HAND SAVE!! 🧤</div>')
+
+                add_mom_points(keeper, 6)
+
+                logs.append(
+                    f"実況：止めたァァァ！！ {keeper}、まさに神の右手！！"
+                )
+
+            else:
+
+                logs.append('<div class="goal">⚽ GOOOOOAL!! ⚽</div>')
+                logs.append('<div class="goal">🧪 SUPER GOAL 🧪</div>')
+
+                points = 1
+
+                add_mom_points(attacker, 4)
+
+                logs.append(
+                    f"実況：これは理不尽！！ {attacker}、とんでもない一撃を突き刺しました！！！"
+                )
 
         elif event == "hat_trick":
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
