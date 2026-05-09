@@ -251,10 +251,10 @@ def pick_side(side_label, side_icon):
 left, right = st.columns(2)
 
 with left:
-    home_team, home_starters, home_gk = pick_side("HOME TEAM", "🏠")
+    home_team, home_starters, home_gk, home_pickup = pick_side("HOME TEAM", "🏠")
 
 with right:
-    away_team, away_starters, away_gk = pick_side("AWAY TEAM", "🛫")
+    away_team, away_starters, away_gk, away_pickup = pick_side("AWAY TEAM", "🛫")
 
 time_zones = [
     ("前半 12分", "立ち上がり、試合の流れをつかむ最初のホットポイント。"),
