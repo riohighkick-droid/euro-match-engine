@@ -431,6 +431,14 @@ def play_demo_match():
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
+        keeper_deck = make_deck()
+        keeper_card = keeper_deck.pop(0)
+
+        keeper_result = judge_card_battle(
+            winning_card,
+            keeper_card
+        )
+
         if winner == "home":
             attacker = home_player
             attacker_team = home_team
