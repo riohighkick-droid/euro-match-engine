@@ -490,17 +490,28 @@ def play_demo_match():
             logs.append(f"実況：決まったぁぁぁ！！！ドッペルバック炸裂！！一気に2点を奪う！！！")
 
         elif event == "normal_goal" or event == "normal":
-            logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
-            logs.append('<div class="goal">⚽ GOAL ⚽</div>')
-            points = 1
-            add_mom_points(attacker, 3)
-            logs.append(f"実況：{attacker}が冷静に決め切った！！！")
 
-        elif event == "god_hand":
-            logs.append('<div class="goal">🧤 GOD HAND 🧤</div>')
-            points = 0
-            add_mom_points(keeper, 5)
-            logs.append(f"実況：決まったかと思われたァァァ！！しかし{keeper}止めたァァァ！！！")
+            if keeper_result == side:
+
+                logs.append('<div class="goal">⚽ GOOOOOAL!! ⚽</div>')
+
+                points = 1
+
+                add_mom_points(attacker, 2)
+
+                logs.append(
+                    f"実況：{attacker}、冷静に流し込みました！！"
+                )
+
+            else:
+
+                logs.append('<div class="goal">🧤 GREAT SAVE!! 🧤</div>')
+
+                add_mom_points(keeper, 3)
+
+                logs.append(
+                    f"実況：{keeper}！！ ビッグセーブ！！ ゴールを許しません！！"
+                )
 
         else:
             logs.append('<div class="goal">🧤 GREAT SAVE 🧤</div>')
