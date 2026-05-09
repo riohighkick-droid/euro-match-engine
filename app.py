@@ -435,10 +435,13 @@ def play_demo_match():
         keeper_deck = make_deck()
         keeper_card = keeper_deck.pop(0)
 
-        keeper_result = judge_card_battle(
-            winning_card,
-            keeper_card
-        )
+        if winning_card is None:
+            keeper_result = "save"
+        else:
+            keeper_result = judge_card_battle(
+                winning_card,
+                keeper_card
+            )
 
         if winner == "home":
             attacker = home_player
