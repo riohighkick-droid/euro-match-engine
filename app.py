@@ -303,6 +303,7 @@ time_zones = [
 
 special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
 
+
 def play_demo_match():
 
     score_home = 0
@@ -310,6 +311,9 @@ def play_demo_match():
     logs = []
     mom_points = {}
     suspended_players = []
+
+    yellow_cards = {}
+    red_card_players = []
 
     def add_mom_points(player, pts):
         mom_points[player] = mom_points.get(player, 0) + pts
