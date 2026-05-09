@@ -417,7 +417,7 @@ def play_demo_match():
         elif event == "hat_trick":
             logs.append('<div class="goal"><span>G</span><span>O</span><span>O</span><span>O</span><span>O</span><span>O</span><span>AL!!</span></div>')
             logs.append('<div class="goal">👑 HAT TRICK 👑</div>')
-            points = random.choice([2, 3])
+            points = 3
             add_mom_points(attacker, 6)
             logs.append(f"実況：止まらない{attacker}！！完全にこの時間帯の主役です！！！")
 
