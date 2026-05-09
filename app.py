@@ -285,9 +285,11 @@ def play_demo_match():
     used_home_players = [home_pickup]
     used_away_players = [away_pickup]
 
-    selected_pairs = [
-        (home_pickup, away_pickup)
-    ]
+    home_selected_players = [home_pickup]
+    away_selected_players = [away_pickup]
+
+    used_home_players = [home_pickup]
+    used_away_players = [away_pickup]
 
     for i in range(2):
 
@@ -300,9 +302,13 @@ def play_demo_match():
         used_home_players.append(home_player)
         used_away_players.append(away_player)
 
-        selected_pairs.append((home_player, away_player))
+        home_selected_players.append(home_player)
+        away_selected_players.append(away_player)
 
-    random.shuffle(selected_pairs)
+    random.shuffle(home_selected_players)
+    random.shuffle(away_selected_players)
+
+    selected_pairs = list(zip(home_selected_players, away_selected_players))
 
     logs.append(
         f'<div style="border:3px solid {home_color}; border-radius:22px; padding:24px; margin-top:20px; margin-bottom:25px; text-align:center; background:#111827;">'
