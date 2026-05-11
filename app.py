@@ -489,20 +489,6 @@ def play_demo_match():
         logs.append(context)
         logs.append(f"⚔️ {player_label(home_team, home_player)} vs {player_label(away_team, away_player)}")
 
-        keeper_deck = make_deck()
-        keeper_card = keeper_deck.pop(0)
-        if keeper_card["type"] != "yellow_card":
-            keeper_card["power"] = int(keeper_data[keeper_card["type"]])
-        if winning_card is None:
-            keeper_result = "save"
-        else:
-            if winning_card["type"] != "yellow_card":
-                winning_card["power"] = int(winner_data[winning_card["type"]])
-            keeper_result = judge_card_battle(
-                winning_card,
-                keeper_card
-            )
-
         if winner == "home":
             attacker = home_player
             attacker_team = home_team
@@ -515,6 +501,26 @@ def play_demo_match():
             keeper = home_gk
             side = "away"
             opponent = home_player
+            
+        keeper_data = df[df["name"] == keeper].iloc[0]
+        winner_data = df[df["name"] == attacker].iloc[0]
+
+        keeper_deck = make_deck()
+        keeper_card = keeper_deck.pop(0)
+
+        if keeper_card["type"] != "yellow_card":
+            keeper_card["power"] = int(keeper_data[keeper_card["type"]])
+
+        if winning_card is None:
+            keeper_result = "save"
+        else:
+            if winning_card["type"] != "yellow_card":
+                winning_card["power"] = int(winner_data[winning_card["type"]])
+
+            keeper_result = judge_card_battle(
+                winning_card,
+                keeper_card
+            )
 
         attacker_pos = get_player_position(attacker_team, attacker)
 
