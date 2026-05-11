@@ -724,7 +724,8 @@ if st.button("⚽ MATCH START", use_container_width=True):
             "match_results.csv",
             mode="a",
             header=not file_exists,
-            index=False
+            index=False,
+            encoding="utf-8-sig"
         )
 
         st.subheader("📢 MATCH LIVE")
