@@ -747,15 +747,7 @@ if st.button("⚽ MATCH START", use_container_width=True):
                    unsafe_allow_html=True
              )
              
-    if os.path.exists("match_results.csv"):
-
-        with open("match_results.csv", "rb") as file:
-            st.download_button(
-                label="⬇ MATCH RESULTS DOWNLOAD",
-                data=file,
-                file_name="match_results.csv",
-                mime="text/csv"
-            )
+   
 
 """)
     
