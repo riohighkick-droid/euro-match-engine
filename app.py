@@ -491,10 +491,13 @@ def play_demo_match():
 
         keeper_deck = make_deck()
         keeper_card = keeper_deck.pop(0)
-
+        if keeper_card["type"] != "yellow_card":
+            keeper_card["power"] = int(keeper_data[keeper_card["type"]])
         if winning_card is None:
             keeper_result = "save"
         else:
+            if winning_card["type"] != "yellow_card":
+                winning_card["power"] = int(winner_data[winning_card["type"]])
             keeper_result = judge_card_battle(
                 winning_card,
                 keeper_card
