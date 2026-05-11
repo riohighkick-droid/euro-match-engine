@@ -85,6 +85,8 @@ def judge_card_battle(home_card, away_card):
 
     h = home_card["type"]
     a = away_card["type"]
+    hg = home_card["grade"]
+    ag = away_card["grade"]
 
     # player_class は数値勝負
     if h == "player_class" or a == "player_class":
