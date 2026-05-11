@@ -5,6 +5,7 @@ import pandas as pd
 import random
 import os
 import base64
+from datetime import datetime
 
 # ===== 本番エンジン STEP 1：カードデッキ =====
 def make_deck():
