@@ -104,7 +104,7 @@ def judge_card_battle(home_card, away_card):
     if a in win_map.get(h, []):
         return "home"
 
-    elif win_map.get(a) == h:
+    elif h in win_map.get(a, []):
         return "away"
 
     return "draw"
