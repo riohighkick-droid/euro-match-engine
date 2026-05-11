@@ -140,6 +140,9 @@ def judge_card_battle(home_card, away_card):
 # ===== 本番エンジン STEP 3：選手バトル =====
 def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
+    home_player_name = home_player["name"]
+    away_player_name = away_player["name"]
+
     home_wins = 0
     away_wins = 0
     battle_logs = []
@@ -169,7 +172,7 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
             if card["type"] == "yellow_card":
 
-                player_name = home_player if card == home_card else away_player
+                player_name = home_player_name if card == home_card else away_player_name
 
                 yellow_cards[player_name] = yellow_cards.get(player_name, 0) + 1
 
