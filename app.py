@@ -101,7 +101,7 @@ def judge_card_battle(home_card, away_card):
             return "draw"
 
     # 5すくみ判定
-    if win_map.get(h) == a:
+    if a in win_map.get(h, []):
         return "home"
 
     elif win_map.get(a) == h:
