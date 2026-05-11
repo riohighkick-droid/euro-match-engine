@@ -66,11 +66,11 @@ def judge_card_battle(home_card, away_card):
         return "home"
         
     win_map = {
-        "offense": "defense",
-        "defense": "speed",
-        "speed": "technique",
-        "technique": "physical",
-        "physical": "offense"
+        "offense": ["defense", "technique"],
+        "defense": ["speed", "technique"],
+        "speed": ["offense", "physical"],
+        "technique": ["speed", "physical"],
+        "physical": ["offense", "defense"]
     }
 
     h = home_card["type"]
