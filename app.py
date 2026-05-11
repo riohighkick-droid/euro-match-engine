@@ -322,10 +322,14 @@ def pick_side(side_label, side_icon):
     starters = st.multiselect(
         f"{side_label} フィールド選手を6人選択",
         field["name"].tolist(),
+        default=st.session_state[memory_key],
         format_func=lambda name: player_label(team, name),
         max_selections=6,
         key=f"{side_label}_starters"
     )
+
+    st.session_state[memory_key] = starters
+
     pickup_player = st.selectbox(
         f"{side_label} PICKUP選手を選択",
         starters,
