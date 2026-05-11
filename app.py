@@ -325,7 +325,7 @@ def pick_side(side_label, side_icon):
         default=st.session_state[memory_key],
         format_func=lambda name: player_label(team, name),
         max_selections=6,
-        key=f"{side_label}_starters"
+        key=f"{side_label}_{team}_starters"
     )
 
     st.session_state[memory_key] = starters
