@@ -315,7 +315,10 @@ def pick_side(side_label, side_icon):
     team_players = df[df["team"] == team]
     field = team_players[team_players["position"] != "GK"]
     gk = team_players[team_players["position"] == "GK"]
-
+    memory_key = f"{side_label}_{team}_memory"
+    if memory_key not in st.session_state:
+        st.session_state[memory_key] = []
+    
     starters = st.multiselect(
         f"{side_label} フィールド選手を6人選択",
         field["name"].tolist(),
