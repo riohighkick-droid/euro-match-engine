@@ -111,13 +111,30 @@ def judge_card_battle(home_card, away_card):
         else:
             return "draw"
 
-    # 5すくみ判定
+    # player_class が絡んだら能力戦
+    if h == "player_class" or a == "player_class":
+
+        if home_card["power"] > away_card["power"]:
+            return "home"
+        elif away_card["power"] > home_card["power"]:
+            return "away"
+        else:
+            return "draw"
+
+    # 同タイプなら能力戦
+    if h == a:
+        if home_card["power"] > away_card["power"]:
+            return "home"
+        elif away_card["power"] > home_card["power"]:
+            return "away"
+        else:
+            return "draw"
+
+    # 別タイプなら5すくみ
     if a in win_map.get(h, []):
         return "home"
-
     elif h in win_map.get(a, []):
         return "away"
-
     return "draw"
 
 # ===== 本番エンジン STEP 3：選手バトル =====
