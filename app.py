@@ -468,9 +468,12 @@ def play_demo_match():
         minute, context = time_zones[i]
         home_player, away_player = pair
 
+        home_player_data = df[df["name"] == home_player].iloc[0]
+        away_player_data = df[df["name"] == away_player].iloc[0]
+        
         winner, loser, winning_card, battle_logs = play_player_match(
-            home_player,
-            away_player,
+            home_player_data,
+            away_player_data,
             yellow_cards,
             red_card_players
         )
