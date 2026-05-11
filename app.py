@@ -708,6 +708,24 @@ if st.button("⚽ MATCH START", use_container_width=True):
         st.error("両チームともフィールド選手を6人選んでください。")
     else:
         home_score, away_score, logs = play_demo_match()
+        winner = home_team if home_score > away_score else away_team
+
+        result_row = pd.DataFrame([{
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "home_team": home_team,
+            "away_team": away_team,
+            "away_score": away_score,
+            "winner": winner
+        }])
+
+        file_exists = os.path.exists("match_results.csv")
+
+        result_row.to_csv(
+            "match_results.csv",
+            mode="a",
+            header=not file_exists,
+            index=False
+        )
 
         st.subheader("📢 MATCH LIVE")
 
