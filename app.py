@@ -20,40 +20,50 @@ def make_deck():
         "player_class"
     ]
 
+    grade_map = {
+        1: "F",
+        2: "E",
+        3: "D",
+        4: "C",
+        5: "B",
+        6: "A"
+    }
+
     ability_map = {
-        ("defense", 6): "god_hand",
-        ("offense", 6): "hat_trick",
-        ("speed", 6): "hat_trick",
-        ("offense", 5): "doppel_back",
-        ("speed", 5): "doppel_back",
-        ("physical", 6): "doppel_back",
-        ("technique", 6): "doppel_back",
-        ("offense", 4): "super_goal",
-        ("technique", 5): "super_goal",
+        ("defense", "A"): "god_hand",
+        ("offense", "A"): "hat_trick",
+        ("speed", "A"): "hat_trick",
+        ("offense", "B"): "doppel_back",
+        ("speed", "B"): "doppel_back",
+        ("physical", "A"): "doppel_back",
+        ("technique", "A"): "doppel_back",
+        ("offense", "C"): "super_goal",
+        ("technique", "B"): "super_goal",
     }
 
     for card_type in card_types:
         for number in range(1, 7):
+            grade = grade_map[number]
+
             deck.append({
                 "type": card_type,
-                "number": number,
-                "name": f"{card_type}{number}",
-                "special": ability_map.get((card_type, number), "normal"),
-                "power": number
+                "grade": grade,
+                "name": f"{card_type}{grade}",
+                "special": ability_map.get((card_type, grade), "normal")
             })
 
     for i in range(3):
         deck.append({
             "type": "yellow_card",
-            "number": i + 1,
+            "grade": "",
             "name": f"yellow_card{i + 1}",
-            "special": "yellow_card",
-            "power": 0
+            "special": "yellow_card"
         })
 
     random.shuffle(deck)
     return deck
 
+    
     # ===== 本番エンジン STEP 2：5すくみ判定 =====
 def judge_card_battle(home_card, away_card):
     if home_card["type"] == "yellow_card" and away_card["type"] == "yellow_card":
