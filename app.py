@@ -199,7 +199,7 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
                     battle_logs.append(random.choice(red_card_lines))
 
-                    if player_name == home_player:
+                    if player_name == home_player_name:
                         away_wins = 3
                     else:
                         home_wins = 3
