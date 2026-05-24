@@ -345,8 +345,13 @@ def pick_side(side_label, side_icon):
         logo_col1, logo_col2, logo_col3 = st.columns([1,2,1])
 
         with logo_col2:
-            st.image(logo_file, width=180)
+            logo_mime = "image/png" if logo_file.lower().endswith(".png") else "image/svg+xml"
+            logo_b64 = base64.b64encode(open(logo_file, "rb").read()).decode()
 
+            st.markdown(
+                f'<div style="width:220px;height:220px;display:flex;align-items:center;justify-content:center;margin:auto;overflow:hidden;"><img src="data:{logo_mime};base64,{logo_b64}" style="max-width:180px;max-height:180px;object-fit:contain;"></div>',
+                unsafe_allow_html=True
+            )
         
     team_players = df[df["team"] == team]
     field = team_players[team_players["position"] != "GK"]
