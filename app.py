@@ -358,9 +358,9 @@ def pick_side(side_label, side_icon):
                 ">
                     <img src="data:image/svg+xml;base64,{base64.b64encode(open(logo_file, "rb").read()).decode()}"
                          style="
-                            max-width:220px;
-                            max-height:220px;
-                            object-fit:contain;
+                             max-width:220px;
+                             max-height:220px;
+                             object-fit:contain;
                          ">
                 </div>
                 """,
