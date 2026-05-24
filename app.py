@@ -251,7 +251,11 @@ def team_value(team, key, default=""):
 
 
 def logo_path(short_name):
-    return f"logos/{short_name}.svg"
+    svg_path = f"logos/{short_name}.svg"
+    png_path = f"logos/{short_name}.png"
+    if os.path.exists(svg_path):
+        return svg_path
+    return png_path
 
 
 def svg_img_tag(short_name, size=70):
