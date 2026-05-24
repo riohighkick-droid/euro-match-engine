@@ -366,7 +366,6 @@ def pick_side(side_label, side_icon):
                 """,
                 unsafe_allow_html=True
             )
-        
     team_players = df[df["team"] == team]
     field = team_players[team_players["position"] != "GK"]
     gk = team_players[team_players["position"] == "GK"]
