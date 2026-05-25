@@ -239,6 +239,9 @@ df.columns = df.columns.str.strip().str.replace(" ", "_")
 team_df = pd.read_csv("teams.csv", encoding="utf-8-sig")
 team_df.columns = team_df.columns.str.strip().str.replace(" ", "_")
 
+commentary_df = pd.read_csv("commentary.csv", encoding="utf-8-sig")
+commentary_df.columns = commentary_df.columns.str.strip().str.replace(" ", "_")
+
 teams = {}
 def team_value(team, key, default=""):
     try:
