@@ -280,7 +280,7 @@ for _, row in team_df.iterrows():
         "team_color": row["team_color"],
         "sub_color": row["sub_color"],
         "league": row["league"],
-        "country": row["country"]
+        "country": row["country"],
         "rival_team": row.get("rival_team", ""),
     }
 
