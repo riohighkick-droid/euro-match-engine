@@ -464,26 +464,30 @@ def play_demo_match():
             .replace("{home_short}", home_short)
             .replace("{away_short}", away_short)
             .replace("{stadium}", stadium)
-            .replace("{city}", city)    
+            .replace("{city}", city) 
+            .replace("{player}", player)
         )
     match_minutes = sorted(random.sample(range(8, 89), 3))
     time_zones = [
         (
             format_match_time(match_minutes[0]),
             apply_commentary_vars(
-                get_time_comment("opening")
+                get_time_comment("opening"),
+                attacker
             )
         ),
         (
             format_match_time(match_minutes[1]),
             apply_commentary_vars(
-                get_time_comment("middle")
+                get_time_comment("middle"),
+                attacker
             )
         ),
         (
             format_match_time(match_minutes[2]),
             apply_commentary_vars(
-                get_time_comment("climax")
+                get_time_comment("climax"),
+                attacker
             )
         )
     ]
