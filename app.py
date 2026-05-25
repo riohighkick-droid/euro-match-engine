@@ -431,8 +431,10 @@ def get_time_comment(comment_type):
 match_minutes = sorted(random.sample(range(8, 89), 3))
 time_zones = [
     (
-    format_match_time(match_minutes[0]),
-    get_time_comment("opening")
+        format_match_time(match_minutes[0]),
+        apply_commentary_vars(
+            get_time_comment("opening")
+        )
     ),
     (
     format_match_time(match_minutes[1]),
