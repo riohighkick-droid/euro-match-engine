@@ -486,11 +486,6 @@ def play_demo_match():
             yellow_cards,
             red_card_players
         )
-        logs.append(
-            f"<div style='text-align:center;font-size:12px;color:#999999;margin:4px 0;'>"
-            f"({home_player} {home_set_score}-{away_set_score} {away_player})"
-            f"</div>"
-        )
 
         if loser not in suspended_players:
             suspended_players.append(loser)
@@ -654,6 +649,12 @@ def play_demo_match():
             score_home += points
         else:
             score_away += points
+
+        logs.append(
+            f"<div style='text-align:center;font-size:12px;color:#999999;margin:4px 0;'>"
+            f"({home_player} {home_set_score}-{away_set_score} {away_player})"
+            f"</div>"
+        )
 
         logs.append(f"現在スコア：{home_short} {score_home} - {score_away} {away_short}")
 
