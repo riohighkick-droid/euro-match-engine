@@ -469,6 +469,14 @@ def play_demo_match():
     stadium = team_value(home_team, "stadium", "")
     city = team_value(home_team, "home_town")
     home_color = team_value(home_team, "team_color", "#FFD700")
+    def apply_commentary_vars(text):
+        return (
+            text
+            .replace("{home_team}", home_team)
+            .replace("{away_team}", away_team)
+            .replace("{home_short}", home_short)
+            .replace("{away_short}", away_short)
+        )
 
     used_home_players = [home_pickup]
     used_away_players = [away_pickup]
