@@ -383,9 +383,9 @@ def pick_side(side_label, side_icon):
     keeper = st.selectbox(
         f"{side_label} GKを選択",
         gk["name"].tolist(),
+        format_func=lambda name: player_label(team, name),
         key=f"{side_label}_gk"
     )
-
     return team, starters, keeper, pickup_player
 
 left, right = st.columns(2)
