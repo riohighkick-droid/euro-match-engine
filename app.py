@@ -472,22 +472,19 @@ def play_demo_match():
         (
             format_match_time(match_minutes[0]),
             apply_commentary_vars(
-                get_time_comment("opening"),
-                attacker
+                get_time_comment("opening")
             )
         ),
         (
             format_match_time(match_minutes[1]),
             apply_commentary_vars(
-                get_time_comment("middle"),
-                attacker
+                get_time_comment("middle")
             )
         ),
         (
             format_match_time(match_minutes[2]),
             apply_commentary_vars(
-                get_time_comment("climax"),
-                attacker
+                get_time_comment("climax")
             )
         )
     ]
