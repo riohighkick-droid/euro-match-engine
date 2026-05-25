@@ -404,8 +404,18 @@ def format_match_time(minute):
         return f"前半 {minute}分"
     return f"後半 {minute}分"
 
-match_minutes = sorted(random.sample(range(8, 89), 3))
+def get_time_comment(comment_type):
+    rows = commentary_df[
+        (commentary_df["event"] == "time_zone") &
+        (commentary_df["type"] == comment_type)
+    ]
 
+    if rows.empty:
+        return ""
+
+    return random.choice(rows["text"].tolist())
+
+match_minutes = sorted(random.sample(range(8, 89), 3))
 time_zones = [
     (
         format_match_time(match_minutes[0]),
