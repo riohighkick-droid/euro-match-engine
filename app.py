@@ -648,9 +648,20 @@ def play_demo_match():
 
                 add_mom_points(attacker, 2)
 
-                logs.append(
-                    f"実況：{attacker}、冷静に流し込みました！！"
-                )
+                goal_rows = commentary_df[
+                    commentary_df["event"] == "normal_goal"
+                ]
+
+                if not goal_rows.empty:
+                    goal_text = random.choice(goal_rows["text"].tolist())
+
+                    goal_text = (
+                        goal_text
+                        .replace("{scorer}", attacker)
+                        .replace("{team}", scoring_team)
+                    )
+
+                    logs.append(f"実況：{goal_text}")
 
             else:
 
