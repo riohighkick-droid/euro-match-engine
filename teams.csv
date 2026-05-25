@@ -1,5 +1,4 @@
 ﻿rank,team_name,short_name,founded,nickname,home_town,stadium,team_color,sub_color,rival_team,country,league
-rank,team_name,short_name,founded,nickname,home_town,stadium,team_color,sub_color,rival_team,country,league
 1,リバプール,LIV,1892,レッズ,リヴァプール,アンフィールド,#C8102E,#00B2A9,EVE,イングランド,プレミアリーグ
 2,アーセナル,ARS,1886,ガナーズ,ロンドン,エミレーツ・スタジアム,#EF0107,#FFFFFF,CHE,イングランド,プレミアリーグ
 3,マンチェスターC,MCI,1880,シチズンズ,マンチェスター,エティハド・スタジアム,#6CABDD,#1C2C5B,MUN,イングランド,プレミアリーグ
@@ -16,6 +15,7 @@ rank,team_name,short_name,founded,nickname,home_town,stadium,team_color,sub_colo
 14,ウエストハム,WHU,1895,ハマーズ,ロンドン,ロンドン・スタジアム,#7A263A,#1BB1E7,MIL,イングランド,プレミアリーグ
 15,マンチェスターU,MUN,1878,レッド・デビルズ,マンチェスター,オールド・トラッフォード,#DA020E,#FBE122,MCI,イングランド,プレミアリーグ
 16,ウルヴァーハンプトン,WOL,1877,ウルブズ,ウルヴァーハンプトン,モリニュー・スタジアム,#FDB913,#231F20,WBA,イングランド,プレミアリーグ
+1,バルセロナ,BAR,1899,ブラウグラナ,バルセロナ,カンプ・ノウ,#A50044,#004D98,"レアルマドリード,アトレティコマドリード,エスパニョール",スペイン,リーガ・エスパニョーラ
 2,レアル・マドリード,RMA,1902,ロス・ブランコス,マドリード,サンティアゴ・ベルナベウ,#FFFFFF,#FEBE10,"バルセロナ,アトレティコマドリード,アスレティックビルバオ",スペイン,リーガ・エスパニョーラ
 3,アトレティコ,ATM,1903,ロヒブランコス,マドリード,メトロポリターノ,#C8102E,#FFFFFF,"レアルマドリード,バルセロナ,セビージャ",スペイン,リーガ・エスパニョーラ
 4,ビルバオ,ATH,1898,ロス・レオネス,ビルバオ,サン・マメス,#EE2523,#FFFFFF,"レアルソシエダ,オサスナ,レアルマドリード",スペイン,リーガ・エスパニョーラ
