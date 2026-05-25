@@ -213,8 +213,8 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
             winning_card = away_card
 
     if home_wins >= 3:
-        return "home", away_player["name"], winning_card, battle_logs
-    return "away", home_player["name"], winning_card, battle_logs
+        return "home", away_player["name"], winning_card, battle_logs, home_wins, away_wins
+    return "away", home_player["name"], winning_card, battle_logs, home_wins, away_wins
 
 st.set_page_config(
     page_title="EURO MATCH ENGINE - TACTICAL SIX",
