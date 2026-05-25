@@ -404,6 +404,24 @@ def format_match_time(minute):
         return f"前半 {minute}分"
     return f"後半 {minute}分"
 
+match_minutes = sorted(random.sample(range(8, 89), 3))
+
+time_zones = [
+    (
+        format_match_time(match_minutes[0]),
+        "立ち上がり、試合の流れをつかむ最初のホットポイント。"
+    ),
+    (
+        format_match_time(match_minutes[1]),
+        "中盤以降、均衡を破る重要な攻防。"
+    ),
+    (
+        format_match_time(match_minutes[2]),
+        "終盤、勝敗を決めるクライマックス。"
+    )
+]
+    
+
 special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
 
 
