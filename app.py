@@ -417,17 +417,6 @@ def format_match_time(minute):
         return f"前半 {minute}分"
     return f"後半 {minute}分"
 
-def apply_commentary_vars(text):
-    return (
-        text
-        .replace("{home_team}", home_team)
-        .replace("{away_team}", away_team)
-        .replace("{home_short}", home_short)
-        .replace("{away_short}", away_short)
-        .replace("{stadium}", stadium)
-        .replace("{city}", city)
-    )
-
 def get_time_comment(comment_type):
     rows = commentary_df[
         (commentary_df["event"] == "time_zone") &
@@ -486,6 +475,7 @@ def play_demo_match():
     stadium = team_value(home_team, "stadium", "")
     city = team_value(home_team, "home_town")
     home_color = team_value(home_team, "team_color", "#FFD700")
+    
     def apply_commentary_vars(text):
         return (
             text
@@ -493,6 +483,8 @@ def play_demo_match():
             .replace("{away_team}", away_team)
             .replace("{home_short}", home_short)
             .replace("{away_short}", away_short)
+            .replace("{stadium}", stadium)
+            .replace("{city}", city)    
         )
 
     used_home_players = [home_pickup]
