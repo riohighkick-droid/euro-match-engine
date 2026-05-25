@@ -480,7 +480,7 @@ def play_demo_match():
         home_player_data = df[df["name"] == home_player].iloc[0]
         away_player_data = df[df["name"] == away_player].iloc[0]
         
-        winner, loser, winning_card, battle_logs = play_player_match(
+        winner, loser, winning_card, battle_logs, home_set_score, away_set_score = play_player_match(
             home_player_data,
             away_player_data,
             yellow_cards,
