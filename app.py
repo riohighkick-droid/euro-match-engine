@@ -427,6 +427,7 @@ def play_demo_match():
     home_nickname = team_value(home_team, "nickname", home_team)
     away_nickname = team_value(away_team, "nickname", away_team)
     stadium = team_value(home_team, "stadium", "")
+    city = team_value(home_team, "home_town")
     home_color = team_value(home_team, "team_color", "#FFD700")
 
     used_home_players = [home_pickup]
