@@ -465,8 +465,31 @@ def play_demo_match():
         f'</div>'
     )
 
-    logs.append(f"実況：{home_nickname}、{home_team}！！対するは、{away_nickname}、{away_team}！！")
-    logs.append("実況：運命の一戦、キックオフです！！")
+    pre_match_type = "derby" if is_derby else "normal"
+    
+    pre_match_rows = commentary_df[
+        (commentary_df["event"] == "pre_match") &
+        (commentary_df["type"] == pre_match_type)
+    ]
+
+    if not pre_match_rows.empty:
+        pre_match_text = random.choice(pre_match_rows["text"].tolist())
+
+        pre_match_text = (
+            pre_match_text
+            .replace("{home_team}", home_team)
+            .replace("{away_team}", away_team)
+            .replace("{home_nickname}", home_nickname)
+            .replace("{away_nickname}", away_nickname)
+            .replace("{stadium}", stadium)
+            .replace("{city}", city)
+            .replace("{competition}", competition)
+            .replace("{derby_name}", derby_name)
+        )
+
+        logs.append(f"実況：{pre_match_text}")
+
+    logs.append("実況：運命の一戦、キックオフです！！！")
 
     logs.append('<div style="text-align:center; font-size:30px; font-weight:bold; color:#FFD700; margin-top:30px;">TODAY’S HOT POINT</div>')
     logs.append("実況：今日の勝敗を分ける注目のホットポイントはこちら！！")
