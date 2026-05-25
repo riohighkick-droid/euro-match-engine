@@ -759,6 +759,7 @@ if st.button("⚽ MATCH START", use_container_width=True):
 
     home_rival = team_value(home_team, "rival_team", "")
     away_rival = team_value(away_team, "rival_team", "")
+    derby_name = team_value(home_team, "derby_name", "")
 
     is_derby = (
         home_rival == away_short_name or
