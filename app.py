@@ -767,7 +767,7 @@ if st.button("⚽ MATCH START", use_container_width=True):
     )
     if is_derby:
         st.markdown(
-            "<div style='text-align:center;font-size:32px;font-weight:900;color:#ff4444;margin-top:10px;margin-bottom:10px;letter-spacing:2px;'>🔥 DERBY MATCH 🔥</div>",
+            f"<div style='text-align:center;font-size:32px;font-weight:900;color:#ff4444;margin-top:10px;letter-spacing:2px;'>🔥 DERBY MATCH 🔥</div><div style='text-align:center;font-size:20px;font-weight:700;color:#ffffff;margin-bottom:10px;'>{derby_name}</div>",
             unsafe_allow_html=True
         )
    
