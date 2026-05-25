@@ -763,11 +763,21 @@ if st.button("⚽ MATCH START", use_container_width=True):
         home_rival == away_short_name or
         away_rival == home_short_name
     )
-    st.write("HOME:", home_short_name, "HOME_RIVAL:", home_rival)
-    st.write("AWAY:", away_short_name, "AWAY_RIVAL:", away_rival)
-    st.write("IS_DERBY:", is_derby)
 
-
+    if is_derby:
+        st.markdown("""
+        <div style="
+            text-align:center;
+            font-size:32px;
+            font-weight:900;
+            color:#ff4444;
+            margin-top:10px;
+            margin-bottom:10px;
+            letter-spacing:2px;
+        ">
+            🔥 DERBY MATCH 🔥
+        </div>
+        """, unsafe_allow_html=True)
     
     if home_team is None or away_team is None:
         st.error("両チームを選択してください。")
