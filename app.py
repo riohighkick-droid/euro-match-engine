@@ -647,7 +647,8 @@ def play_demo_match():
                 points = 1
 
                 add_mom_points(attacker, 2)
-
+               
+                scoring_team = home_short if scoring_side == "home" else away_short
                 goal_rows = commentary_df[
                     commentary_df["event"] == "normal_goal"
                 ]
