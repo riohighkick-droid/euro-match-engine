@@ -437,13 +437,17 @@ time_zones = [
         )
     ),
     (
-    format_match_time(match_minutes[1]),
-    get_time_comment("middle")
+        format_match_time(match_minutes[1]),
+        apply_commentary_vars(
+            get_time_comment("middle")
+        )
     ),
     (
-    format_match_time(match_minutes[2]),
-    get_time_comment("climax")
-    ),
+        format_match_time(match_minutes[2]),
+        apply_commentary_vars(
+            get_time_comment("climax")
+        )
+    )
 ]
     
 
