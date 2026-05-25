@@ -763,6 +763,12 @@ if st.button("⚽ MATCH START", use_container_width=True):
         home_rival == away_short_name or
         away_rival == home_short_name
     )
+    st.write("HOME:", home_short_name, "HOME_RIVAL:", home_rival)
+    st.write("AWAY:", away_short_name, "AWAY_RIVAL:", away_rival)
+    st.write("IS_DERBY:", is_derby)
+
+
+    
     if home_team is None or away_team is None:
         st.error("両チームを選択してください。")
     elif home_team == away_team:
