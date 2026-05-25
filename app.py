@@ -399,11 +399,10 @@ with left:
 with right:
     away_team, away_starters, away_gk, away_pickup = pick_side("AWAY TEAM", "🛫")
 
-time_zones = [
-    ("前半 12分", "立ち上がり、試合の流れをつかむ最初のホットポイント。"),
-    ("後半 58分", "中盤以降、均衡を破る重要な攻防。"),
-    ("後半 84分", "終盤、勝敗を決めるクライマックス。")
-]
+def format_match_time(minute):
+    if minute <= 45:
+        return f"前半 {minute}分"
+    return f"後半 {minute}分"
 
 special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
 
