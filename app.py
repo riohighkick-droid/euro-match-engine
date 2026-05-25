@@ -484,7 +484,6 @@ def play_demo_match():
             .replace("{away_nickname}", away_nickname)
             .replace("{stadium}", stadium)
             .replace("{city}", city)
-            .replace("{competition}", competition)
             .replace("{derby_name}", derby_name)
         )
 
