@@ -262,16 +262,29 @@ def logo_path(short_name):
 
 
 def svg_img_tag(short_name, size=70):
-    path = logo_path(short_name)
 
-    if not os.path.exists(path):
+    svg_path = f"logos/{short_name}.svg"
+    png_path = f"logos/{short_name}.png"
+
+    path = None
+    mime = None
+
+    if os.path.exists(svg_path):
+        path = svg_path
+        mime = "image/svg+xml"
+
+    elif os.path.exists(png_path):
+        path = png_path
+        mime = "image/png"
+
+    else:
         return f'<span style="font-size:28px; font-weight:900;">{short_name}</span>'
 
     with open(path, "rb") as f:
         encoded = base64.b64encode(f.read()).decode()
 
     return (
-        f'<img src="data:image/svg+xml;base64,{encoded}" '
+        f'<img src="data:{mime};base64,{encoded}" '
         f'style="width:{size}px; height:{size}px; object-fit:contain; vertical-align:middle;">'
     )
 
