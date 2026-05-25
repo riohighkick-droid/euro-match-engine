@@ -428,27 +428,7 @@ def get_time_comment(comment_type):
 
     return random.choice(rows["text"].tolist())
 
-match_minutes = sorted(random.sample(range(8, 89), 3))
-time_zones = [
-    (
-        format_match_time(match_minutes[0]),
-        apply_commentary_vars(
-            get_time_comment("opening")
-        )
-    ),
-    (
-        format_match_time(match_minutes[1]),
-        apply_commentary_vars(
-            get_time_comment("middle")
-        )
-    ),
-    (
-        format_match_time(match_minutes[2]),
-        apply_commentary_vars(
-            get_time_comment("climax")
-        )
-    )
-]
+
     
 
 special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
@@ -486,6 +466,27 @@ def play_demo_match():
             .replace("{stadium}", stadium)
             .replace("{city}", city)    
         )
+    match_minutes = sorted(random.sample(range(8, 89), 3))
+    time_zones = [
+        (
+            format_match_time(match_minutes[0]),
+            apply_commentary_vars(
+                get_time_comment("opening")
+            )
+        ),
+        (
+            format_match_time(match_minutes[1]),
+            apply_commentary_vars(
+                get_time_comment("middle")
+            )
+        ),
+        (
+            format_match_time(match_minutes[2]),
+            apply_commentary_vars(
+                get_time_comment("climax")
+            )
+        )
+    ]
 
     used_home_players = [home_pickup]
     used_away_players = [away_pickup]
