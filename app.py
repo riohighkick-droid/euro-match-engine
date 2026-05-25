@@ -456,7 +456,7 @@ def play_demo_match():
     city = team_value(home_team, "home_town")
     home_color = team_value(home_team, "team_color", "#FFD700")
     
-    def apply_commentary_vars(text):
+    def apply_commentary_vars(text, player=""):
         return (
             text
             .replace("{home_team}", home_team)
@@ -464,9 +464,10 @@ def play_demo_match():
             .replace("{home_short}", home_short)
             .replace("{away_short}", away_short)
             .replace("{stadium}", stadium)
-            .replace("{city}", city) 
+            .replace("{city}", city)
             .replace("{player}", player)
         )
+        
     match_minutes = sorted(random.sample(range(8, 89), 3))
     time_zones = [
         (
