@@ -752,6 +752,16 @@ def play_demo_match():
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
 if st.button("⚽ MATCH START", use_container_width=True):
+    home_short_name = team_value(home_team, "short_name", home_team)
+    away_short_name = team_value(away_team, "short_name", away_team)
+
+    home_rival = team_value(home_team, "rival_team", "")
+    away_rival = team_value(away_team, "rival_team", "")
+
+    is_derby = (
+        home_rival == away_short_name or
+        away_rival == home_short_name
+    )
     if home_team is None or away_team is None:
         st.error("両チームを選択してください。")
     elif home_team == away_team:
