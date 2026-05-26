@@ -35,7 +35,7 @@ def make_deck():
         "speed",
         "technique",
         "physical",
-        "player_class"
+        "_class"
     ]
 
     grade_map = {
@@ -105,8 +105,8 @@ def judge_card_battle(home_card, away_card):
     a = away_card["type"]
 
 
-    # player_class は数値勝負
-    if h == "player_class" or a == "player_class":
+    # _class は数値勝負
+    if h == "_class" or a == "_class":
 
         if home_card["power"] > away_card["power"]:
             return "home"
@@ -129,8 +129,8 @@ def judge_card_battle(home_card, away_card):
         else:
             return "draw"
 
-    # player_class が絡んだら能力戦
-    if h == "player_class" or a == "player_class":
+    # _class が絡んだら能力戦
+    if h == "_class" or a == "player_class":
 
         if home_card["power"] > away_card["power"]:
             return "home"
@@ -158,7 +158,7 @@ def judge_card_battle(home_card, away_card):
 # ===== 本番エンジン STEP 3：選手バトル =====
 def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
-    home_player_name = home_player["name"]
+    home_player_name = home_["name"]
     away_player_name = away_player["name"]
 
     home_wins = 0
@@ -348,6 +348,7 @@ def player_label(team, player_name):
 
     total = int(row.iloc[0]["total"])
     role = row.iloc[0]["role"]
+    injury_prone = row.iloc[0].get("injury_prone", "A")
 
     return f"[{pos}] {player_name} | {total} | {role}"
 
