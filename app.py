@@ -898,6 +898,8 @@ def play_demo_match():
                 logs.append(
                     f"🚑 試合後情報：{player} が負傷！ → {injury_text}"
                 )
+                print("MATCH END OK")
+        
 
         return score_home, score_away, logs
 
