@@ -7,6 +7,21 @@ import os
 import base64
 from datetime import datetime
 
+def get_injury_rate(player_name):
+    row = df[df["name"] == player_name]
+
+    if row.empty or "injury_resistance" not in df.columns:
+        return 3
+
+    resistance = str(row.iloc[0]["injury_resistance"]).strip().upper()
+
+    if resistance == "B":
+        return 5
+    elif resistance == "C":
+        return 8
+    else:
+        return 3
+
 # ===== 本番エンジン STEP 1：カードデッキ =====
 def make_deck():
     deck = []
