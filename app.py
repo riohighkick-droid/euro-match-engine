@@ -872,12 +872,16 @@ def play_demo_match():
             f'<div style="text-align:center; font-size:16px; color:#ff4444; margin-top:10px;">🟥退場。三試合出場停止 → {", ".join(red_card_players)}</div>'
         )
 
-        all_starters = (
-            home_selected_players
-            + away_selected_players
-            + [home_gk]
-            + [away_gk]
-        )
+        all_starters = []
+
+        all_starters.extend(list(home_selected_players))
+        all_starters.extend(list(away_selected_players))
+
+        if home_gk:
+            all_starters.append(home_gk)
+
+        if away_gk:
+            all_starters.append(away_gk)
 
         for player in all_starters:
 
