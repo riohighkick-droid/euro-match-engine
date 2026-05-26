@@ -179,10 +179,16 @@ def play_player_match(home_player, away_player, yellow_cards, red_card_players):
 
         home_card = home_deck.pop(0)
         away_card = away_deck.pop(0)
+        
         if home_card["type"] != "yellow_card":
             print("CARD TYPE:", home_card["type"])
             print("PLAYER INDEX:", home_player.index)
-            home_card["power"] = int(home_player[home_card["type"]])
+            card_type = home_card["type"]
+
+            if card_type in home_player.index:
+                home_card["power"] = int(home_player[card_type])
+            else:
+                home_card["power"] = 0
 
         if away_card["type"] != "yellow_card":
             away_card["power"] = int(away_player[away_card["type"]])
