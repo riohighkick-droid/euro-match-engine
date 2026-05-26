@@ -869,7 +869,31 @@ def play_demo_match():
             f'<div style="text-align:center; font-size:16px; color:#ff4444; margin-top:10px;">🟥退場。三試合出場停止 → {", ".join(red_card_players)}</div>'
         )
 
-    return score_home, score_away, logs
+        all_starters = (
+            home_selected_players
+            + away_selected_players
+            + [home_gk]
+            + [away_gk]
+        )
+
+        for player in all_starters:
+
+            injury_rate = get_injury_rate(player)
+
+            if random.randint(1, 100) <= injury_rate:
+                severity_roll = random.randint(1, 10)
+                if severity_roll <= 6:
+                    injury_text = "軽傷（1試合欠場）"
+                elif severity_roll <= 9:
+                    injury_text = "中傷（3試合欠場）"
+                else:
+                    injury_text = "重傷（今季絶望）"
+                logs.append(
+                    f"🚑 試合後情報：{player} が負傷！ → {injury_text}"
+                )
+
+        return score_home, score_away, logs
+
 st.markdown('<div class="card">', unsafe_allow_html=True)
 
 if st.button("⚽ MATCH START", use_container_width=True):
