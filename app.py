@@ -8,12 +8,15 @@ import base64
 from datetime import datetime
 
 def get_injury_rate(player_name):
-    row = df[df["name"] == player_name]
-
-    if row.empty or "injury_resistance" not in df.columns:
+    if "injury_resistance" not in df.columns:
         return 3
 
-    resistance = str(row.iloc[0]["injury_resistance"]).strip().upper()
+    row = df[df["name"] == player_name]
+
+    if row.empty:
+        return 3
+
+    resistance = str(row.iloc[0].get("injury_resistance", "A")).strip().upper()
 
     if resistance == "B":
         return 5
