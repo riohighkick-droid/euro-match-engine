@@ -635,7 +635,11 @@ def play_demo_match():
         keeper_card = keeper_deck.pop(0)
 
         if keeper_card["type"] != "yellow_card":
-            keeper_card["power"] = int(keeper_data[keeper_card["type"]])
+            card_type = keeper_card["type"]
+            if card_type in keeper_data.index:
+                keeper_card["power"] = int(keeper_data[card_type])
+            else:
+                keeper_card["power"] = 0
 
         if winning_card is None:
             keeper_result = "save"
