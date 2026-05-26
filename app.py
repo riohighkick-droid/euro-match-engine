@@ -647,6 +647,8 @@ def play_demo_match():
                 winning_card,
                 keeper_card
             )
+            if keeper_result == "away" and random.randint(1, 100) <= 15:
+                keeper_result = "draw"
 
         attacker_pos = get_player_position(attacker_team, attacker)
 
