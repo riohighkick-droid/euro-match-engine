@@ -874,33 +874,28 @@ def play_demo_match():
 
     all_starters = []
 
-        all_starters.extend(list(home_selected_players))
-        all_starters.extend(list(away_selected_players))
+    all_starters.extend(list(home_selected_players))
+    all_starters.extend(list(away_selected_players))
 
-        if home_gk:
-            all_starters.append(home_gk)
+    if home_gk:
+        all_starters.append(home_gk)
 
-        if away_gk:
-            all_starters.append(away_gk)
+    if away_gk:
+        all_starters.append(away_gk)
 
-        for player in all_starters:
-
-            injury_rate = get_injury_rate(player)
-
-            if random.randint(1, 100) <= injury_rate:
-                severity_roll = random.randint(1, 10)
-                if severity_roll <= 6:
-                    injury_text = "軽傷（1試合欠場）"
-                elif severity_roll <= 9:
-                    injury_text = "中傷（3試合欠場）"
-                else:
-                    injury_text = "重傷（今季絶望）"
-                logs.append(
-                    f"🚑 試合後情報：{player} が負傷！ → {injury_text}"
-                )
-                print("MATCH END OK")
-        
-
+    for player in all_starters:
+        injury_rate = get_injury_rate(player)
+        if random.randint(1, 100) <= injury_rate:
+            severity_roll = random.randint(1, 10)
+            if severity_roll <= 6:
+                injury_text = "軽傷（1試合欠場）"
+            elif severity_roll <= 9:
+                injury_text = "中傷（3試合欠場）"
+            else:
+                injury_text = "重傷（今季絶望）"
+            logs.append(
+                f"🚑 試合後情報：{player} が負傷！ → {injury_text}"
+            )
     return score_home, score_away, logs
 
 st.markdown('<div class="card">', unsafe_allow_html=True)
