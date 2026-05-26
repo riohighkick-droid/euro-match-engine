@@ -348,10 +348,11 @@ def player_label(team, player_name):
 
     total = int(row.iloc[0]["total"])
     role = row.iloc[0]["role"]
-    injury_prone = row.iloc[0].get("injury_prone", "A")
-
-    return f"[{pos}] {player_name} | {total} | {role}"
-
+    if "injury_prone" in row.columns:
+        injury_prone = row.iloc[0]["injury_prone"]
+    else:
+        injury_prone = "A"
+    return f"[{pos}] {player_name}｜{total}｜{role}｜怪我:{injury_prone}"
 
     
 def pick_side(side_label, side_icon):
