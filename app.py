@@ -645,7 +645,10 @@ def play_demo_match():
             keeper_result = "save"
         else:
             if winning_card["type"] != "yellow_card":
-                winning_card["power"] = int(winner_data[winning_card["type"]])
+                card_type = winning_card["type"]
+                if card_type == "power":
+                    card_type = "physical"
+                winning_card["power"] = int(winner_data[card_type])
 
             keeper_result = judge_card_battle(
                 winning_card,
