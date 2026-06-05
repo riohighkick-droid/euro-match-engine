@@ -655,6 +655,8 @@ def play_demo_match():
                 keeper_result = "draw"
 
         attacker_pos = get_player_position(attacker_team, attacker)
+        if keeper_result == side and winning_card and winning_card["type"] != "yellow_card":
+            event = roll_fw_special_event(attacker_pos, winning_card["type"])
 
         if attacker_pos in ["CB", "SB", "RB", "LB", "DF"] and event in ["hat_trick", "doppel_back"]:
             event = "normal_goal"
