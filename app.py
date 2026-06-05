@@ -35,7 +35,7 @@ def make_deck():
         "speed",
         "technique",
         "physical",
-        "_class"
+        "player_class"
     ]
 
     grade_map = {
@@ -105,8 +105,8 @@ def judge_card_battle(home_card, away_card):
     a = away_card["type"]
 
 
-    # _class は数値勝負
-    if h == "_class" or a == "_class":
+    # _ は数値勝負
+    if h == "player_class" or a == "player_class":
 
         if home_card["power"] > away_card["power"]:
             return "home"
@@ -130,9 +130,9 @@ def judge_card_battle(home_card, away_card):
             return "draw"
 
     # _class が絡んだら能力戦
-    if h == "_class" or a == "player_class":
+    if h == "player_class" or a == "player_class":
 
-        if home_card["power"] > away_card["power"]:
+        if home_card[""] > away_card[""]:
             return "home"
         elif away_card["power"] > home_card["power"]:
             return "away"
