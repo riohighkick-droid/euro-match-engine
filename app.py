@@ -461,6 +461,17 @@ def roll_fw_special_event(attacker_pos, winning_card_type):
 
     return "normal_goal"
 
+def roll_gk_special_event(keeper_card_type):
+    if keeper_card_type != "defense":
+        return "normal"
+
+    roll = random.randint(1, 100)
+
+    if roll <= 10:
+        return "god_hand"
+
+    return "normal"
+
 def play_demo_match():
 
     score_home = 0
