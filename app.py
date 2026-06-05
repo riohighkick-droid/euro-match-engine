@@ -38,42 +38,17 @@ def make_deck():
         "player_class"
     ]
 
-    grade_map = {
-        1: "F",
-        2: "E",
-        3: "D",
-        4: "C",
-        5: "B",
-        6: "A"
-    }
-
-    ability_map = {
-        ("defense", "A"): "god_hand",
-        ("offense", "A"): "hat_trick",
-        ("speed", "A"): "hat_trick",
-        ("offense", "B"): "doppel_back",
-        ("speed", "B"): "doppel_back",
-        ("physical", "A"): "doppel_back",
-        ("technique", "A"): "doppel_back",
-        ("offense", "C"): "super_goal",
-        ("technique", "B"): "super_goal",
-    }
-
     for card_type in card_types:
-        for number in range(1, 7):
-            grade = grade_map[number]
-
+        for i in range(6):
             deck.append({
                 "type": card_type,
-                "grade": grade,
-                "name": f"{card_type}{grade}",
-                "special": ability_map.get((card_type, grade), "normal")
+                "name": card_type,
+                "special": "normal"
             })
 
     for i in range(3):
         deck.append({
             "type": "yellow_card",
-            "grade": "",
             "name": f"yellow_card{i + 1}",
             "special": "yellow_card"
         })
