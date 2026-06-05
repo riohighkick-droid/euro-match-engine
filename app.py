@@ -467,7 +467,7 @@ def roll_gk_special_event(keeper_card_type):
 
     roll = random.randint(1, 100)
 
-    if roll <= 15:
+    if roll <= 10:
         return "god_hand"
 
     return "normal"
