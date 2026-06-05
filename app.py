@@ -437,27 +437,67 @@ def get_time_comment(comment_type):
     
 
 special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
-def roll_fw_special_event(attacker_pos, winning_card_type):
-    if attacker_pos != "FW":
-        return "normal_goal"
 
-    roll = random.randint(1, 100)
+def normalize_attacker_position(attacker_pos):
+    pos = str(attacker_pos).strip().upper()
 
-    if winning_card_type == "offense":
+    if pos in ["FW", "CF", "ST", "SS", "LW", "RW", "LWF", "RWF"]:
+        return "FW"
+
+    if pos in ["MF", "CMF", "DMF", "AMF", "LMF", "RMF", "CM", "DM", "AM", "LM", "RM"]:
+        return "MF"
+
+    return pos
+
+
+def roll_attacker_special_event(attacker_pos, winning_card_type):
+    pos = normalize_attacker_position(attacker_pos)
+    card_type = str(winning_card_type).strip()
+
+    # SUPER GOAL：全ポジション対象。technique勝利時に10%
+    if card_type == "technique":
+        roll = random.randint(1, 100)
+
         if roll <= 10:
-            return "hat_trick"
-        elif roll <= 30:
-            return "doppel_back"
-        else:
-            return "normal_goal"
+            return "super_goal"
 
-    if winning_card_type in ["speed", "physical", "technique"]:
-        if roll <= 5:
-            return "hat_trick"
-        elif roll <= 20:
-            return "doppel_back"
-        else:
-            return "normal_goal"
+    # FW特殊イベント
+    if pos == "FW":
+        roll = random.randint(1, 100)
+
+        if card_type == "offense":
+            if roll <= 10:
+                return "hat_trick"
+            elif roll <= 30:
+                return "doppel_back"
+            else:
+                return "normal_goal"
+
+        if card_type in ["speed", "physical", "technique"]:
+            if roll <= 5:
+                return "hat_trick"
+            elif roll <= 20:
+                return "doppel_back"
+            else:
+                return "normal_goal"
+
+    # MF特殊イベント
+    if pos == "MF":
+        roll = random.randint(1, 100)
+
+        if card_type == "offense":
+            if roll <= 5:
+                return "hat_trick"
+            elif roll <= 20:
+                return "doppel_back"
+            else:
+                return "normal_goal"
+
+        if card_type in ["speed", "physical"]:
+            if roll <= 10:
+                return "doppel_back"
+            else:
+                return "normal_goal"
 
     return "normal_goal"
 
@@ -668,7 +708,7 @@ def play_demo_match():
 
         attacker_pos = get_player_position(attacker_team, attacker)
         if keeper_result == side and winning_card and winning_card["type"] != "yellow_card":
-            event = roll_fw_special_event(attacker_pos, winning_card["type"])
+            event = roll_attacker_special_event(attacker_pos, winning_card["type"])
 
         if attacker_pos in ["CB", "SB", "RB", "LB", "DF"] and event in ["hat_trick", "doppel_back"]:
             event = "normal_goal"
@@ -919,10 +959,10 @@ def play_demo_match():
     for player in all_starters:
         injury_rate = get_injury_rate(player)
         if random.randint(1, 100) <= injury_rate:
-            severity_roll = random.randint(1, 10)
-            if severity_roll <= 6:
+            severity_ = random.randint(1, 10)
+            if severity_ <= 6:
                 injury_text = "軽傷（1試合欠場）"
-            elif severity_roll <= 9:
+            elif severity_ <= 9:
                 injury_text = "中傷（3試合欠場）"
             else:
                 injury_text = "重傷（今季絶望）"
