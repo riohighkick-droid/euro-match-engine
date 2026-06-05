@@ -604,7 +604,7 @@ def play_demo_match():
         if loser not in suspended_players:
             suspended_players.append(loser)
 
-        event = winning_card["special"] if winning_card else "save"
+        event = "normal_goal" if winning_card else "save"
         points = 0
 
         logs.append('<div style="height:18px;"></div>')
