@@ -467,7 +467,7 @@ def roll_gk_special_event(keeper_card_type):
 
     roll = random.randint(1, 100)
 
-    if roll <= 10:
+    if roll <= 15:
         return "god_hand"
 
     return "normal"
@@ -648,6 +648,7 @@ def play_demo_match():
                 keeper_card["power"] = int(keeper_data[card_type])
             else:
                 keeper_card["power"] = 0
+        keeper_card["special"] = roll_gk_special_event(keeper_card["type"])
 
         if winning_card is None:
             keeper_result = "save"
