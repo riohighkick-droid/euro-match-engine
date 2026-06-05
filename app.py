@@ -43,14 +43,14 @@ def make_deck():
             deck.append({
                 "type": card_type,
                 "name": card_type,
-                "special": "normal"
+                "": "normal"
             })
 
     for i in range(3):
         deck.append({
             "type": "yellow_card",
             "name": f"yellow_card{i + 1}",
-            "special": "yellow_card"
+            "": "yellow_card"
         })
 
     random.shuffle(deck)
@@ -437,7 +437,29 @@ def get_time_comment(comment_type):
     
 
 special_events = ["normal_goal", "save", "super_goal", "god_hand", "hat_trick", "doppel_back"]
+def roll_fw_special_event(attacker_pos, winning_card_type):
+    if attacker_pos != "FW":
+        return "normal_goal"
 
+    roll = random.randint(1, 100)
+
+    if winning_card_type == "offense":
+        if roll <= 5:
+            return "hat_trick"
+        elif roll <= 15:
+            return "doppel_back"
+        else:
+            return "normal_goal"
+
+    if winning_card_type in ["speed", "physical", "technique"]:
+        if roll <= 3:
+            return "hat_trick"
+        elif roll <= 11:
+            return "doppel_back"
+        else:
+            return "normal_goal"
+
+    return "normal_goal"
 
 def play_demo_match():
 
@@ -650,7 +672,7 @@ def play_demo_match():
 
         if event == "super_goal":
 
-            if keeper_card["special"] == "god_hand":
+            if keeper_card[""] == "god_hand":
 
                 logs.append('<div class="goal">🧤 GOD HAND SAVE!! 🧤</div>')
 
