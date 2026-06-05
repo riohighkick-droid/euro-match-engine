@@ -444,17 +444,17 @@ def roll_fw_special_event(attacker_pos, winning_card_type):
     roll = random.randint(1, 100)
 
     if winning_card_type == "offense":
-        if roll <= 5:
+        if roll <= 10:
             return "hat_trick"
-        elif roll <= 15:
+        elif roll <= 30:
             return "doppel_back"
         else:
             return "normal_goal"
 
     if winning_card_type in ["speed", "physical", "technique"]:
-        if roll <= 3:
+        if roll <= 5:
             return "hat_trick"
-        elif roll <= 11:
+        elif roll <= 20:
             return "doppel_back"
         else:
             return "normal_goal"
